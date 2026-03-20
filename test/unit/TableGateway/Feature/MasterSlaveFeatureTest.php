@@ -35,7 +35,7 @@ class MasterSlaveFeatureTest extends TestCase
         $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue(
             $mockStatement
         ));
-        $this->mockMasterAdapter->expects($this->any())->method('getDriver')->will($this->returnValue($mockDriver));
+        $this->mockMasterAdapter->expects($this->any())->method('getDriver')->willReturn($mockDriver);
         $this->mockMasterAdapter->expects($this->any())->method('getPlatform')->will($this->returnValue(
             new Sql92()
         ));
@@ -47,7 +47,7 @@ class MasterSlaveFeatureTest extends TestCase
         $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue(
             $mockStatement
         ));
-        $this->mockSlaveAdapter->expects($this->any())->method('getDriver')->will($this->returnValue($mockDriver));
+        $this->mockSlaveAdapter->expects($this->any())->method('getDriver')->willReturn($mockDriver);
         $this->mockSlaveAdapter->expects($this->any())->method('getPlatform')->will($this->returnValue(
             new Sql92()
         ));

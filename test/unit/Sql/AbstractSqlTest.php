@@ -38,7 +38,7 @@ class AbstractSqlTest extends TestCase
         $this->mockDriver
             ->expects($this->any())
             ->method('getPrepareType')
-            ->will($this->returnValue(DriverInterface::PARAMETERIZATION_NAMED));
+            ->willReturn(DriverInterface::PARAMETERIZATION_NAMED);
         $this->mockDriver
             ->expects($this->any())
             ->method('formatParameterName')

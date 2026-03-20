@@ -30,11 +30,11 @@ class TableGatewayTest extends TestCase
         // mock the adapter, driver, and parts
         $mockResult    = $this->getMockBuilder(ResultInterface::class)->getMock();
         $mockStatement = $this->getMockBuilder(StatementInterface::class)->getMock();
-        $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
+        $mockStatement->expects($this->any())->method('execute')->willReturn($mockResult);
         $mockConnection = $this->getMockBuilder(ConnectionInterface::class)->getMock();
         $mockDriver     = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
-        $mockDriver->expects($this->any())->method('getConnection')->will($this->returnValue($mockConnection));
+        $mockDriver->expects($this->any())->method('createStatement')->willReturn($mockStatement);
+        $mockDriver->expects($this->any())->method('getConnection')->willReturn($mockConnection);
 
         // setup mock adapter
         $this->mockAdapter = $this->getMockBuilder(Adapter::class)
@@ -157,13 +157,13 @@ class TableGatewayTest extends TestCase
             ->getMock();
         $result->expects($this->once())
             ->method('getAffectedRows')
-            ->will($this->returnValue(1));
+            ->willReturn(1);
 
         $statement = $this->getMockBuilder(StatementInterface::class)
             ->getMock();
         $statement->expects($this->once())
             ->method('execute')
-            ->will($this->returnValue($result));
+            ->willReturn($result);
 
         $statementExpectation = function ($insert) use ($expected, $statement) {
             $state = $insert->getRawState();
@@ -176,10 +176,10 @@ class TableGatewayTest extends TestCase
             ->getMock();
         $sql->expects($this->atLeastOnce())
             ->method('getTable')
-            ->will($this->returnValue($tableValue));
+            ->willReturn($tableValue);
         $sql->expects($this->once())
             ->method('insert')
-            ->will($this->returnValue($insert));
+            ->willReturn($insert);
         $sql->expects($this->once())
             ->method('prepareStatementForSqlObject')
             ->with($this->equalTo($insert))
@@ -219,13 +219,13 @@ class TableGatewayTest extends TestCase
             ->getMock();
         $result->expects($this->once())
             ->method('getAffectedRows')
-            ->will($this->returnValue(1));
+            ->willReturn(1);
 
         $statement = $this->getMockBuilder(StatementInterface::class)
             ->getMock();
         $statement->expects($this->once())
             ->method('execute')
-            ->will($this->returnValue($result));
+            ->willReturn($result);
 
         $statementExpectation = function ($update) use ($expected, $statement) {
             $state = $update->getRawState();
@@ -238,10 +238,10 @@ class TableGatewayTest extends TestCase
             ->getMock();
         $sql->expects($this->atLeastOnce())
             ->method('getTable')
-            ->will($this->returnValue($tableValue));
+            ->willReturn($tableValue);
         $sql->expects($this->once())
             ->method('update')
-            ->will($this->returnValue($update));
+            ->willReturn($update);
         $sql->expects($this->once())
             ->method('prepareStatementForSqlObject')
             ->with($this->equalTo($update))
@@ -283,13 +283,13 @@ class TableGatewayTest extends TestCase
             ->getMock();
         $result->expects($this->once())
             ->method('getAffectedRows')
-            ->will($this->returnValue(1));
+            ->willReturn(1);
 
         $statement = $this->getMockBuilder(StatementInterface::class)
             ->getMock();
         $statement->expects($this->once())
             ->method('execute')
-            ->will($this->returnValue($result));
+            ->willReturn($result);
 
         $statementExpectation = function ($delete) use ($expected, $statement) {
             $state = $delete->getRawState();
@@ -302,10 +302,10 @@ class TableGatewayTest extends TestCase
             ->getMock();
         $sql->expects($this->atLeastOnce())
             ->method('getTable')
-            ->will($this->returnValue($tableValue));
+            ->willReturn($tableValue);
         $sql->expects($this->once())
             ->method('delete')
-            ->will($this->returnValue($delete));
+            ->willReturn($delete);
         $sql->expects($this->once())
             ->method('prepareStatementForSqlObject')
             ->with($this->equalTo($delete))

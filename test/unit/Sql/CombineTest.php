@@ -183,7 +183,7 @@ class CombineTest extends TestCase
 
         $mockStatement = $this->getMockBuilder(StatementInterface::class)->getMock();
         $mockStatement->expects($this->any())->method('getParameterContainer')
-            ->will($this->returnValue($parameterContainer));
+            ->willReturn($parameterContainer);
 
         $setGetSqlFunction = function ($sql = null) use ($mockStatement) {
             static $sqlValue;
@@ -197,8 +197,8 @@ class CombineTest extends TestCase
         $mockStatement->expects($this->any())->method('getSql')->will($this->returnCallback($setGetSqlFunction));
 
         $mockDriver = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
-        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
+        $mockDriver->expects($this->any())->method('formatParameterName')->willReturn('?');
+        $mockDriver->expects($this->any())->method('createStatement')->willReturn($mockStatement);
 
         return $this->getMockBuilder(Adapter::class)
             ->setConstructorArgs([$mockDriver])

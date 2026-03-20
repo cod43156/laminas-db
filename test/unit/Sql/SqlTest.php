@@ -40,12 +40,12 @@ class SqlTest extends TestCase
         // mock the adapter, driver, and parts
         $mockResult    = $this->getMockBuilder(ResultInterface::class)->getMock();
         $mockStatement = $this->getMockBuilder(StatementInterface::class)->getMock();
-        $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
+        $mockStatement->expects($this->any())->method('execute')->willReturn($mockResult);
         $mockConnection = $this->getMockBuilder(ConnectionInterface::class)->getMock();
         $mockDriver     = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
-        $mockDriver->expects($this->any())->method('getConnection')->will($this->returnValue($mockConnection));
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockDriver->expects($this->any())->method('createStatement')->willReturn($mockStatement);
+        $mockDriver->expects($this->any())->method('getConnection')->willReturn($mockConnection);
+        $mockDriver->expects($this->any())->method('formatParameterName')->willReturn('?');
 
         // setup mock adapter
         $this->mockAdapter = $this->getMockBuilder(Adapter::class)
@@ -218,8 +218,8 @@ class SqlTest extends TestCase
 
         $mockStatement = $this->getMockBuilder(StatementInterface::class)->getMock();
         $mockDriver    = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
-        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
+        $mockDriver->expects($this->any())->method('formatParameterName')->willReturn('?');
+        $mockDriver->expects($this->any())->method('createStatement')->willReturn($mockStatement);
 
         return new Adapter($mockDriver, $platform);
     }

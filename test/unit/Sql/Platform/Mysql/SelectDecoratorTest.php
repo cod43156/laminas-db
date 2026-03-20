@@ -35,7 +35,7 @@ class SelectDecoratorTest extends TestCase
     public function testPrepareStatement(Select $select, string $expectedSql, array $expectedParams)
     {
         $driver = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $driver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $driver->expects($this->any())->method('formatParameterName')->willReturn('?');
 
         // test
         $adapter = $this->getMockBuilder(Adapter::class)
@@ -48,7 +48,7 @@ class SelectDecoratorTest extends TestCase
         $parameterContainer = new ParameterContainer();
         $statement          = $this->getMockBuilder(StatementInterface::class)->getMock();
         $statement->expects($this->any())->method('getParameterContainer')
-            ->will($this->returnValue($parameterContainer));
+            ->willReturn($parameterContainer);
 
         $statement->expects($this->once())->method('setSql')->with($expectedSql);
 
@@ -81,8 +81,8 @@ class SelectDecoratorTest extends TestCase
                             ->setConstructorArgs([$driver, new TrustingMysqlPlatform()])
                             ->getMock();
         $trustingPlatform = new TrustingMysqlPlatform();
-        $mockAdapter->expects($this->any())->method('getPlatform')->will($this->returnValue($trustingPlatform));
-        $mockAdapter->expects($this->any())->method('getDriver')->will($this->returnValue($driver));
+        $mockAdapter->expects($this->any())->method('getPlatform')->willReturn($trustingPlatform);
+        $mockAdapter->expects($this->any())->method('getDriver')->willReturn($driver);
         // setup mock adapter
         $this->mockAdapter = $mockAdapter;
 
@@ -105,7 +105,7 @@ class SelectDecoratorTest extends TestCase
         $parameterContainer = new ParameterContainer();
         $statement          = $this->getMockBuilder(StatementInterface::class)->getMock();
         $statement->expects($this->any())->method('getParameterContainer')
-            ->will($this->returnValue($parameterContainer));
+            ->willReturn($parameterContainer);
 
         $selectDecorator = new SelectDecorator();
         $selectDecorator->setSubject($select);

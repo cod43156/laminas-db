@@ -32,7 +32,7 @@ class SelectDecoratorTest extends TestCase
         bool $supportsLimitOffset
     ) {
         $driver = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $driver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $driver->expects($this->any())->method('formatParameterName')->willReturn('?');
 
         // test
         $adapter = $this->getMockBuilder(Adapter::class)
@@ -48,7 +48,7 @@ class SelectDecoratorTest extends TestCase
         $statement
             ->expects($this->any())
             ->method('getParameterContainer')
-            ->will($this->returnValue($parameterContainer));
+            ->willReturn($parameterContainer);
         $statement
             ->expects($this->once())
             ->method('setSql')
@@ -81,7 +81,7 @@ class SelectDecoratorTest extends TestCase
         $statement
             ->expects($this->any())
             ->method('getParameterContainer')
-            ->will($this->returnValue($parameterContainer));
+            ->willReturn($parameterContainer);
 
         $selectDecorator = new SelectDecorator();
         $selectDecorator->setSubject($select);

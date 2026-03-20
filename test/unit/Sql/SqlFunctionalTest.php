@@ -583,7 +583,7 @@ class SqlFunctionalTest extends TestCase
      *     }
      * }>
      */
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         $data = array_merge(
             $this->dataProviderCommonProcessMethods(),
@@ -646,7 +646,7 @@ class SqlFunctionalTest extends TestCase
             $decoratorMock = $this->getMockBuilder($decorator[0])
                 ->setConstructorArgs([null])
                 ->getMock();
-            $decoratorMock->expects($this->any())->method('buildSqlString')->will($this->returnValue($decorator[1]));
+            $decoratorMock->expects($this->any())->method('buildSqlString')->willReturn($decorator[1]);
             return $decoratorMock;
         }
 
@@ -677,7 +677,7 @@ class SqlFunctionalTest extends TestCase
         }
 
         $mockDriver = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->willReturn('?');
         $mockDriver->expects($this->any())->method('createStatement')->will($this->returnCallback(function () {
             return new Adapter\StatementContainer();
         }));

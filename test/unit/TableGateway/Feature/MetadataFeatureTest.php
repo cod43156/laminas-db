@@ -18,13 +18,13 @@ class MetadataFeatureTest extends TestCase
     {
         $tableGatewayMock = $this->getMockForAbstractClass(AbstractTableGateway::class);
         $metadataMock     = $this->getMockBuilder(MetadataInterface::class)->getMock();
-        $metadataMock->expects($this->any())->method('getColumnNames')->will($this->returnValue(['id', 'name']));
+        $metadataMock->expects($this->any())->method('getColumnNames')->willReturn(['id', 'name']);
 
         $constraintObject = new ConstraintObject('id_pk', 'table');
         $constraintObject->setColumns(['id']);
         $constraintObject->setType('PRIMARY KEY');
 
-        $metadataMock->expects($this->any())->method('getConstraints')->will($this->returnValue([$constraintObject]));
+        $metadataMock->expects($this->any())->method('getConstraints')->willReturn([$constraintObject]);
 
         $feature = new MetadataFeature($metadataMock);
         $feature->setTableGateway($tableGatewayMock);
@@ -38,16 +38,16 @@ class MetadataFeatureTest extends TestCase
         /** @var AbstractTableGateway $tableGatewayMock */
         $tableGatewayMock = $this->getMockForAbstractClass(AbstractTableGateway::class);
         $metadataMock     = $this->getMockBuilder(MetadataInterface::class)->getMock();
-        $metadataMock->expects($this->any())->method('getColumnNames')->will($this->returnValue(['id', 'name']));
+        $metadataMock->expects($this->any())->method('getColumnNames')->willReturn(['id', 'name']);
         $metadataMock->expects($this->any())
             ->method('getTable')
-            ->will($this->returnValue(new TableObject('foo')));
+            ->willReturn(new TableObject('foo'));
 
         $constraintObject = new ConstraintObject('id_pk', 'table');
         $constraintObject->setColumns(['id']);
         $constraintObject->setType('PRIMARY KEY');
 
-        $metadataMock->expects($this->any())->method('getConstraints')->will($this->returnValue([$constraintObject]));
+        $metadataMock->expects($this->any())->method('getConstraints')->willReturn([$constraintObject]);
 
         $feature = new MetadataFeature($metadataMock);
         $feature->setTableGateway($tableGatewayMock);
@@ -69,16 +69,16 @@ class MetadataFeatureTest extends TestCase
         /** @var AbstractTableGateway $tableGatewayMock */
         $tableGatewayMock = $this->getMockForAbstractClass(AbstractTableGateway::class);
         $metadataMock     = $this->getMockBuilder(MetadataInterface::class)->getMock();
-        $metadataMock->expects($this->any())->method('getColumnNames')->will($this->returnValue(['id', 'name']));
+        $metadataMock->expects($this->any())->method('getColumnNames')->willReturn(['id', 'name']);
         $metadataMock->expects($this->any())
             ->method('getTable')
-            ->will($this->returnValue(new TableObject('foo')));
+            ->willReturn(new TableObject('foo'));
 
         $constraintObject = new ConstraintObject('id_pk', 'table');
         $constraintObject->setColumns(['composite', 'id']);
         $constraintObject->setType('PRIMARY KEY');
 
-        $metadataMock->expects($this->any())->method('getConstraints')->will($this->returnValue([$constraintObject]));
+        $metadataMock->expects($this->any())->method('getConstraints')->willReturn([$constraintObject]);
 
         $feature = new MetadataFeature($metadataMock);
         $feature->setTableGateway($tableGatewayMock);
@@ -100,10 +100,10 @@ class MetadataFeatureTest extends TestCase
         /** @var AbstractTableGateway $tableGatewayMock */
         $tableGatewayMock = $this->getMockForAbstractClass(AbstractTableGateway::class);
         $metadataMock     = $this->getMockBuilder(MetadataInterface::class)->getMock();
-        $metadataMock->expects($this->any())->method('getColumnNames')->will($this->returnValue(['id', 'name']));
+        $metadataMock->expects($this->any())->method('getColumnNames')->willReturn(['id', 'name']);
         $metadataMock->expects($this->any())
             ->method('getTable')
-            ->will($this->returnValue(new ViewObject('foo')));
+            ->willReturn(new ViewObject('foo'));
 
         $metadataMock->expects($this->never())->method('getConstraints');
 

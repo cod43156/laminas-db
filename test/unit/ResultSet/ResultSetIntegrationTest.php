@@ -110,7 +110,7 @@ class ResultSetIntegrationTest extends TestCase
     {
         $iteratorAggregate = $this->getMockBuilder('IteratorAggregate')
             ->getMock();
-        $iteratorAggregate->expects($this->any())->method('getIterator')->will($this->returnValue($iteratorAggregate));
+        $iteratorAggregate->expects($this->any())->method('getIterator')->willReturn($iteratorAggregate);
         $this->resultSet->initialize($iteratorAggregate);
         self::assertSame($iteratorAggregate->getIterator(), $this->resultSet->getDataSource());
     }
@@ -206,7 +206,7 @@ class ResultSetIntegrationTest extends TestCase
     public function testCurrentWithBufferingCallsDataSourceCurrentOnce()
     {
         $mockResult = $this->getMockBuilder(ResultInterface::class)->getMock();
-        $mockResult->expects($this->once())->method('current')->will($this->returnValue(['foo' => 'bar']));
+        $mockResult->expects($this->once())->method('current')->willReturn(['foo' => 'bar']);
 
         $this->resultSet->initialize($mockResult);
         $this->resultSet->buffer();
@@ -229,7 +229,7 @@ class ResultSetIntegrationTest extends TestCase
     public function testCurrentReturnsNullForNonExistingValues()
     {
         $mockResult = $this->createMock(ResultInterface::class);
-        $mockResult->expects($this->once())->method('current')->will($this->returnValue("Not an Array"));
+        $mockResult->expects($this->once())->method('current')->willReturn("Not an Array");
 
         $this->resultSet->initialize($mockResult);
         $this->resultSet->buffer();

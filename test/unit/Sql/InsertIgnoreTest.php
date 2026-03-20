@@ -105,15 +105,15 @@ class InsertIgnoreTest extends TestCase
     public function testPrepareStatement()
     {
         $mockDriver = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockDriver->expects($this->any())->method('getPrepareType')->willReturn('positional');
+        $mockDriver->expects($this->any())->method('formatParameterName')->willReturn('?');
         $mockAdapter = $this->getMockBuilder(Adapter::class)
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 
         $mockStatement = $this->getMockBuilder(StatementInterface::class)->getMock();
         $pContainer    = new ParameterContainer([]);
-        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+        $mockStatement->expects($this->any())->method('getParameterContainer')->willReturn($pContainer);
         $mockStatement->expects($this->at(1))
             ->method('setSql')
             ->with($this->equalTo('INSERT IGNORE INTO "foo" ("bar", "boo") VALUES (?, NOW())'));
@@ -126,15 +126,15 @@ class InsertIgnoreTest extends TestCase
         // with TableIdentifier
         $this->insert = new InsertIgnore();
         $mockDriver   = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockDriver->expects($this->any())->method('getPrepareType')->willReturn('positional');
+        $mockDriver->expects($this->any())->method('formatParameterName')->willReturn('?');
         $mockAdapter = $this->getMockBuilder(Adapter::class)
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 
         $mockStatement = $this->getMockBuilder(StatementInterface::class)->getMock();
         $pContainer    = new ParameterContainer([]);
-        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+        $mockStatement->expects($this->any())->method('getParameterContainer')->willReturn($pContainer);
         $mockStatement->expects($this->at(1))
             ->method('setSql')
             ->with($this->equalTo('INSERT IGNORE INTO "sch"."foo" ("bar", "boo") VALUES (?, NOW())'));
@@ -148,8 +148,8 @@ class InsertIgnoreTest extends TestCase
     public function testPrepareStatementWithSelect()
     {
         $mockDriver = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockDriver->expects($this->any())->method('getPrepareType')->willReturn('positional');
+        $mockDriver->expects($this->any())->method('formatParameterName')->willReturn('?');
         $mockAdapter = $this->getMockBuilder(Adapter::class)
             ->setConstructorArgs([$mockDriver])
             ->getMock();
@@ -292,15 +292,15 @@ class InsertIgnoreTest extends TestCase
         $replace = new Replace();
 
         $mockDriver = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockDriver->expects($this->any())->method('getPrepareType')->willReturn('positional');
+        $mockDriver->expects($this->any())->method('formatParameterName')->willReturn('?');
         $mockAdapter = $this->getMockBuilder(Adapter::class)
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 
         $mockStatement = $this->getMockBuilder(StatementInterface::class)->getMock();
         $pContainer    = new ParameterContainer([]);
-        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+        $mockStatement->expects($this->any())->method('getParameterContainer')->willReturn($pContainer);
         $mockStatement->expects($this->at(1))
             ->method('setSql')
             ->with($this->equalTo('REPLACE INTO "foo" ("bar", "boo") VALUES (?, NOW())'));
@@ -314,15 +314,15 @@ class InsertIgnoreTest extends TestCase
         $replace = new Replace();
 
         $mockDriver = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockDriver->expects($this->any())->method('getPrepareType')->willReturn('positional');
+        $mockDriver->expects($this->any())->method('formatParameterName')->willReturn('?');
         $mockAdapter = $this->getMockBuilder(Adapter::class)
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 
         $mockStatement = $this->getMockBuilder(StatementInterface::class)->getMock();
         $pContainer    = new ParameterContainer([]);
-        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+        $mockStatement->expects($this->any())->method('getParameterContainer')->willReturn($pContainer);
         $mockStatement->expects($this->at(1))
             ->method('setSql')
             ->with($this->equalTo('REPLACE INTO "sch"."foo" ("bar", "boo") VALUES (?, NOW())'));

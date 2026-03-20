@@ -40,7 +40,7 @@ class TableIdentifierTest extends TestCase
     {
         $table = $this->getMockBuilder('stdClass')->getMock();
 
-        $table->expects($this->once())->method('__toString')->will($this->returnValue('castResult'));
+        $table->expects($this->once())->method('__toString')->willReturn('castResult');
 
         $tableIdentifier = new TableIdentifier($table);
 
@@ -52,7 +52,7 @@ class TableIdentifierTest extends TestCase
     {
         $schema = $this->getMockBuilder('stdClass')->getMock();
 
-        $schema->expects($this->once())->method('__toString')->will($this->returnValue('castResult'));
+        $schema->expects($this->once())->method('__toString')->willReturn('castResult');
 
         $tableIdentifier = new TableIdentifier('foo', $schema);
 
@@ -87,11 +87,11 @@ class TableIdentifierTest extends TestCase
      *
      * @return mixed[][]
      */
-    public function invalidTableProvider()
+    public static function invalidTableProvider()
     {
         return array_merge(
             [[null]],
-            $this->invalidSchemaProvider()
+            self::invalidSchemaProvider()
         );
     }
 

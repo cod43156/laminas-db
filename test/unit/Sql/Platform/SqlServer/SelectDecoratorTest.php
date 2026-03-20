@@ -33,7 +33,7 @@ class SelectDecoratorTest extends TestCase
     ) {
         $driver = $this->getMockBuilder(DriverInterface::class)->getMock();
         $driver->expects($this->exactly($expectedFormatParamCount))->method('formatParameterName')
-            ->will($this->returnValue('?'));
+            ->willReturn('?');
 
         // test
         $adapter = $this->getMockBuilder(Adapter::class)
@@ -46,7 +46,7 @@ class SelectDecoratorTest extends TestCase
         $parameterContainer = new ParameterContainer();
         $statement          = $this->getMockBuilder(StatementInterface::class)->getMock();
         $statement->expects($this->any())->method('getParameterContainer')
-            ->will($this->returnValue($parameterContainer));
+            ->willReturn($parameterContainer);
 
         $statement->expects($this->once())->method('setSql')->with($expectedSql);
 
@@ -69,7 +69,7 @@ class SelectDecoratorTest extends TestCase
         $parameterContainer = new ParameterContainer();
         $statement          = $this->getMockBuilder(StatementInterface::class)->getMock();
         $statement->expects($this->any())->method('getParameterContainer')
-            ->will($this->returnValue($parameterContainer));
+            ->willReturn($parameterContainer);
 
         $selectDecorator = new SelectDecorator();
         $selectDecorator->setSubject($select);

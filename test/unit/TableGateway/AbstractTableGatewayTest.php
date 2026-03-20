@@ -78,17 +78,17 @@ class AbstractTableGatewayTest extends TestCase
     {
         // mock the adapter, driver, and parts
         $mockResult = $this->getMockBuilder(ResultInterface::class)->getMock();
-        $mockResult->expects($this->any())->method('getAffectedRows')->will($this->returnValue(5));
+        $mockResult->expects($this->any())->method('getAffectedRows')->willReturn(5);
 
         $mockStatement = $this->getMockBuilder(StatementInterface::class)->getMock();
-        $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
+        $mockStatement->expects($this->any())->method('execute')->willReturn($mockResult);
 
         $mockConnection = $this->getMockBuilder(ConnectionInterface::class)->getMock();
-        $mockConnection->expects($this->any())->method('getLastGeneratedValue')->will($this->returnValue(10));
+        $mockConnection->expects($this->any())->method('getLastGeneratedValue')->willReturn(10);
 
         $mockDriver = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
-        $mockDriver->expects($this->any())->method('getConnection')->will($this->returnValue($mockConnection));
+        $mockDriver->expects($this->any())->method('createStatement')->willReturn($mockStatement);
+        $mockDriver->expects($this->any())->method('getConnection')->willReturn($mockConnection);
 
         $this->mockAdapter = $this->getMockBuilder(Adapter::class)
             ->setConstructorArgs([$mockDriver])

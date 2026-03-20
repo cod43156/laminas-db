@@ -46,14 +46,14 @@ class AbstractRowGatewayTest extends TestCase
     {
         // mock the adapter, driver, and parts
         $mockResult = $this->getMockBuilder(ResultInterface::class)->getMock();
-        $mockResult->expects($this->any())->method('getAffectedRows')->will($this->returnValue(1));
+        $mockResult->expects($this->any())->method('getAffectedRows')->willReturn(1);
         $this->mockResult = $mockResult;
         $mockStatement    = $this->getMockBuilder(StatementInterface::class)->getMock();
-        $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
+        $mockStatement->expects($this->any())->method('execute')->willReturn($mockResult);
         $mockConnection = $this->getMockBuilder(ConnectionInterface::class)->getMock();
         $mockDriver     = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
-        $mockDriver->expects($this->any())->method('getConnection')->will($this->returnValue($mockConnection));
+        $mockDriver->expects($this->any())->method('createStatement')->willReturn($mockStatement);
+        $mockDriver->expects($this->any())->method('getConnection')->willReturn($mockConnection);
 
         // setup mock adapter
         $this->mockAdapter = $this->getMockBuilder(Adapter::class)
@@ -148,8 +148,8 @@ class AbstractRowGatewayTest extends TestCase
     {
         // test insert
         $this->mockResult->expects($this->any())->method('current')
-            ->will($this->returnValue(['id' => 5, 'name' => 'foo']));
-        $this->mockResult->expects($this->any())->method('getGeneratedValue')->will($this->returnValue(5));
+            ->willReturn(['id' => 5, 'name' => 'foo']);
+        $this->mockResult->expects($this->any())->method('getGeneratedValue')->willReturn(5);
         $this->rowGateway->populate(['name' => 'foo']);
         $this->rowGateway->save();
         self::assertEquals(5, $this->rowGateway->id);
@@ -171,7 +171,7 @@ class AbstractRowGatewayTest extends TestCase
 
         // test insert
         $this->mockResult->expects($this->any())->method('current')
-            ->will($this->returnValue(['one' => 'foo', 'two' => 'bar']));
+            ->willReturn(['one' => 'foo', 'two' => 'bar']);
 
         // @todo Need to assert that $where was filled in
 
@@ -193,7 +193,7 @@ class AbstractRowGatewayTest extends TestCase
     {
         // test update
         $this->mockResult->expects($this->any())->method('current')
-            ->will($this->returnValue(['id' => 6, 'name' => 'foo']));
+            ->willReturn(['id' => 6, 'name' => 'foo']);
         $this->rowGateway->populate(['id' => 6, 'name' => 'foo'], true);
         $this->rowGateway->save();
         self::assertEquals(6, $this->rowGateway['id']);
@@ -207,21 +207,21 @@ class AbstractRowGatewayTest extends TestCase
         $selectMock->expects($this->once())
             ->method('where')
             ->with($this->equalTo(['id' => 7]))
-            ->will($this->returnValue($selectMock));
+            ->willReturn($selectMock);
 
         $sqlMock = $this->getMockBuilder(Sql::class)
             ->setConstructorArgs([$this->mockAdapter])
             ->getMock();
         $sqlMock->expects($this->any())
             ->method('select')
-            ->will($this->returnValue($selectMock));
+            ->willReturn($selectMock);
 
         $this->setRowGatewayState(['sql' => $sqlMock]);
 
         // original mock returning updated data
         $this->mockResult->expects($this->any())
             ->method('current')
-            ->will($this->returnValue(['id' => 7, 'name' => 'fooUpdated']));
+            ->willReturn(['id' => 7, 'name' => 'fooUpdated']);
 
         // populate forces an update in save(), seeds with original data (from db)
         $this->rowGateway->populate(['id' => 6, 'name' => 'foo'], true);

@@ -156,7 +156,7 @@ class SelectTest extends TestCase
         $mockExpression = $this->getMockBuilder(ExpressionInterface::class)
             ->getMock();
         $mockDriver     = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->willReturn('?');
         $parameterContainer = new ParameterContainer();
 
         $select = new Select();
@@ -618,7 +618,7 @@ class SelectTest extends TestCase
 
         $mockStatement = $this->getMockBuilder(StatementInterface::class)->getMock();
         $mockStatement->expects($this->any())->method('getParameterContainer')
-            ->will($this->returnValue($parameterContainer));
+            ->willReturn($parameterContainer);
         $mockStatement->expects($this->any())->method('setSql')->with($this->equalTo($expectedSqlString));
 
         $select->prepareStatement($mockAdapter, $mockStatement);
@@ -691,7 +691,7 @@ class SelectTest extends TestCase
         }
 
         $mockDriver = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->willReturn('?');
         $parameterContainer = new ParameterContainer();
 
         $sr = new ReflectionObject($select);

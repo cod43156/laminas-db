@@ -71,11 +71,11 @@ class RowCounterTest extends TestCase
             ->getMock();
         $result->expects($this->once())
             ->method('current')
-            ->will($this->returnValue(['count' => $returnValue]));
+            ->willReturn(['count' => $returnValue]);
         $statement->setSql($sql);
         $statement->expects($this->once())
             ->method('execute')
-            ->will($this->returnValue($result));
+            ->willReturn($result);
         return $statement;
     }
 
@@ -90,17 +90,17 @@ class RowCounterTest extends TestCase
             ->getMock(); // stdClass can be used here
         $oci8Statement->expects($this->once())
             ->method('current')
-            ->will($this->returnValue(['count' => $returnValue]));
+            ->willReturn(['count' => $returnValue]);
         $connection = $this->getMockBuilder(ConnectionInterface::class)->getMock();
         $connection->expects($this->once())
             ->method('execute')
-            ->will($this->returnValue($oci8Statement));
+            ->willReturn($oci8Statement);
         $driver = $this->getMockBuilder(Oci8::class)
             ->disableOriginalConstructor()
             ->getMock();
         $driver->expects($this->once())
             ->method('getConnection')
-            ->will($this->returnValue($connection));
+            ->willReturn($connection);
         return $driver;
     }
 }

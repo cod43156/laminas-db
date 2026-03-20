@@ -26,7 +26,7 @@ statement')]
         array $expectedParams
     ) {
         $driver = $this->getMockBuilder(DriverInterface::class)->getMock();
-        $driver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $driver->expects($this->any())->method('formatParameterName')->willReturn('?');
 
         // test
         $adapter = $this->getMockBuilder(Adapter::class)
@@ -39,7 +39,7 @@ statement')]
         $parameterContainer = new ParameterContainer();
         $statement          = $this->getMockBuilder(StatementInterface::class)->getMock();
         $statement->expects($this->any())->method('getParameterContainer')
-            ->will($this->returnValue($parameterContainer));
+            ->willReturn($parameterContainer);
 
         $statement->expects($this->once())->method('setSql')->with($expectedSql);
 
@@ -66,7 +66,7 @@ statement')]
         $parameterContainer = new ParameterContainer();
         $statement          = $this->getMockBuilder(StatementInterface::class)->getMock();
         $statement->expects($this->any())->method('getParameterContainer')
-            ->will($this->returnValue($parameterContainer));
+            ->willReturn($parameterContainer);
 
         $selectDecorator = new SelectDecorator();
         $selectDecorator->setSubject($select);

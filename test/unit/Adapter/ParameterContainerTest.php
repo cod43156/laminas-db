@@ -138,8 +138,7 @@ class ParameterContainerTest extends TestCase
         self::assertEquals('baz', $this->parameterContainer[':myparam']);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetSetMaxLength() will persist errata data')]
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetGetMaxLength() return persisted errata data, if it exists')]
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetSetMaxLength() will persist errata data. Return persisted errata data, if it exists')]
     public function testOffsetSetAndGetMaxLength()
     {
         $this->parameterContainer->offsetSetMaxLength('foo', 100);

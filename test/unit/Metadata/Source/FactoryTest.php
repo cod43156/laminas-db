@@ -29,7 +29,7 @@ class FactoryTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: Adapter&MockObject, 1: MetadataInterface}> */
-    public function validAdapterProvider(): array
+    public static function validAdapterProvider(): array
     {
         /** @return Adapter&MockObject */
         $createAdapterForPlatform = function (string $platformName) {

@@ -73,18 +73,18 @@ class OracleRowCounterTest extends TestCase
             ->getMock();
         $resource->expects($this->once())
             ->method('fetch')
-            ->will($this->returnValue(['count' => $returnValue]));
+            ->willReturn(['count' => $returnValue]);
 
         // mock the result
         $result = $this->getMockBuilder(ResultInterface::class)->getMock();
         $result->expects($this->once())
             ->method('getResource')
-            ->will($this->returnValue($resource));
+            ->willReturn($resource);
 
         $statement->setSql($sql);
         $statement->expects($this->once())
             ->method('execute')
-            ->will($this->returnValue($result));
+            ->willReturn($result);
 
         return $statement;
     }
@@ -100,25 +100,25 @@ class OracleRowCounterTest extends TestCase
             ->getMock(); // stdClass can be used here
         $pdoStatement->expects($this->once())
             ->method('fetch')
-            ->will($this->returnValue(['count' => $returnValue]));
+            ->willReturn(['count' => $returnValue]);
 
         $pdoConnection = $this->getMockBuilder('stdClass')
             ->getMock();
         $pdoConnection->expects($this->once())
             ->method('query')
-            ->will($this->returnValue($pdoStatement));
+            ->willReturn($pdoStatement);
 
         $connection = $this->getMockBuilder(ConnectionInterface::class)->getMock();
         $connection->expects($this->once())
             ->method('getResource')
-            ->will($this->returnValue($pdoConnection));
+            ->willReturn($pdoConnection);
 
         $driver = $this->getMockBuilder(Pdo::class)
             ->disableOriginalConstructor()
             ->getMock();
         $driver->expects($this->once())
             ->method('getConnection')
-            ->will($this->returnValue($connection));
+            ->willReturn($connection);
 
         return $driver;
     }
