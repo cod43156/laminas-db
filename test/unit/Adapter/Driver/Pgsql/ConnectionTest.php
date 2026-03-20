@@ -7,6 +7,8 @@ use Laminas\Db\Adapter\Exception as AdapterException;
 use Laminas\Db\Adapter\Exception\InvalidArgumentException;
 use Laminas\Db\Adapter\Exception\RuntimeException;
 use LaminasTest\Db\DeprecatedAssertionsTrait;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 
@@ -15,7 +17,7 @@ use function pg_client_encoding;
 
 use const PGSQL_CONNECT_FORCE_NEW;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Connection::class, 'getResource')]
+#[CoversMethod(Connection::class, 'getResource')]
 class ConnectionTest extends TestCase
 {
     use DeprecatedAssertionsTrait;
@@ -83,8 +85,8 @@ class ConnectionTest extends TestCase
         self::assertSame($this->connection, $this->connection->disconnect());
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('6760')]
-    #[\PHPUnit\Framework\Attributes\Group('6787')]
+    #[Group('6760')]
+    #[Group('6787')]
     public function testGetConnectionStringEncodeSpecialSymbol()
     {
         $connectionParameters = [
@@ -134,7 +136,7 @@ class ConnectionTest extends TestCase
         self::assertEquals($type, self::readAttribute($this->connection, 'type'));
     }
 
-    #[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+    #[RunInSeparateProcess]
     public function testSetCharset()
     {
         if (! extension_loaded('pgsql')) {
@@ -160,7 +162,7 @@ class ConnectionTest extends TestCase
         self::assertEquals('SQL_ASCII', pg_client_encoding($this->connection->getResource()));
     }
 
-    #[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+    #[RunInSeparateProcess]
     public function testSetInvalidCharset()
     {
         if (! extension_loaded('pgsql')) {

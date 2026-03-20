@@ -10,16 +10,19 @@ use Laminas\Db\Adapter\Platform\Sqlite as SqlitePlatform;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Platform\Sqlite\SelectDecorator;
 use Laminas\Db\Sql\Select;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Sqlite\SelectDecorator::class, 'prepareStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Sqlite\SelectDecorator::class, 'processCombine')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Sqlite\SelectDecorator::class, 'getSqlString')]
+#[CoversMethod(SelectDecorator::class, 'prepareStatement')]
+#[CoversMethod(SelectDecorator::class, 'processCombine')]
+#[CoversMethod(SelectDecorator::class, 'getSqlString')]
 class SelectDecoratorTest extends TestCase
 {
-    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare a proper combine
+    #[TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare a proper combine
 statement')]
-    #[\PHPUnit\Framework\Attributes\DataProvider('dataProviderUnionSyntaxFromCombine')]
+    #[DataProvider('dataProviderUnionSyntaxFromCombine')]
     public function testPrepareStatementPreparesUnionSyntaxFromCombine(
         Select $select,
         string $expectedSql,
@@ -54,9 +57,9 @@ statement')]
      * @param mixed $ignore
      * @param mixed $alsoIgnore
      */
-    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare a proper combine
+    #[TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare a proper combine
 statement')]
-    #[\PHPUnit\Framework\Attributes\DataProvider('dataProviderUnionSyntaxFromCombine')]
+    #[DataProvider('dataProviderUnionSyntaxFromCombine')]
     public function testGetSqlStringPreparesUnionSyntaxFromCombine(
         Select $select,
         $ignore,

@@ -5,23 +5,24 @@ namespace LaminasTest\Db\Adapter\Driver\IbmDb2;
 use Laminas\Db\Adapter\Driver\IbmDb2\Connection;
 use Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2;
 use Laminas\Db\Adapter\Driver\IbmDb2\Result;
+use PHPUnit\Framework\Attributes\Group;
 
 use function ini_get;
 use function php_uname;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Connection::class, 'getCurrentSchema')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Connection::class, 'setResource')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Connection::class, 'getResource')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Connection::class, 'connect')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Connection::class, 'isConnected')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Connection::class, 'disconnect')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Connection::class, 'beginTransaction')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Connection::class, 'commit')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Connection::class, 'rollback')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Connection::class, 'execute')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Connection::class, 'getLastGeneratedValue')]
-#[\PHPUnit\Framework\Attributes\Group('integration')]
-#[\PHPUnit\Framework\Attributes\Group('integration-ibm_db2')]
+#[CoversMethod(Connection::class, 'getCurrentSchema')]
+#[CoversMethod(Connection::class, 'setResource')]
+#[CoversMethod(Connection::class, 'getResource')]
+#[CoversMethod(Connection::class, 'connect')]
+#[CoversMethod(Connection::class, 'isConnected')]
+#[CoversMethod(Connection::class, 'disconnect')]
+#[CoversMethod(Connection::class, 'beginTransaction')]
+#[CoversMethod(Connection::class, 'commit')]
+#[CoversMethod(Connection::class, 'rollback')]
+#[CoversMethod(Connection::class, 'execute')]
+#[CoversMethod(Connection::class, 'getLastGeneratedValue')]
+#[Group('integration')]
+#[Group('integration-ibm_db2')]
 class ConnectionIntegrationTest extends AbstractIntegrationTest
 {
     public function testGetCurrentSchema()
@@ -165,7 +166,7 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         $connection->getLastGeneratedValue();
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('laminas3469')]
+    #[Group('laminas3469')]
     public function testConnectReturnsConnectionWhenResourceSet()
     {
         $resource   = db2_connect(

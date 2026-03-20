@@ -6,19 +6,21 @@ use Laminas\Db\Adapter\Driver\IbmDb2\Connection;
 use Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2;
 use Laminas\Db\Adapter\Driver\IbmDb2\Result;
 use Laminas\Db\Adapter\Driver\IbmDb2\Statement;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'registerConnection')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'registerStatementPrototype')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'registerResultPrototype')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'getDatabasePlatformName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'getConnection')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'createStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'createResult')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'getPrepareType')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'formatParameterName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'getLastGeneratedValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'getResultPrototype')]
+#[CoversMethod(IbmDb2::class, 'registerConnection')]
+#[CoversMethod(IbmDb2::class, 'registerStatementPrototype')]
+#[CoversMethod(IbmDb2::class, 'registerResultPrototype')]
+#[CoversMethod(IbmDb2::class, 'getDatabasePlatformName')]
+#[CoversMethod(IbmDb2::class, 'getConnection')]
+#[CoversMethod(IbmDb2::class, 'createStatement')]
+#[CoversMethod(IbmDb2::class, 'createResult')]
+#[CoversMethod(IbmDb2::class, 'getPrepareType')]
+#[CoversMethod(IbmDb2::class, 'formatParameterName')]
+#[CoversMethod(IbmDb2::class, 'getLastGeneratedValue')]
+#[CoversMethod(IbmDb2::class, 'getResultPrototype')]
 class IbmDb2Test extends TestCase
 {
     /** @var IbmDb2 */
@@ -86,7 +88,7 @@ class IbmDb2Test extends TestCase
         self::assertEquals('IBM DB2', $this->ibmdb2->getDatabasePlatformName(IbmDb2::NAME_FORMAT_NATURAL));
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testRegisterConnection')]
+    #[Depends('testRegisterConnection')]
     public function testGetConnection()
     {
         $conn = new Connection([]);

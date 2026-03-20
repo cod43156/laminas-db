@@ -6,10 +6,12 @@ use Laminas\Db\Adapter\Driver\DriverInterface;
 use Laminas\Db\Adapter\Driver\Pdo\Pdo;
 use Laminas\Db\Adapter\Driver\Pdo\Result;
 use Laminas\Db\Exception\RuntimeException;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Pdo::class, 'getDatabasePlatformName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Pdo::class, 'getResultPrototype')]
+#[CoversMethod(Pdo::class, 'getDatabasePlatformName')]
+#[CoversMethod(Pdo::class, 'getResultPrototype')]
 class PdoTest extends TestCase
 {
     /** @var Pdo */
@@ -53,7 +55,7 @@ class PdoTest extends TestCase
     /**
      * @param int|string $name
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('getParamsAndType')]
+    #[DataProvider('getParamsAndType')]
     public function testFormatParameterName($name, ?string $type, string $expected)
     {
         $result = $this->pdo->formatParameterName($name, $type);
@@ -71,7 +73,7 @@ class PdoTest extends TestCase
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('getInvalidParamName')]
+    #[DataProvider('getInvalidParamName')]
     public function testFormatParameterNameWithInvalidCharacters(string $name)
     {
         $this->expectException(RuntimeException::class);

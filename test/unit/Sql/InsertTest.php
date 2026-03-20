@@ -15,17 +15,20 @@ use Laminas\Db\Sql\TableIdentifier;
 use LaminasTest\Db\DeprecatedAssertionsTrait;
 use LaminasTest\Db\TestAsset\Replace;
 use LaminasTest\Db\TestAsset\TrustingSql92Platform;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Insert::class, 'into')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Insert::class, 'columns')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Insert::class, 'values')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Insert::class, 'prepareStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Insert::class, 'getSqlString')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Insert::class, '__set')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Insert::class, '__unset')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Insert::class, '__isset')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Insert::class, '__get')]
+#[CoversMethod(Insert::class, 'into')]
+#[CoversMethod(Insert::class, 'columns')]
+#[CoversMethod(Insert::class, 'values')]
+#[CoversMethod(Insert::class, 'prepareStatement')]
+#[CoversMethod(Insert::class, 'getSqlString')]
+#[CoversMethod(Insert::class, '__set')]
+#[CoversMethod(Insert::class, '__unset')]
+#[CoversMethod(Insert::class, '__isset')]
+#[CoversMethod(Insert::class, '__get')]
 class InsertTest extends TestCase
 {
     use DeprecatedAssertionsTrait;
@@ -104,7 +107,7 @@ class InsertTest extends TestCase
         $this->insert->values(['foo' => 'bar'], Insert::VALUES_MERGE);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('Laminas-4926')]
+    #[Group('Laminas-4926')]
     public function testEmptyArrayValues()
     {
         $this->insert->values([]);
@@ -282,7 +285,7 @@ class InsertTest extends TestCase
         self::assertNull($this->insert->foo);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('Laminas-536')]
+    #[Group('Laminas-536')]
     public function testValuesMerge()
     {
         $this->insert->into('foo')
@@ -296,7 +299,7 @@ class InsertTest extends TestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\CoversNothing]
+    #[CoversNothing]
     public function testSpecificationconstantsCouldBeOverridedByExtensionInPrepareStatement()
     {
         $replace = new Replace();
@@ -343,7 +346,7 @@ class InsertTest extends TestCase
         $replace->prepareStatement($mockAdapter, $mockStatement);
     }
 
-    #[\PHPUnit\Framework\Attributes\CoversNothing]
+    #[CoversNothing]
     public function testSpecificationconstantsCouldBeOverridedByExtensionInGetSqlString()
     {
         $replace = new Replace();

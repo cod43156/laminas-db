@@ -14,15 +14,17 @@ use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Sql;
 use Laminas\Db\Sql\Update;
 use LaminasTest\Db\TestAsset;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Sql::class, '__construct')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Sql::class, 'select')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Sql::class, 'insert')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Sql::class, 'update')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Sql::class, 'delete')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Sql::class, 'prepareStatementForSqlObject')]
+#[CoversMethod(Sql::class, '__construct')]
+#[CoversMethod(Sql::class, 'select')]
+#[CoversMethod(Sql::class, 'insert')]
+#[CoversMethod(Sql::class, 'update')]
+#[CoversMethod(Sql::class, 'delete')]
+#[CoversMethod(Sql::class, 'prepareStatementForSqlObject')]
 class SqlTest extends TestCase
 {
     /** @var Adapter&MockObject */
@@ -131,7 +133,7 @@ class SqlTest extends TestCase
         self::assertInstanceOf(StatementInterface::class, $stmt);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('6890')]
+    #[Group('6890')]
     public function testForDifferentAdapters()
     {
         $adapterSql92     = $this->getAdapterForPlatform('sql92');

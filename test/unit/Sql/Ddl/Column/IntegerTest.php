@@ -2,12 +2,14 @@
 
 namespace LaminasTest\Db\Sql\Ddl\Column;
 
+use Laminas\Db\Sql\Ddl\Column\Column;
 use Laminas\Db\Sql\Ddl\Column\Integer;
 use Laminas\Db\Sql\Ddl\Constraint\PrimaryKey;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\Integer::class, '__construct')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\Column::class, 'getExpressionData')]
+#[CoversMethod(Integer::class, '__construct')]
+#[CoversMethod(Column::class, 'getExpressionData')]
 class IntegerTest extends TestCase
 {
     public function testObjectConstruction()

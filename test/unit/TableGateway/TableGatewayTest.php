@@ -17,6 +17,8 @@ use Laminas\Db\TableGateway\Exception\InvalidArgumentException;
 use Laminas\Db\TableGateway\Feature;
 use Laminas\Db\TableGateway\Feature\FeatureSet;
 use Laminas\Db\TableGateway\TableGateway;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -83,8 +85,8 @@ class TableGatewayTest extends TestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('6726')]
-    #[\PHPUnit\Framework\Attributes\Group('6740')]
+    #[Group('6726')]
+    #[Group('6740')]
     public function testTableAsString()
     {
         $ti = 'fooTable.barSchema';
@@ -97,8 +99,8 @@ class TableGatewayTest extends TestCase
         self::assertEquals($ti, $table->getTable());
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('6726')]
-    #[\PHPUnit\Framework\Attributes\Group('6740')]
+    #[Group('6726')]
+    #[Group('6740')]
     public function testTableAsTableIdentifierObject()
     {
         $ti = new TableIdentifier('fooTable', 'barSchema');
@@ -111,8 +113,8 @@ class TableGatewayTest extends TestCase
         self::assertEquals($ti, $table->getTable());
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('6726')]
-    #[\PHPUnit\Framework\Attributes\Group('6740')]
+    #[Group('6726')]
+    #[Group('6740')]
     public function testTableAsAliasedTableIdentifierObject()
     {
         // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps
@@ -146,8 +148,8 @@ class TableGatewayTest extends TestCase
      * @param array<string, string|TableIdentifier> $tableValue
      * @param string|TableIdentifier $expected
      */
-    #[\PHPUnit\Framework\Attributes\Group('7311')]
-    #[\PHPUnit\Framework\Attributes\DataProvider('aliasedTables')]
+    #[Group('7311')]
+    #[DataProvider('aliasedTables')]
     public function testInsertShouldResetTableToUnaliasedTable(array $tableValue, $expected)
     {
         $insert = new Insert();
@@ -209,7 +211,7 @@ class TableGatewayTest extends TestCase
      * @param array<string, string|TableIdentifier> $tableValue
      * @param string|TableIdentifier $expected
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('aliasedTables')]
+    #[DataProvider('aliasedTables')]
     public function testUpdateShouldResetTableToUnaliasedTable(array $tableValue, $expected)
     {
         $update = new Update();
@@ -273,7 +275,7 @@ class TableGatewayTest extends TestCase
      * @param array<string, string|TableIdentifier> $tableValue
      * @param string|TableIdentifier $expected
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('aliasedTables')]
+    #[DataProvider('aliasedTables')]
     public function testDeleteShouldResetTableToUnaliasedTable(array $tableValue, $expected)
     {
         $delete = new Delete();

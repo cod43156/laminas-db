@@ -3,23 +3,25 @@
 namespace LaminasTest\Db\Adapter\Driver\Oci8;
 
 use Laminas\Db\Adapter\Driver\Oci8\Result;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'initialize')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'buffer')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'getResource')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'current')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'next')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'key')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'rewind')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'valid')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'count')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'getFieldCount')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'isQueryResult')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'getAffectedRows')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'getGeneratedValue')]
-#[\PHPUnit\Framework\Attributes\Group('integration')]
-#[\PHPUnit\Framework\Attributes\Group('integration-oracle')]
+#[CoversMethod(Result::class, 'initialize')]
+#[CoversMethod(Result::class, 'buffer')]
+#[CoversMethod(Result::class, 'getResource')]
+#[CoversMethod(Result::class, 'current')]
+#[CoversMethod(Result::class, 'next')]
+#[CoversMethod(Result::class, 'key')]
+#[CoversMethod(Result::class, 'rewind')]
+#[CoversMethod(Result::class, 'valid')]
+#[CoversMethod(Result::class, 'count')]
+#[CoversMethod(Result::class, 'getFieldCount')]
+#[CoversMethod(Result::class, 'isQueryResult')]
+#[CoversMethod(Result::class, 'getAffectedRows')]
+#[CoversMethod(Result::class, 'getGeneratedValue')]
+#[Group('integration')]
+#[Group('integration-oracle')]
 class ResultIntegrationTest extends TestCase
 {
     /** @var Result */

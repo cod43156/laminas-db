@@ -4,10 +4,11 @@ namespace LaminasTest\Db\ResultSet;
 
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\ResultSet\AbstractResultSet;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'current')]
+#[CoversMethod(AbstractResultSet::class, 'current')]
 class AbstractResultSetIntegrationTest extends TestCase
 {
     /** @var AbstractResultSet|MockObject */

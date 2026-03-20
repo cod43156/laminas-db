@@ -8,6 +8,7 @@ use Laminas\Db\Adapter\StatementContainer;
 use Laminas\Db\Sql\Exception\RuntimeException;
 use Laminas\Db\Sql\Platform\Platform;
 use LaminasTest\Db\TestAsset;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
@@ -44,7 +45,7 @@ class PlatformTest extends TestCase
         self::assertEquals('sql92', $reflectionMethod->invoke($platform, new TestAsset\TrustingSql92Platform()));
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('6890')]
+    #[Group('6890')]
     public function testAbstractPlatformCrashesGracefullyOnMissingDefaultPlatform()
     {
         $adapter            = $this->resolveAdapter('sql92');
@@ -63,7 +64,7 @@ class PlatformTest extends TestCase
         $reflectionMethod->invoke($platform, null);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('6890')]
+    #[Group('6890')]
     public function testAbstractPlatformCrashesGracefullyOnMissingDefaultPlatformWithGetDecorators()
     {
         $adapter            = $this->resolveAdapter('sql92');

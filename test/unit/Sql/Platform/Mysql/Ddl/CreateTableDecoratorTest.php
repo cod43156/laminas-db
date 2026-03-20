@@ -7,10 +7,11 @@ use Laminas\Db\Sql\Ddl\Column\Column;
 use Laminas\Db\Sql\Ddl\Constraint\PrimaryKey;
 use Laminas\Db\Sql\Ddl\CreateTable;
 use Laminas\Db\Sql\Platform\Mysql\Ddl\CreateTableDecorator;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\Ddl\CreateTableDecorator::class, 'setSubject')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\Ddl\CreateTableDecorator::class, 'getSqlString')]
+#[CoversMethod(CreateTableDecorator::class, 'setSubject')]
+#[CoversMethod(CreateTableDecorator::class, 'getSqlString')]
 class CreateTableDecoratorTest extends TestCase
 {
     public function testSetSubject()

@@ -4,6 +4,7 @@ namespace LaminasIntegrationTest\Db\Adapter\Platform;
 
 use Laminas\Db\Adapter\Platform\SqlServer;
 use PDO;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 use function extension_loaded;
@@ -12,8 +13,8 @@ use function sqlsrv_connect;
 use function sqlsrv_errors;
 use function var_dump;
 
-#[\PHPUnit\Framework\Attributes\Group('integration')]
-#[\PHPUnit\Framework\Attributes\Group('integration-sqlserver')]
+#[Group('integration')]
+#[Group('integration-sqlserver')]
 class SqlServerTest extends TestCase
 {
     /** @var array<string, resource> */

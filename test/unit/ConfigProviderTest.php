@@ -4,6 +4,7 @@ namespace LaminasTest\Db;
 
 use Laminas\Db\Adapter;
 use Laminas\Db\ConfigProvider;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use Zend\Db\Adapter\AdapterInterface;
 
@@ -31,7 +32,7 @@ class ConfigProviderTest extends TestCase
         return $provider;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testProvidesExpectedConfiguration')]
+    #[Depends('testProvidesExpectedConfiguration')]
     public function testInvocationProvidesDependencyConfiguration(ConfigProvider $provider)
     {
         self::assertEquals(['dependencies' => $provider->getDependencyConfig()], $provider());

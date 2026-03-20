@@ -3,18 +3,19 @@
 namespace LaminasTest\Db\Adapter\Platform;
 
 use Laminas\Db\Adapter\Platform\Mysql;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Mysql::class, 'getName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Mysql::class, 'getQuoteIdentifierSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Mysql::class, 'quoteIdentifier')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Mysql::class, 'quoteIdentifierChain')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Mysql::class, 'getQuoteValueSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Mysql::class, 'quoteValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Mysql::class, 'quoteTrustedValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Mysql::class, 'quoteValueList')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Mysql::class, 'getIdentifierSeparator')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Mysql::class, 'quoteIdentifierInFragment')]
+#[CoversMethod(Mysql::class, 'getName')]
+#[CoversMethod(Mysql::class, 'getQuoteIdentifierSymbol')]
+#[CoversMethod(Mysql::class, 'quoteIdentifier')]
+#[CoversMethod(Mysql::class, 'quoteIdentifierChain')]
+#[CoversMethod(Mysql::class, 'getQuoteValueSymbol')]
+#[CoversMethod(Mysql::class, 'quoteValue')]
+#[CoversMethod(Mysql::class, 'quoteTrustedValue')]
+#[CoversMethod(Mysql::class, 'quoteValueList')]
+#[CoversMethod(Mysql::class, 'getIdentifierSeparator')]
+#[CoversMethod(Mysql::class, 'quoteIdentifierInFragment')]
 class MysqlTest extends TestCase
 {
     /** @var Mysql */

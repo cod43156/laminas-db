@@ -5,21 +5,22 @@ namespace LaminasTest\Db\Adapter\Platform;
 use Laminas\Db\Adapter\Driver\Oci8\Oci8;
 use Laminas\Db\Adapter\Exception\InvalidArgumentException;
 use Laminas\Db\Adapter\Platform\Oracle;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, '__construct')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, 'setDriver')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, 'getDriver')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, 'getName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, 'getQuoteIdentifierSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, 'quoteIdentifier')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, 'quoteIdentifierChain')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, 'getQuoteValueSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, 'quoteValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, 'quoteTrustedValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, 'quoteValueList')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, 'getIdentifierSeparator')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Oracle::class, 'quoteIdentifierInFragment')]
+#[CoversMethod(Oracle::class, '__construct')]
+#[CoversMethod(Oracle::class, 'setDriver')]
+#[CoversMethod(Oracle::class, 'getDriver')]
+#[CoversMethod(Oracle::class, 'getName')]
+#[CoversMethod(Oracle::class, 'getQuoteIdentifierSymbol')]
+#[CoversMethod(Oracle::class, 'quoteIdentifier')]
+#[CoversMethod(Oracle::class, 'quoteIdentifierChain')]
+#[CoversMethod(Oracle::class, 'getQuoteValueSymbol')]
+#[CoversMethod(Oracle::class, 'quoteValue')]
+#[CoversMethod(Oracle::class, 'quoteTrustedValue')]
+#[CoversMethod(Oracle::class, 'quoteValueList')]
+#[CoversMethod(Oracle::class, 'getIdentifierSeparator')]
+#[CoversMethod(Oracle::class, 'quoteIdentifierInFragment')]
 class OracleTest extends TestCase
 {
     /** @var Oracle */

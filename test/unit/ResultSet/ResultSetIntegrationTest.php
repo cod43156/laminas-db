@@ -5,9 +5,12 @@ namespace LaminasTest\Db\ResultSet;
 use ArrayIterator;
 use ArrayObject;
 use Laminas\Db\Adapter\Driver\ResultInterface;
+use Laminas\Db\ResultSet\AbstractResultSet;
 use Laminas\Db\ResultSet\Exception\InvalidArgumentException;
 use Laminas\Db\ResultSet\Exception\RuntimeException;
 use Laminas\Db\ResultSet\ResultSet;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use SplStack;
 use stdClass;
@@ -16,8 +19,8 @@ use function is_array;
 use function rand;
 use function var_export;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'current')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'buffer')]
+#[CoversMethod(AbstractResultSet::class, 'current')]
+#[CoversMethod(AbstractResultSet::class, 'buffer')]
 class ResultSetIntegrationTest extends TestCase
 {
     /** @var ResultSet */
@@ -73,7 +76,7 @@ class ResultSetIntegrationTest extends TestCase
     /**
      * @param mixed $type
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('invalidReturnTypes')]
+    #[DataProvider('invalidReturnTypes')]
     public function testSettingInvalidReturnTypeRaisesException($type)
     {
         $this->expectException(InvalidArgumentException::class);
@@ -118,7 +121,7 @@ class ResultSetIntegrationTest extends TestCase
     /**
      * @param mixed $dataSource
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('invalidReturnTypes')]
+    #[DataProvider('invalidReturnTypes')]
     public function testInvalidDataSourceRaisesException($dataSource)
     {
         if (is_array($dataSource)) {

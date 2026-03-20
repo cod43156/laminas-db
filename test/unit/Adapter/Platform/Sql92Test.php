@@ -3,18 +3,19 @@
 namespace LaminasTest\Db\Adapter\Platform;
 
 use Laminas\Db\Adapter\Platform\Sql92;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'getName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'getQuoteIdentifierSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'quoteIdentifier')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'quoteIdentifierChain')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'getQuoteValueSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'quoteValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'quoteTrustedValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'quoteValueList')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'getIdentifierSeparator')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'quoteIdentifierInFragment')]
+#[CoversMethod(Sql92::class, 'getName')]
+#[CoversMethod(Sql92::class, 'getQuoteIdentifierSymbol')]
+#[CoversMethod(Sql92::class, 'quoteIdentifier')]
+#[CoversMethod(Sql92::class, 'quoteIdentifierChain')]
+#[CoversMethod(Sql92::class, 'getQuoteValueSymbol')]
+#[CoversMethod(Sql92::class, 'quoteValue')]
+#[CoversMethod(Sql92::class, 'quoteTrustedValue')]
+#[CoversMethod(Sql92::class, 'quoteValueList')]
+#[CoversMethod(Sql92::class, 'getIdentifierSeparator')]
+#[CoversMethod(Sql92::class, 'quoteIdentifierInFragment')]
 class Sql92Test extends TestCase
 {
     /** @var Sql92 */

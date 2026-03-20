@@ -3,9 +3,10 @@
 namespace LaminasTest\Db\Sql\Ddl\Constraint;
 
 use Laminas\Db\Sql\Ddl\Constraint\UniqueKey;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\UniqueKey::class, 'getExpressionData')]
+#[CoversMethod(UniqueKey::class, 'getExpressionData')]
 class UniqueKeyTest extends TestCase
 {
     public function testGetExpressionData()

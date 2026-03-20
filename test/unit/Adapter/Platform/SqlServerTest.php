@@ -9,17 +9,17 @@ use PHPUnit\Framework\TestCase;
 use function restore_error_handler;
 use function set_error_handler;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\SqlServer::class, 'getName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\SqlServer::class, 'getQuoteIdentifierSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\SqlServer::class, 'quoteIdentifier')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\SqlServer::class, 'quoteIdentifierChain')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\SqlServer::class, 'getQuoteValueSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\SqlServer::class, 'quoteValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\SqlServer::class, 'quoteTrustedValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\SqlServer::class, 'quoteValueList')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\SqlServer::class, 'getIdentifierSeparator')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\SqlServer::class, 'quoteIdentifierInFragment')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\SqlServer::class, 'setDriver')]
+#[CoversMethod(SqlServer::class, 'getName')]
+#[CoversMethod(SqlServer::class, 'getQuoteIdentifierSymbol')]
+#[CoversMethod(SqlServer::class, 'quoteIdentifier')]
+#[CoversMethod(SqlServer::class, 'quoteIdentifierChain')]
+#[CoversMethod(SqlServer::class, 'getQuoteValueSymbol')]
+#[CoversMethod(SqlServer::class, 'quoteValue')]
+#[CoversMethod(SqlServer::class, 'quoteTrustedValue')]
+#[CoversMethod(SqlServer::class, 'quoteValueList')]
+#[CoversMethod(SqlServer::class, 'getIdentifierSeparator')]
+#[CoversMethod(SqlServer::class, 'quoteIdentifierInFragment')]
+#[CoversMethod(SqlServer::class, 'setDriver')]
 class SqlServerTest extends TestCase
 {
     /** @var SqlServer */

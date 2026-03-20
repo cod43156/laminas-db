@@ -8,12 +8,13 @@ use Laminas\Db\Metadata\Object\TableObject;
 use Laminas\Db\Metadata\Object\ViewObject;
 use Laminas\Db\TableGateway\AbstractTableGateway;
 use Laminas\Db\TableGateway\Feature\MetadataFeature;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
 class MetadataFeatureTest extends TestCase
 {
-    #[\PHPUnit\Framework\Attributes\Group('integration-test')]
+    #[Group('integration-test')]
     public function testPostInitialize()
     {
         $tableGatewayMock = $this->getMockForAbstractClass(AbstractTableGateway::class);

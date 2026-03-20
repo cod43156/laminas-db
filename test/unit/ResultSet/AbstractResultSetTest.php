@@ -9,23 +9,24 @@ use Laminas\Db\ResultSet\AbstractResultSet;
 use Laminas\Db\ResultSet\Exception\InvalidArgumentException;
 use Laminas\Db\ResultSet\Exception\RuntimeException;
 use PDOStatement;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 use function assert;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'initialize')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'buffer')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'isBuffered')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'getDataSource')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'getFieldCount')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'next')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'key')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'current')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'valid')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'rewind')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'count')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'toArray')]
+#[CoversMethod(AbstractResultSet::class, 'initialize')]
+#[CoversMethod(AbstractResultSet::class, 'buffer')]
+#[CoversMethod(AbstractResultSet::class, 'isBuffered')]
+#[CoversMethod(AbstractResultSet::class, 'getDataSource')]
+#[CoversMethod(AbstractResultSet::class, 'getFieldCount')]
+#[CoversMethod(AbstractResultSet::class, 'next')]
+#[CoversMethod(AbstractResultSet::class, 'key')]
+#[CoversMethod(AbstractResultSet::class, 'current')]
+#[CoversMethod(AbstractResultSet::class, 'valid')]
+#[CoversMethod(AbstractResultSet::class, 'rewind')]
+#[CoversMethod(AbstractResultSet::class, 'count')]
+#[CoversMethod(AbstractResultSet::class, 'toArray')]
 class AbstractResultSetTest extends TestCase
 {
     /** @var MockObject */
@@ -212,7 +213,7 @@ class AbstractResultSetTest extends TestCase
     /**
      * Test multiple iterations with buffer
      */
-    #[\PHPUnit\Framework\Attributes\Group('issue-6845')]
+    #[Group('issue-6845')]
     public function testBufferIterations()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -243,7 +244,7 @@ class AbstractResultSetTest extends TestCase
     /**
      * Test multiple iterations with buffer with multiple rewind() calls
      */
-    #[\PHPUnit\Framework\Attributes\Group('issue-6845')]
+    #[Group('issue-6845')]
     public function testMultipleRewindBufferIterations()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);

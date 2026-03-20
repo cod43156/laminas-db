@@ -12,14 +12,14 @@ use PHPUnit\Framework\TestCase;
 
 use function str_replace;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\AlterTable::class, 'setTable')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\AlterTable::class, 'addColumn')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\AlterTable::class, 'changeColumn')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\AlterTable::class, 'dropColumn')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\AlterTable::class, 'dropConstraint')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\AlterTable::class, 'addConstraint')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\AlterTable::class, 'dropIndex')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\AlterTable::class, 'getSqlString')]
+#[CoversMethod(AlterTable::class, 'setTable')]
+#[CoversMethod(AlterTable::class, 'addColumn')]
+#[CoversMethod(AlterTable::class, 'changeColumn')]
+#[CoversMethod(AlterTable::class, 'dropColumn')]
+#[CoversMethod(AlterTable::class, 'dropConstraint')]
+#[CoversMethod(AlterTable::class, 'addConstraint')]
+#[CoversMethod(AlterTable::class, 'dropIndex')]
+#[CoversMethod(AlterTable::class, 'getSqlString')]
 class AlterTableTest extends TestCase
 {
     public function testSetTable()

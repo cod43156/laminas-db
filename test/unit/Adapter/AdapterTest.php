@@ -24,22 +24,24 @@ use Laminas\Db\Adapter\Profiler;
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\ResultSet\ResultSetInterface;
 use LaminasTest\Db\TestAsset\TemporaryResultSet;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 use function extension_loaded;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, 'setProfiler')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, 'getProfiler')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, 'createDriver')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, 'createPlatform')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, 'getDriver')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, 'getPlatform')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, 'getQueryResultSetPrototype')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, 'getCurrentSchema')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, 'query')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, 'createStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, '__get')]
+#[CoversMethod(Adapter::class, 'setProfiler')]
+#[CoversMethod(Adapter::class, 'getProfiler')]
+#[CoversMethod(Adapter::class, 'createDriver')]
+#[CoversMethod(Adapter::class, 'createPlatform')]
+#[CoversMethod(Adapter::class, 'getDriver')]
+#[CoversMethod(Adapter::class, 'getPlatform')]
+#[CoversMethod(Adapter::class, 'getQueryResultSetPrototype')]
+#[CoversMethod(Adapter::class, 'getCurrentSchema')]
+#[CoversMethod(Adapter::class, 'query')]
+#[CoversMethod(Adapter::class, 'createStatement')]
+#[CoversMethod(Adapter::class, '__get')]
 class AdapterTest extends TestCase
 {
     /** @var MockObject&DriverInterface */
@@ -72,14 +74,14 @@ class AdapterTest extends TestCase
         $this->adapter = new Adapter($this->mockDriver, $this->mockPlatform);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test setProfiler() will store profiler')]
+    #[TestDox('unit test: Test setProfiler() will store profiler')]
     public function testSetProfiler()
     {
         $ret = $this->adapter->setProfiler(new Profiler\Profiler());
         self::assertSame($this->adapter, $ret);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getProfiler() will store profiler')]
+    #[TestDox('unit test: Test getProfiler() will store profiler')]
     public function testGetProfiler()
     {
         $this->adapter->setProfiler($profiler = new Profiler\Profiler());
@@ -89,7 +91,7 @@ class AdapterTest extends TestCase
         self::assertInstanceOf(\Laminas\Db\Adapter\Profiler\Profiler::class, $adapter->getProfiler());
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test createDriverFromParameters() will create proper driver type')]
+    #[TestDox('unit test: Test createDriverFromParameters() will create proper driver type')]
     public function testCreateDriver()
     {
         if (extension_loaded('mysqli')) {
@@ -117,7 +119,7 @@ class AdapterTest extends TestCase
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test createPlatformFromDriver() will create proper platform from driver')]
+    #[TestDox('unit test: Test createPlatformFromDriver() will create proper platform from driver')]
     public function testCreatePlatform()
     {
         $driver = clone $this->mockDriver;
@@ -174,39 +176,39 @@ class AdapterTest extends TestCase
         unset($adapter, $driver);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getDriver() will return driver object')]
+    #[TestDox('unit test: Test getDriver() will return driver object')]
     public function testGetDriver()
     {
         self::assertSame($this->mockDriver, $this->adapter->getDriver());
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getPlatform() returns platform object')]
+    #[TestDox('unit test: Test getPlatform() returns platform object')]
     public function testGetPlatform()
     {
         self::assertSame($this->mockPlatform, $this->adapter->getPlatform());
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getQueryResultSetPrototype() returns a result set object')]
+    #[TestDox('unit test: Test getQueryResultSetPrototype() returns a result set object')]
     public function testGetQueryResultSetPrototype()
     {
         self::assertInstanceOf(ResultSetInterface::class, $this->adapter->getQueryResultSetPrototype());
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getCurrentSchema() returns current schema from connection object')]
+    #[TestDox('unit test: Test getCurrentSchema() returns current schema from connection object')]
     public function testGetCurrentSchema()
     {
         $this->mockConnection->expects($this->any())->method('getCurrentSchema')->willReturn('FooSchema');
         self::assertEquals('FooSchema', $this->adapter->getCurrentSchema());
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test query() in prepare mode produces a statement object')]
+    #[TestDox('unit test: Test query() in prepare mode produces a statement object')]
     public function testQueryWhenPreparedProducesStatement()
     {
         $s = $this->adapter->query('SELECT foo');
         self::assertSame($this->mockStatement, $s);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('#210')]
+    #[Group('#210')]
     public function testProducedResultSetPrototypeIsDifferentForEachQuery()
     {
         $statement = $this->createMock(StatementInterface::class);
@@ -225,7 +227,7 @@ class AdapterTest extends TestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test query() in prepare mode, with array of parameters, produces a result object')]
+    #[TestDox('unit test: Test query() in prepare mode, with array of parameters, produces a result object')]
     public function testQueryWhenPreparedWithParameterArrayProducesResult()
     {
         $parray    = ['bar' => 'foo'];
@@ -240,7 +242,7 @@ class AdapterTest extends TestCase
         self::assertSame($result, $r);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test query() in prepare mode, with ParameterContainer, produces a result object')]
+    #[TestDox('unit test: Test query() in prepare mode, with ParameterContainer, produces a result object')]
     public function testQueryWhenPreparedWithParameterContainerProducesResult()
     {
         $sql                = 'SELECT foo';
@@ -255,7 +257,7 @@ class AdapterTest extends TestCase
         self::assertInstanceOf(ResultSet::class, $r);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test query() in execute mode produces a driver result object')]
+    #[TestDox('unit test: Test query() in execute mode produces a driver result object')]
     public function testQueryWhenExecutedProducesAResult()
     {
         $sql    = 'SELECT foo';
@@ -266,7 +268,7 @@ class AdapterTest extends TestCase
         self::assertSame($result, $r);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test query() in execute mode produces a resultset object')]
+    #[TestDox('unit test: Test query() in execute mode produces a resultset object')]
     public function testQueryWhenExecutedProducesAResultSetObjectWhenResultIsQuery()
     {
         $sql = 'SELECT foo';
@@ -282,7 +284,7 @@ class AdapterTest extends TestCase
         self::assertInstanceOf(TemporaryResultSet::class, $r);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test createStatement() produces a statement object')]
+    #[TestDox('unit test: Test createStatement() produces a statement object')]
     public function testCreateStatement()
     {
         self::assertSame($this->mockStatement, $this->adapter->createStatement());

@@ -3,11 +3,12 @@
 namespace LaminasTest\Db\Sql\Ddl\Column;
 
 use Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn::class, 'setLength')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn::class, 'getLength')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn::class, 'getExpressionData')]
+#[CoversMethod(AbstractLengthColumn::class, 'setLength')]
+#[CoversMethod(AbstractLengthColumn::class, 'getLength')]
+#[CoversMethod(AbstractLengthColumn::class, 'getExpressionData')]
 class AbstractLengthColumnTest extends TestCase
 {
     public function testSetLength()

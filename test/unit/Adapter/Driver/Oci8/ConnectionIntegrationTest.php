@@ -5,20 +5,21 @@ namespace LaminasTest\Db\Adapter\Driver\Oci8;
 use Laminas\Db\Adapter\Driver\Oci8\Connection;
 use Laminas\Db\Adapter\Driver\Oci8\Oci8;
 use Laminas\Db\Adapter\Driver\Oci8\Result;
+use PHPUnit\Framework\Attributes\Group;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'getCurrentSchema')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'setResource')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'getResource')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'connect')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'isConnected')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'disconnect')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'beginTransaction')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'commit')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'rollback')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'execute')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'getLastGeneratedValue')]
-#[\PHPUnit\Framework\Attributes\Group('integration')]
-#[\PHPUnit\Framework\Attributes\Group('integration-oracle')]
+#[CoversMethod(Connection::class, 'getCurrentSchema')]
+#[CoversMethod(Connection::class, 'setResource')]
+#[CoversMethod(Connection::class, 'getResource')]
+#[CoversMethod(Connection::class, 'connect')]
+#[CoversMethod(Connection::class, 'isConnected')]
+#[CoversMethod(Connection::class, 'disconnect')]
+#[CoversMethod(Connection::class, 'beginTransaction')]
+#[CoversMethod(Connection::class, 'commit')]
+#[CoversMethod(Connection::class, 'rollback')]
+#[CoversMethod(Connection::class, 'execute')]
+#[CoversMethod(Connection::class, 'getLastGeneratedValue')]
+#[Group('integration')]
+#[Group('integration-oracle')]
 class ConnectionIntegrationTest extends AbstractIntegrationTest
 {
     public function testGetCurrentSchema()
@@ -133,7 +134,7 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         $connection->getLastGeneratedValue();
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('laminas3469')]
+    #[Group('laminas3469')]
     public function testConnectReturnsConnectionWhenResourceSet()
     {
         $this->markTestIncomplete('edit this');

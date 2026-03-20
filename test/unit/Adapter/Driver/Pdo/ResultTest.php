@@ -6,14 +6,15 @@ use Laminas\Db\Adapter\Driver\Pdo\Result;
 use Laminas\Db\Adapter\Exception\InvalidArgumentException;
 use PDO;
 use PDOStatement;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
 use function assert;
 use function uniqid;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Result::class, 'current')]
-#[\PHPUnit\Framework\Attributes\Group('result-pdo')]
+#[CoversMethod(Result::class, 'current')]
+#[Group('result-pdo')]
 class ResultTest extends TestCase
 {
     /**

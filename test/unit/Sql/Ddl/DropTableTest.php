@@ -4,9 +4,10 @@ namespace LaminasTest\Db\Sql\Ddl;
 
 use Laminas\Db\Sql\Ddl\DropTable;
 use Laminas\Db\Sql\TableIdentifier;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\DropTable::class, 'getSqlString')]
+#[CoversMethod(DropTable::class, 'getSqlString')]
 class DropTableTest extends TestCase
 {
     public function testGetSqlString()

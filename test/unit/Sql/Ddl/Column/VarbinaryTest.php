@@ -3,9 +3,10 @@
 namespace LaminasTest\Db\Sql\Ddl\Column;
 
 use Laminas\Db\Sql\Ddl\Column\Varbinary;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\Varbinary::class, 'getExpressionData')]
+#[CoversMethod(Varbinary::class, 'getExpressionData')]
 class VarbinaryTest extends TestCase
 {
     public function testGetExpressionData()

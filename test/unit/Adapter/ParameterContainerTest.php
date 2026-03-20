@@ -3,30 +3,32 @@
 namespace LaminasTest\Db\Adapter;
 
 use Laminas\Db\Adapter\ParameterContainer;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'offsetExists')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'offsetGet')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'offsetSet')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'offsetUnset')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'setFromArray')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'offsetSetMaxLength')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'offsetGetMaxLength')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'offsetHasMaxLength')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'offsetUnsetMaxLength')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'getMaxLengthIterator')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'offsetSetErrata')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'offsetGetErrata')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'offsetHasErrata')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'offsetUnsetErrata')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'getErrataIterator')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'getNamedArray')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'count')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'current')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'next')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'key')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'valid')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\ParameterContainer::class, 'rewind')]
+#[CoversMethod(ParameterContainer::class, 'offsetExists')]
+#[CoversMethod(ParameterContainer::class, 'offsetGet')]
+#[CoversMethod(ParameterContainer::class, 'offsetSet')]
+#[CoversMethod(ParameterContainer::class, 'offsetUnset')]
+#[CoversMethod(ParameterContainer::class, 'setFromArray')]
+#[CoversMethod(ParameterContainer::class, 'offsetSetMaxLength')]
+#[CoversMethod(ParameterContainer::class, 'offsetGetMaxLength')]
+#[CoversMethod(ParameterContainer::class, 'offsetHasMaxLength')]
+#[CoversMethod(ParameterContainer::class, 'offsetUnsetMaxLength')]
+#[CoversMethod(ParameterContainer::class, 'getMaxLengthIterator')]
+#[CoversMethod(ParameterContainer::class, 'offsetSetErrata')]
+#[CoversMethod(ParameterContainer::class, 'offsetGetErrata')]
+#[CoversMethod(ParameterContainer::class, 'offsetHasErrata')]
+#[CoversMethod(ParameterContainer::class, 'offsetUnsetErrata')]
+#[CoversMethod(ParameterContainer::class, 'getErrataIterator')]
+#[CoversMethod(ParameterContainer::class, 'getNamedArray')]
+#[CoversMethod(ParameterContainer::class, 'count')]
+#[CoversMethod(ParameterContainer::class, 'current')]
+#[CoversMethod(ParameterContainer::class, 'next')]
+#[CoversMethod(ParameterContainer::class, 'key')]
+#[CoversMethod(ParameterContainer::class, 'valid')]
+#[CoversMethod(ParameterContainer::class, 'rewind')]
 class ParameterContainerTest extends TestCase
 {
     /** @var ParameterContainer */
@@ -41,7 +43,7 @@ class ParameterContainerTest extends TestCase
         $this->parameterContainer = new ParameterContainer(['foo' => 'bar']);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetExists() returns proper values via method call and isset()')]
+    #[TestDox('unit test: Test offsetExists() returns proper values via method call and isset()')]
     public function testOffsetExists()
     {
         self::assertTrue($this->parameterContainer->offsetExists('foo'));
@@ -50,7 +52,7 @@ class ParameterContainerTest extends TestCase
         self::assertFalse(isset($this->parameterContainer['bar']));
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetGet() returns proper values via method call and array access')]
+    #[TestDox('unit test: Test offsetGet() returns proper values via method call and array access')]
     public function testOffsetGet()
     {
         self::assertEquals('bar', $this->parameterContainer->offsetGet('foo'));
@@ -60,7 +62,7 @@ class ParameterContainerTest extends TestCase
         // @todo determine what should come back here
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetSet() works via method call and array access')]
+    #[TestDox('unit test: Test offsetSet() works via method call and array access')]
     public function testOffsetSet()
     {
         $this->parameterContainer->offsetSet('boo', 'baz');
@@ -108,7 +110,7 @@ class ParameterContainerTest extends TestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetUnset() works via method call and array access')]
+    #[TestDox('unit test: Test offsetUnset() works via method call and array access')]
     public function testOffsetUnset()
     {
         $this->parameterContainer->offsetSet('boo', 'baz');
@@ -118,7 +120,7 @@ class ParameterContainerTest extends TestCase
         self::assertFalse($this->parameterContainer->offsetExists('boo'));
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test setFromArray() will populate the container')]
+    #[TestDox('unit test: Test setFromArray() will populate the container')]
     public function testSetFromArray()
     {
         $this->parameterContainer->setFromArray(['bar' => 'baz']);
@@ -138,21 +140,22 @@ class ParameterContainerTest extends TestCase
         self::assertEquals('baz', $this->parameterContainer[':myparam']);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetSetMaxLength() will persist errata data. Return persisted errata data, if it exists')]
+    #[TestDox('unit test: Test offsetSetMaxLength() will persist errata data. 
+                          Return persisted errata data, if it exists')]
     public function testOffsetSetAndGetMaxLength()
     {
         $this->parameterContainer->offsetSetMaxLength('foo', 100);
         self::assertEquals(100, $this->parameterContainer->offsetGetMaxLength('foo'));
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetHasMaxLength() will check if errata exists for a particular key')]
+    #[TestDox('unit test: Test offsetHasMaxLength() will check if errata exists for a particular key')]
     public function testOffsetHasMaxLength()
     {
         $this->parameterContainer->offsetSetMaxLength('foo', 100);
         self::assertTrue($this->parameterContainer->offsetHasMaxLength('foo'));
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetUnsetMaxLength() will unset data for a particular key')]
+    #[TestDox('unit test: Test offsetUnsetMaxLength() will unset data for a particular key')]
     public function testOffsetUnsetMaxLength()
     {
         $this->parameterContainer->offsetSetMaxLength('foo', 100);
@@ -160,7 +163,7 @@ class ParameterContainerTest extends TestCase
         self::assertNull($this->parameterContainer->offsetGetMaxLength('foo'));
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getMaxLengthIterator() will return an iterator for the errata data')]
+    #[TestDox('unit test: Test getMaxLengthIterator() will return an iterator for the errata data')]
     public function testGetMaxLengthIterator()
     {
         $this->parameterContainer->offsetSetMaxLength('foo', 100);
@@ -168,28 +171,28 @@ class ParameterContainerTest extends TestCase
         self::assertInstanceOf('ArrayIterator', $data);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetSetErrata() will persist errata data')]
+    #[TestDox('unit test: Test offsetSetErrata() will persist errata data')]
     public function testOffsetSetErrata()
     {
         $this->parameterContainer->offsetSetErrata('foo', ParameterContainer::TYPE_INTEGER);
         self::assertEquals(ParameterContainer::TYPE_INTEGER, $this->parameterContainer->offsetGetErrata('foo'));
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetGetErrata() return persisted errata data, if it exists')]
+    #[TestDox('unit test: Test offsetGetErrata() return persisted errata data, if it exists')]
     public function testOffsetGetErrata()
     {
         $this->parameterContainer->offsetSetErrata('foo', ParameterContainer::TYPE_INTEGER);
         self::assertEquals(ParameterContainer::TYPE_INTEGER, $this->parameterContainer->offsetGetErrata('foo'));
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetHasErrata() will check if errata exists for a particular key')]
+    #[TestDox('unit test: Test offsetHasErrata() will check if errata exists for a particular key')]
     public function testOffsetHasErrata()
     {
         $this->parameterContainer->offsetSetErrata('foo', ParameterContainer::TYPE_INTEGER);
         self::assertTrue($this->parameterContainer->offsetHasErrata('foo'));
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test offsetUnsetErrata() will unset data for a particular key')]
+    #[TestDox('unit test: Test offsetUnsetErrata() will unset data for a particular key')]
     public function testOffsetUnsetErrata()
     {
         $this->parameterContainer->offsetSetErrata('foo', ParameterContainer::TYPE_INTEGER);
@@ -197,7 +200,7 @@ class ParameterContainerTest extends TestCase
         self::assertNull($this->parameterContainer->offsetGetErrata('foo'));
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getErrataIterator() will return an iterator for the errata data')]
+    #[TestDox('unit test: Test getErrataIterator() will return an iterator for the errata data')]
     public function testGetErrataIterator()
     {
         $this->parameterContainer->offsetSetErrata('foo', ParameterContainer::TYPE_INTEGER);
@@ -205,27 +208,27 @@ class ParameterContainerTest extends TestCase
         self::assertInstanceOf('ArrayIterator', $data);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getNamedArray()')]
+    #[TestDox('unit test: Test getNamedArray()')]
     public function testGetNamedArray()
     {
         $data = $this->parameterContainer->getNamedArray();
         self::assertEquals(['foo' => 'bar'], $data);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test count() returns the proper count')]
+    #[TestDox('unit test: Test count() returns the proper count')]
     public function testCount()
     {
         self::assertEquals(1, $this->parameterContainer->count());
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test current() returns the current element when used as an iterator')]
+    #[TestDox('unit test: Test current() returns the current element when used as an iterator')]
     public function testCurrent()
     {
         $value = $this->parameterContainer->current();
         self::assertEquals('bar', $value);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test next() increases the pointer when used as an iterator')]
+    #[TestDox('unit test: Test next() increases the pointer when used as an iterator')]
     public function testNext()
     {
         $this->parameterContainer['bar'] = 'baz';
@@ -233,13 +236,13 @@ class ParameterContainerTest extends TestCase
         self::assertEquals('baz', $this->parameterContainer->current());
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox("unit test: Test key() returns the name of the current item's name")]
+    #[TestDox("unit test: Test key() returns the name of the current item's name")]
     public function testKey()
     {
         self::assertEquals('foo', $this->parameterContainer->key());
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test valid() returns whether the iterators current position is valid')]
+    #[TestDox('unit test: Test valid() returns whether the iterators current position is valid')]
     public function testValid()
     {
         self::assertTrue($this->parameterContainer->valid());
@@ -247,7 +250,7 @@ class ParameterContainerTest extends TestCase
         self::assertFalse($this->parameterContainer->valid());
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test rewind() resets the iterators pointer')]
+    #[TestDox('unit test: Test rewind() resets the iterators pointer')]
     public function testRewind()
     {
         $this->parameterContainer->offsetSet('bar', 'baz');

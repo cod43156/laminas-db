@@ -3,19 +3,21 @@
 namespace LaminasTest\Db\Sql\Ddl\Constraint;
 
 use Laminas\Db\Sql\Ddl\Constraint\ForeignKey;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\ForeignKey::class, 'setName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\ForeignKey::class, 'getName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\ForeignKey::class, 'setReferenceTable')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\ForeignKey::class, 'getReferenceTable')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\ForeignKey::class, 'setReferenceColumn')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\ForeignKey::class, 'getReferenceColumn')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\ForeignKey::class, 'setOnDeleteRule')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\ForeignKey::class, 'getOnDeleteRule')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\ForeignKey::class, 'setOnUpdateRule')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\ForeignKey::class, 'getOnUpdateRule')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\ForeignKey::class, 'getExpressionData')]
+#[CoversMethod(ForeignKey::class, 'setName')]
+#[CoversMethod(ForeignKey::class, 'getName')]
+#[CoversMethod(ForeignKey::class, 'setReferenceTable')]
+#[CoversMethod(ForeignKey::class, 'getReferenceTable')]
+#[CoversMethod(ForeignKey::class, 'setReferenceColumn')]
+#[CoversMethod(ForeignKey::class, 'getReferenceColumn')]
+#[CoversMethod(ForeignKey::class, 'setOnDeleteRule')]
+#[CoversMethod(ForeignKey::class, 'getOnDeleteRule')]
+#[CoversMethod(ForeignKey::class, 'setOnUpdateRule')]
+#[CoversMethod(ForeignKey::class, 'getOnUpdateRule')]
+#[CoversMethod(ForeignKey::class, 'getExpressionData')]
 class ForeignKeyTest extends TestCase
 {
     public function testSetName(): ForeignKey
@@ -25,7 +27,7 @@ class ForeignKeyTest extends TestCase
         return $fk;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testSetName')]
+    #[Depends('testSetName')]
     public function testGetName(ForeignKey $fk)
     {
         self::assertEquals('xxxx', $fk->getName());
@@ -38,7 +40,7 @@ class ForeignKeyTest extends TestCase
         return $fk;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testSetReferenceTable')]
+    #[Depends('testSetReferenceTable')]
     public function testGetReferenceTable(ForeignKey $fk)
     {
         self::assertEquals('xxxx', $fk->getReferenceTable());
@@ -51,7 +53,7 @@ class ForeignKeyTest extends TestCase
         return $fk;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testSetReferenceColumn')]
+    #[Depends('testSetReferenceColumn')]
     public function testGetReferenceColumn(ForeignKey $fk)
     {
         self::assertEquals(['xxxx'], $fk->getReferenceColumn());
@@ -64,7 +66,7 @@ class ForeignKeyTest extends TestCase
         return $fk;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testSetOnDeleteRule')]
+    #[Depends('testSetOnDeleteRule')]
     public function testGetOnDeleteRule(ForeignKey $fk)
     {
         self::assertEquals('CASCADE', $fk->getOnDeleteRule());
@@ -77,7 +79,7 @@ class ForeignKeyTest extends TestCase
         return $fk;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testSetOnUpdateRule')]
+    #[Depends('testSetOnUpdateRule')]
     public function testGetOnUpdateRule(ForeignKey $fk)
     {
         self::assertEquals('CASCADE', $fk->getOnUpdateRule());

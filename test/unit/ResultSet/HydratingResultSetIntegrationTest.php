@@ -4,9 +4,10 @@ namespace LaminasTest\Db\ResultSet;
 
 use ArrayIterator;
 use Laminas\Db\ResultSet\HydratingResultSet;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\HydratingResultSet::class, 'current')]
+#[CoversMethod(HydratingResultSet::class, 'current')]
 class HydratingResultSetIntegrationTest extends TestCase
 {
     public function testCurrentWillReturnBufferedRow()

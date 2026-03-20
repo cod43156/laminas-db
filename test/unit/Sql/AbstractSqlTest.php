@@ -11,6 +11,7 @@ use Laminas\Db\Sql\ExpressionInterface;
 use Laminas\Db\Sql\Predicate;
 use Laminas\Db\Sql\Select;
 use LaminasTest\Db\TestAsset\TrustingSql92Platform;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
@@ -21,7 +22,7 @@ use function next;
 use function preg_match;
 use function uniqid;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\AbstractSql::class, 'processExpression')]
+#[CoversMethod(AbstractSql::class, 'processExpression')]
 class AbstractSqlTest extends TestCase
 {
     /** @var AbstractSql&MockObject */
@@ -121,7 +122,7 @@ class AbstractSqlTest extends TestCase
         self::assertEquals('"release_date" = FROM_UNIXTIME(\'100000000\')', $sqlAndParams);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('7407')]
+    #[Group('7407')]
     public function testProcessExpressionWorksWithExpressionObjectWithPercentageSigns()
     {
         $expressionString = 'FROM_UNIXTIME(date, "%Y-%m")';

@@ -7,16 +7,16 @@ use PHPUnit\Framework\TestCase;
 
 use function function_exists;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\IbmDb2::class, 'getName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\IbmDb2::class, 'getQuoteIdentifierSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\IbmDb2::class, 'quoteIdentifier')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\IbmDb2::class, 'quoteIdentifierChain')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\IbmDb2::class, 'getQuoteValueSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\IbmDb2::class, 'quoteValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\IbmDb2::class, 'quoteTrustedValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\IbmDb2::class, 'quoteValueList')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\IbmDb2::class, 'getIdentifierSeparator')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\IbmDb2::class, 'quoteIdentifierInFragment')]
+#[CoversMethod(IbmDb2::class, 'getName')]
+#[CoversMethod(IbmDb2::class, 'getQuoteIdentifierSymbol')]
+#[CoversMethod(IbmDb2::class, 'quoteIdentifier')]
+#[CoversMethod(IbmDb2::class, 'quoteIdentifierChain')]
+#[CoversMethod(IbmDb2::class, 'getQuoteValueSymbol')]
+#[CoversMethod(IbmDb2::class, 'quoteValue')]
+#[CoversMethod(IbmDb2::class, 'quoteTrustedValue')]
+#[CoversMethod(IbmDb2::class, 'quoteValueList')]
+#[CoversMethod(IbmDb2::class, 'getIdentifierSeparator')]
+#[CoversMethod(IbmDb2::class, 'quoteIdentifierInFragment')]
 class IbmDb2Test extends TestCase
 {
     /** @var IbmDb2 */

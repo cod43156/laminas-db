@@ -3,18 +3,19 @@
 namespace LaminasTest\Db\Sql\Predicate;
 
 use Laminas\Db\Sql\Predicate\Between;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\Between::class, '__construct')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\Between::class, 'getIdentifier')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\Between::class, 'getMinValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\Between::class, 'getMaxValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\Between::class, 'getSpecification')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\Between::class, 'setIdentifier')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\Between::class, 'setMinValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\Between::class, 'setMaxValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\Between::class, 'setSpecification')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\Between::class, 'getExpressionData')]
+#[CoversMethod(Between::class, '__construct')]
+#[CoversMethod(Between::class, 'getIdentifier')]
+#[CoversMethod(Between::class, 'getMinValue')]
+#[CoversMethod(Between::class, 'getMaxValue')]
+#[CoversMethod(Between::class, 'getSpecification')]
+#[CoversMethod(Between::class, 'setIdentifier')]
+#[CoversMethod(Between::class, 'setMinValue')]
+#[CoversMethod(Between::class, 'setMaxValue')]
+#[CoversMethod(Between::class, 'setSpecification')]
+#[CoversMethod(Between::class, 'getExpressionData')]
 class BetweenTest extends TestCase
 {
     /** @var Between */

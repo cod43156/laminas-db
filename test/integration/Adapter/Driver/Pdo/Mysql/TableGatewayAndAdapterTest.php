@@ -3,6 +3,7 @@
 namespace LaminasIntegrationTest\Db\Adapter\Driver\Pdo\Mysql;
 
 use Laminas\Db\TableGateway\TableGateway;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function array_fill;
@@ -17,7 +18,7 @@ class TableGatewayAndAdapterTest extends TestCase
 {
     use AdapterTrait;
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('connections')]
+    #[DataProvider('connections')]
     public function testGetOutOfConnections(): void
     {
         $this->adapter->query('SELECT VERSION();');

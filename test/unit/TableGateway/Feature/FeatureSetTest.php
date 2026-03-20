@@ -16,17 +16,19 @@ use Laminas\Db\TableGateway\Feature\FeatureSet;
 use Laminas\Db\TableGateway\Feature\MasterSlaveFeature;
 use Laminas\Db\TableGateway\Feature\MetadataFeature;
 use Laminas\Db\TableGateway\Feature\SequenceFeature;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\Feature\FeatureSet::class, 'canCallMagicCall')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\Feature\FeatureSet::class, 'callMagicCall')]
+#[CoversMethod(FeatureSet::class, 'canCallMagicCall')]
+#[CoversMethod(FeatureSet::class, 'callMagicCall')]
 class FeatureSetTest extends TestCase
 {
     /**
      * @cover FeatureSet::addFeature
      */
-    #[\PHPUnit\Framework\Attributes\Group('Laminas-4993')]
+    #[Group('Laminas-4993')]
     public function testAddFeatureThatFeatureDoesNotHaveTableGatewayButFeatureSetHas()
     {
         $mockMasterAdapter = $this->getMockBuilder(AdapterInterface::class)->getMock();
@@ -67,7 +69,7 @@ class FeatureSetTest extends TestCase
     /**
      * @cover FeatureSet::addFeature
      */
-    #[\PHPUnit\Framework\Attributes\Group('Laminas-4993')]
+    #[Group('Laminas-4993')]
     public function testAddFeatureThatFeatureHasTableGatewayButFeatureSetDoesNotHave()
     {
         $tableGatewayMock = $this->getMockForAbstractClass(AbstractTableGateway::class);

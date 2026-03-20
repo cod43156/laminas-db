@@ -3,10 +3,12 @@
 namespace LaminasTest\Db\Sql\Ddl\Column;
 
 use Laminas\Db\Sql\Ddl\Column\BigInteger;
+use Laminas\Db\Sql\Ddl\Column\Column;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\BigInteger::class, '__construct')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\Column::class, 'getExpressionData')]
+#[CoversMethod(BigInteger::class, '__construct')]
+#[CoversMethod(Column::class, 'getExpressionData')]
 class BigIntegerTest extends TestCase
 {
     public function testObjectConstruction()

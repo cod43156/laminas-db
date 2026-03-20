@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 use function var_export;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\PredicateSet::class, 'addPredicates')]
+#[CoversMethod(PredicateSet::class, 'addPredicates')]
 class PredicateSetTest extends TestCase
 {
     use DeprecatedAssertionsTrait;

@@ -3,16 +3,18 @@
 namespace LaminasTest\Db\Adapter\Driver\Oci8;
 
 use Laminas\Db\Adapter\Driver\Oci8\Result;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'getResource')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'buffer')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'isBuffered')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'getGeneratedValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'key')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'next')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'rewind')]
-#[\PHPUnit\Framework\Attributes\Group('result-oci8')]
+#[CoversMethod(Result::class, 'getResource')]
+#[CoversMethod(Result::class, 'buffer')]
+#[CoversMethod(Result::class, 'isBuffered')]
+#[CoversMethod(Result::class, 'getGeneratedValue')]
+#[CoversMethod(Result::class, 'key')]
+#[CoversMethod(Result::class, 'next')]
+#[CoversMethod(Result::class, 'rewind')]
+#[Group('result-oci8')]
 class ResultTest extends TestCase
 {
     public function testGetResource()

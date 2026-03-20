@@ -5,10 +5,12 @@ namespace LaminasTest\Db\Adapter\Driver\Pdo;
 use Exception;
 use Laminas\Db\Adapter\Driver\Pdo\Connection;
 use Laminas\Db\Adapter\Exception\InvalidConnectionParametersException;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'getResource')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'getDsn')]
+#[CoversMethod(Connection::class, 'getResource')]
+#[CoversMethod(Connection::class, 'getDsn')]
 class ConnectionTest extends TestCase
 {
     /** @var Connection */
@@ -48,7 +50,7 @@ class ConnectionTest extends TestCase
         self::assertEquals($dsn, $responseString);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('2622')]
+    #[Group('2622')]
     public function testArrayOfConnectionParametersCreatesCorrectDsn()
     {
         $this->connection->setConnectionParameters([

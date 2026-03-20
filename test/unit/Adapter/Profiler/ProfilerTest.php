@@ -6,12 +6,13 @@ use Laminas\Db\Adapter\Exception\InvalidArgumentException;
 use Laminas\Db\Adapter\Exception\RuntimeException;
 use Laminas\Db\Adapter\Profiler\Profiler;
 use Laminas\Db\Adapter\StatementContainer;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Profiler\Profiler::class, 'profilerStart')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Profiler\Profiler::class, 'profilerFinish')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Profiler\Profiler::class, 'getLastProfile')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Profiler\Profiler::class, 'getProfiles')]
+#[CoversMethod(Profiler::class, 'profilerStart')]
+#[CoversMethod(Profiler::class, 'profilerFinish')]
+#[CoversMethod(Profiler::class, 'getLastProfile')]
+#[CoversMethod(Profiler::class, 'getProfiles')]
 class ProfilerTest extends TestCase
 {
     /** @var Profiler */

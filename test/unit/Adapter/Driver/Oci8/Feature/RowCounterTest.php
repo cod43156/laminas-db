@@ -7,13 +7,14 @@ use Laminas\Db\Adapter\Driver\ConnectionInterface;
 use Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter;
 use Laminas\Db\Adapter\Driver\Oci8\Oci8;
 use Laminas\Db\Adapter\Driver\Oci8\Statement;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter::class, 'getName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter::class, 'getCountForStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter::class, 'getCountForSql')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter::class, 'getRowCountClosure')]
+#[CoversMethod(RowCounter::class, 'getName')]
+#[CoversMethod(RowCounter::class, 'getCountForStatement')]
+#[CoversMethod(RowCounter::class, 'getCountForSql')]
+#[CoversMethod(RowCounter::class, 'getRowCountClosure')]
 class RowCounterTest extends TestCase
 {
     /** @var RowCounter */

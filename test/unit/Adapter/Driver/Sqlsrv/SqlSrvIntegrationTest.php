@@ -5,11 +5,13 @@ namespace LaminasTest\Db\Adapter\Driver\Sqlsrv;
 use Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv;
 use Laminas\Db\Adapter\Driver\Sqlsrv\Statement;
 use Laminas\Db\Adapter\Exception\InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\Group;
 use stdClass;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv::class, 'checkEnvironment')]
-#[\PHPUnit\Framework\Attributes\Group('integration')]
-#[\PHPUnit\Framework\Attributes\Group('integration-sqlserver')]
+#[CoversMethod(Sqlsrv::class, 'checkEnvironment')]
+#[Group('integration')]
+#[Group('integration-sqlserver')]
 class SqlSrvIntegrationTest extends AbstractIntegrationTest
 {
     /** @var Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv */
@@ -25,7 +27,7 @@ class SqlSrvIntegrationTest extends AbstractIntegrationTest
         $this->driver   = new Sqlsrv($this->resource);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('integration-sqlserver')]
+    #[Group('integration-sqlserver')]
     public function testCheckEnvironment()
     {
         $sqlserver = new Sqlsrv([]);

@@ -8,13 +8,14 @@ use Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter;
 use Laminas\Db\Adapter\Driver\Pdo\Pdo;
 use Laminas\Db\Adapter\Driver\Pdo\Statement;
 use Laminas\Db\Adapter\Driver\ResultInterface;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter::class, 'getName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter::class, 'getCountForStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter::class, 'getCountForSql')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter::class, 'getRowCountClosure')]
+#[CoversMethod(OracleRowCounter::class, 'getName')]
+#[CoversMethod(OracleRowCounter::class, 'getCountForStatement')]
+#[CoversMethod(OracleRowCounter::class, 'getCountForSql')]
+#[CoversMethod(OracleRowCounter::class, 'getRowCountClosure')]
 class OracleRowCounterTest extends TestCase
 {
     /** @var OracleRowCounter */

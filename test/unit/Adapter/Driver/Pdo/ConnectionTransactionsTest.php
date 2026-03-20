@@ -2,20 +2,23 @@
 
 namespace LaminasTest\Db\Adapter\Driver\Pdo;
 
+use Laminas\Db\Adapter\Driver\AbstractConnection;
 use Laminas\Db\Adapter\Driver\Pdo\Connection;
 use Laminas\Db\Adapter\Exception\RuntimeException;
 use LaminasTest\Db\TestAsset\ConnectionWrapper;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for {@see \Laminas\Db\Adapter\Driver\Pdo\Connection} transaction support
  */
-#[\PHPUnit\Framework\Attributes\CoversClass(\Laminas\Db\Adapter\Driver\Pdo\Connection::class)]
-#[\PHPUnit\Framework\Attributes\CoversClass(\Laminas\Db\Adapter\Driver\AbstractConnection::class)]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'beginTransaction()')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'inTransaction()')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'commit()')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'rollback()')]
+#[CoversClass(Connection::class)]
+#[CoversClass(AbstractConnection::class)]
+#[CoversMethod(Connection::class, 'beginTransaction()')]
+#[CoversMethod(Connection::class, 'inTransaction()')]
+#[CoversMethod(Connection::class, 'commit()')]
+#[CoversMethod(Connection::class, 'rollback()')]
 class ConnectionTransactionsTest extends TestCase
 {
     /** @var Wrapper */

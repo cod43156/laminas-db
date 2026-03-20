@@ -6,18 +6,20 @@ use Laminas\Db\Adapter\Driver\Oci8\Connection;
 use Laminas\Db\Adapter\Driver\Oci8\Oci8;
 use Laminas\Db\Adapter\Driver\Oci8\Result;
 use Laminas\Db\Adapter\Driver\Oci8\Statement;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'registerConnection')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'registerStatementPrototype')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'registerResultPrototype')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'getDatabasePlatformName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'getConnection')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'createStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'createResult')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'getPrepareType')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'formatParameterName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'getLastGeneratedValue')]
+#[CoversMethod(Oci8::class, 'registerConnection')]
+#[CoversMethod(Oci8::class, 'registerStatementPrototype')]
+#[CoversMethod(Oci8::class, 'registerResultPrototype')]
+#[CoversMethod(Oci8::class, 'getDatabasePlatformName')]
+#[CoversMethod(Oci8::class, 'getConnection')]
+#[CoversMethod(Oci8::class, 'createStatement')]
+#[CoversMethod(Oci8::class, 'createResult')]
+#[CoversMethod(Oci8::class, 'getPrepareType')]
+#[CoversMethod(Oci8::class, 'formatParameterName')]
+#[CoversMethod(Oci8::class, 'getLastGeneratedValue')]
 class Oci8Test extends TestCase
 {
     /** @var Oci8 */
@@ -85,7 +87,7 @@ class Oci8Test extends TestCase
         self::assertEquals('Oracle', $this->oci8->getDatabasePlatformName(Oci8::NAME_FORMAT_NATURAL));
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testRegisterConnection')]
+    #[Depends('testRegisterConnection')]
     public function testGetConnection()
     {
         $conn = new Connection([]);

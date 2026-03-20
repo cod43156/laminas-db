@@ -12,25 +12,26 @@ use Laminas\Db\RowGateway\Exception\RuntimeException;
 use Laminas\Db\RowGateway\RowGateway;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Sql;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionObject;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, 'offsetSet')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, '__set')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, '__isset')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, 'offsetExists')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, '__unset')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, 'offsetUnset')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, 'offsetGet')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, '__get')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, 'save')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, 'delete')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, 'populate')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, 'rowExistsInDatabase')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, 'processPrimaryKeyData')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, 'count')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\RowGateway\RowGateway::class, 'toArray')]
+#[CoversMethod(RowGateway::class, 'offsetSet')]
+#[CoversMethod(RowGateway::class, '__set')]
+#[CoversMethod(RowGateway::class, '__isset')]
+#[CoversMethod(RowGateway::class, 'offsetExists')]
+#[CoversMethod(RowGateway::class, '__unset')]
+#[CoversMethod(RowGateway::class, 'offsetUnset')]
+#[CoversMethod(RowGateway::class, 'offsetGet')]
+#[CoversMethod(RowGateway::class, '__get')]
+#[CoversMethod(RowGateway::class, 'save')]
+#[CoversMethod(RowGateway::class, 'delete')]
+#[CoversMethod(RowGateway::class, 'populate')]
+#[CoversMethod(RowGateway::class, 'rowExistsInDatabase')]
+#[CoversMethod(RowGateway::class, 'processPrimaryKeyData')]
+#[CoversMethod(RowGateway::class, 'count')]
+#[CoversMethod(RowGateway::class, 'toArray')]
 class AbstractRowGatewayTest extends TestCase
 {
     /** @var Adapter&MockObject */

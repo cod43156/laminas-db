@@ -3,10 +3,11 @@
 namespace LaminasTest\Db\Sql\Predicate;
 
 use Laminas\Db\Sql\Predicate\NotBetween;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\NotBetween::class, 'getSpecification')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\NotBetween::class, 'getExpressionData')]
+#[CoversMethod(NotBetween::class, 'getSpecification')]
+#[CoversMethod(NotBetween::class, 'getExpressionData')]
 class NotBetweenTest extends TestCase
 {
     /** @var NotBetween */

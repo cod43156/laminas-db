@@ -8,13 +8,14 @@ use Laminas\Db\Adapter\Driver\Pdo\Feature\SqliteRowCounter;
 use Laminas\Db\Adapter\Driver\Pdo\Pdo;
 use Laminas\Db\Adapter\Driver\Pdo\Statement;
 use Laminas\Db\Adapter\Driver\ResultInterface;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Feature\SqliteRowCounter::class, 'getName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Feature\SqliteRowCounter::class, 'getCountForStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Feature\SqliteRowCounter::class, 'getCountForSql')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Feature\SqliteRowCounter::class, 'getRowCountClosure')]
+#[CoversMethod(SqliteRowCounter::class, 'getName')]
+#[CoversMethod(SqliteRowCounter::class, 'getCountForStatement')]
+#[CoversMethod(SqliteRowCounter::class, 'getCountForSql')]
+#[CoversMethod(SqliteRowCounter::class, 'getRowCountClosure')]
 class SqliteRowCounterTest extends TestCase
 {
     /** @var SqliteRowCounter */

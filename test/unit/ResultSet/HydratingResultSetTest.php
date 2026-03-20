@@ -12,12 +12,12 @@ use stdClass;
 
 use function class_exists;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\HydratingResultSet::class, 'setObjectPrototype')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\HydratingResultSet::class, 'getObjectPrototype')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\HydratingResultSet::class, 'setHydrator')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\HydratingResultSet::class, 'getHydrator')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\HydratingResultSet::class, 'current')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\HydratingResultSet::class, 'toArray')]
+#[CoversMethod(HydratingResultSet::class, 'setObjectPrototype')]
+#[CoversMethod(HydratingResultSet::class, 'getObjectPrototype')]
+#[CoversMethod(HydratingResultSet::class, 'setHydrator')]
+#[CoversMethod(HydratingResultSet::class, 'getHydrator')]
+#[CoversMethod(HydratingResultSet::class, 'current')]
+#[CoversMethod(HydratingResultSet::class, 'toArray')]
 class HydratingResultSetTest extends TestCase
 {
     /** @var string */

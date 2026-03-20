@@ -11,6 +11,7 @@ use Laminas\Db\Metadata\Source\OracleMetadata;
 use Laminas\Db\Metadata\Source\PostgresqlMetadata;
 use Laminas\Db\Metadata\Source\SqliteMetadata;
 use Laminas\Db\Metadata\Source\SqlServerMetadata;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -19,10 +20,10 @@ class FactoryTest extends TestCase
     /**
      * @param string $expectedReturnClass
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('validAdapterProvider')]
-    public function testCreateSourceFromAdapter(Adapter $adapter, $expectedReturnClass)
+    #[DataProvider('validAdapterProvider')]
+    public function testCreateSourceFromAdapter(string $adapter, $expectedReturnClass)
     {
-        $source = Factory::createSourceFromAdapter($adapter);
+        $source = Factory::createSourceFromAdapter($this->createAdapter($adapter));
 
         self::assertInstanceOf(MetadataInterface::class, $source);
         self::assertInstanceOf($expectedReturnClass, $source);
@@ -31,33 +32,36 @@ class FactoryTest extends TestCase
     /** @psalm-return array<string, array{0: Adapter&MockObject, 1: MetadataInterface}> */
     public static function validAdapterProvider(): array
     {
-        /** @return Adapter&MockObject */
-        $createAdapterForPlatform = function (string $platformName) {
-            $platform = $this->getMockBuilder(PlatformInterface::class)->getMock();
-            $platform
-                ->expects($this->any())
-                ->method('getName')
-                ->willReturn($platformName);
-
-            $adapter = $this->getMockBuilder(Adapter::class)
-                ->disableOriginalConstructor()
-                ->getMock();
-
-            $adapter
-                ->expects($this->any())
-                ->method('getPlatform')
-                ->willReturn($platform);
-
-            return $adapter;
-        };
-
         return [
             // Description => [adapter, expected return class]
-            'MySQL'      => [$createAdapterForPlatform('MySQL'), MysqlMetadata::class],
-            'SQLServer'  => [$createAdapterForPlatform('SQLServer'), SqlServerMetadata::class],
-            'SQLite'     => [$createAdapterForPlatform('SQLite'), SqliteMetadata::class],
-            'PostgreSQL' => [$createAdapterForPlatform('PostgreSQL'), PostgresqlMetadata::class],
-            'Oracle'     => [$createAdapterForPlatform('Oracle'), OracleMetadata::class],
+            'MySQL'      => ['MySQL', MysqlMetadata::class],
+            'SQLServer'  => ['SQLServer', SqlServerMetadata::class],
+            'SQLite'     => ['SQLite', SqliteMetadata::class],
+            'PostgreSQL' => ['PostgreSQL', PostgresqlMetadata::class],
+            'Oracle'     => ['Oracle', OracleMetadata::class],
         ];
+    }
+
+    /**
+     * @return (Adapter&MockObject)|MockObject
+     */
+    private function createAdapter(string $platformName)
+    {
+        $platform = $this->getMockBuilder(PlatformInterface::class)->getMock();
+        $platform
+            ->expects($this->any())
+            ->method('getName')
+            ->willReturn($platformName);
+
+        $adapter = $this->getMockBuilder(Adapter::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $adapter
+            ->expects($this->any())
+            ->method('getPlatform')
+            ->willReturn($platform);
+
+        return $adapter;
     }
 }

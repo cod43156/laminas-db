@@ -16,12 +16,14 @@ use Laminas\Db\Sql\TableIdentifier;
 use Laminas\Db\Sql\Where;
 use LaminasTest\Db\DeprecatedAssertionsTrait;
 use LaminasTest\Db\TestAsset\DeleteIgnore;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Delete::class, 'from')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Delete::class, 'where')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Delete::class, 'prepareStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Delete::class, 'getSqlString')]
+#[CoversMethod(Delete::class, 'from')]
+#[CoversMethod(Delete::class, 'where')]
+#[CoversMethod(Delete::class, 'prepareStatement')]
+#[CoversMethod(Delete::class, 'getSqlString')]
 class DeleteTest extends TestCase
 {
     use DeprecatedAssertionsTrait;
@@ -156,7 +158,7 @@ class DeleteTest extends TestCase
         self::assertEquals('DELETE FROM "sch"."foo" WHERE x = y', $this->delete->getSqlString());
     }
 
-    #[\PHPUnit\Framework\Attributes\CoversNothing]
+    #[CoversNothing]
     public function testSpecificationconstantsCouldBeOverridedByExtensionInPrepareStatement()
     {
         $deleteIgnore = new DeleteIgnore();
@@ -195,7 +197,7 @@ class DeleteTest extends TestCase
         $deleteIgnore->prepareStatement($mockAdapter, $mockStatement);
     }
 
-    #[\PHPUnit\Framework\Attributes\CoversNothing]
+    #[CoversNothing]
     public function testSpecificationconstantsCouldBeOverridedByExtensionInGetSqlString()
     {
         $deleteIgnore = new DeleteIgnore();

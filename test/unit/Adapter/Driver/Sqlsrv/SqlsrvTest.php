@@ -6,19 +6,21 @@ use Laminas\Db\Adapter\Driver\Sqlsrv\Connection;
 use Laminas\Db\Adapter\Driver\Sqlsrv\Result;
 use Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv;
 use Laminas\Db\Adapter\Driver\Sqlsrv\Statement;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv::class, 'registerConnection')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv::class, 'registerStatementPrototype')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv::class, 'registerResultPrototype')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv::class, 'getDatabasePlatformName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv::class, 'getConnection')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv::class, 'createStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv::class, 'createResult')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv::class, 'getPrepareType')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv::class, 'formatParameterName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv::class, 'getLastGeneratedValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv::class, 'getResultPrototype')]
+#[CoversMethod(Sqlsrv::class, 'registerConnection')]
+#[CoversMethod(Sqlsrv::class, 'registerStatementPrototype')]
+#[CoversMethod(Sqlsrv::class, 'registerResultPrototype')]
+#[CoversMethod(Sqlsrv::class, 'getDatabasePlatformName')]
+#[CoversMethod(Sqlsrv::class, 'getConnection')]
+#[CoversMethod(Sqlsrv::class, 'createStatement')]
+#[CoversMethod(Sqlsrv::class, 'createResult')]
+#[CoversMethod(Sqlsrv::class, 'getPrepareType')]
+#[CoversMethod(Sqlsrv::class, 'formatParameterName')]
+#[CoversMethod(Sqlsrv::class, 'getLastGeneratedValue')]
+#[CoversMethod(Sqlsrv::class, 'getResultPrototype')]
 class SqlsrvTest extends TestCase
 {
     /** @var Sqlsrv */
@@ -86,7 +88,7 @@ class SqlsrvTest extends TestCase
         self::assertEquals('SQLServer', $this->sqlsrv->getDatabasePlatformName(Sqlsrv::NAME_FORMAT_NATURAL));
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testRegisterConnection')]
+    #[Depends('testRegisterConnection')]
     public function testGetConnection()
     {
         $conn = new Connection([]);

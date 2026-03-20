@@ -2,17 +2,18 @@
 
 namespace LaminasIntegrationTest\Db\Adapter\Driver\Pdo\Mysql;
 
-use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Sql\TableIdentifier;
 use Laminas\Db\TableGateway\Feature\MetadataFeature;
 use Laminas\Db\TableGateway\TableGateway;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 
 use function count;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\TableGateway::class, '__construct')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\TableGateway::class, 'select')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\TableGateway::class, 'insert')]
+#[CoversMethod(TableGateway::class, '__construct')]
+#[CoversMethod(TableGateway::class, 'select')]
+#[CoversMethod(TableGateway::class, 'insert')]
 class TableGatewayTest extends TestCase
 {
     use AdapterTrait;
@@ -77,7 +78,7 @@ class TableGatewayTest extends TestCase
     /**
      * @param mixed $id
      */
-    #[\PHPUnit\Framework\Attributes\Depends('testInsertWithExtendedCharsetFieldName')]
+    #[Depends('testInsertWithExtendedCharsetFieldName')]
     public function testUpdateWithExtendedCharsetFieldName($id)
     {
         $tableGateway = new TableGateway('test_charset', $this->adapter);
@@ -100,7 +101,7 @@ class TableGatewayTest extends TestCase
     /**
      * @param string|TableIdentifier|array $table
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('tableProvider')]
+    #[DataProvider('tableProvider')]
     public function testTableGatewayWithMetadataFeature($table)
     {
         $tableGateway = new TableGateway($table, $this->adapter, new MetadataFeature());

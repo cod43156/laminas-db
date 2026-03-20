@@ -3,11 +3,12 @@
 namespace LaminasTest\Db\Sql\Ddl\Constraint;
 
 use Laminas\Db\Sql\Ddl\Constraint\AbstractConstraint;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\AbstractConstraint::class, 'setColumns')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\AbstractConstraint::class, 'addColumn')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\AbstractConstraint::class, 'getColumns')]
+#[CoversMethod(AbstractConstraint::class, 'setColumns')]
+#[CoversMethod(AbstractConstraint::class, 'addColumn')]
+#[CoversMethod(AbstractConstraint::class, 'getColumns')]
 class AbstractConstraintTest extends TestCase
 {
     /** @var AbstractConstraint */

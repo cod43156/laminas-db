@@ -15,6 +15,7 @@ use Laminas\Db\Sql\TableIdentifier;
 use LaminasTest\Db\DeprecatedAssertionsTrait;
 use LaminasTest\Db\TestAsset\Replace;
 use LaminasTest\Db\TestAsset\TrustingSql92Platform;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 class InsertIgnoreTest extends TestCase
@@ -95,7 +96,7 @@ class InsertIgnoreTest extends TestCase
         $this->insert->values(['foo' => 'bar'], InsertIgnore::VALUES_MERGE);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('Laminas-4926')]
+    #[Group('Laminas-4926')]
     public function testEmptyArrayValues()
     {
         $this->insert->values([]);
@@ -273,7 +274,7 @@ class InsertIgnoreTest extends TestCase
         self::assertNull($this->insert->foo);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('Laminas-536')]
+    #[Group('Laminas-536')]
     public function testValuesMerge()
     {
         $this->insert->into('foo')

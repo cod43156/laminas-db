@@ -3,9 +3,10 @@
 namespace LaminasTest\Db\Sql\Ddl\Column;
 
 use Laminas\Db\Sql\Ddl\Column\Varchar;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\Varchar::class, 'getExpressionData')]
+#[CoversMethod(Varchar::class, 'getExpressionData')]
 class VarcharTest extends TestCase
 {
     public function testGetExpressionData()

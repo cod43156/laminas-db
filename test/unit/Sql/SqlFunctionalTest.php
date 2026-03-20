@@ -6,29 +6,17 @@ use Laminas\Db\Adapter;
 use Laminas\Db\Adapter\Driver\DriverInterface;
 use Laminas\Db\Sql;
 use Laminas\Db\Sql\AbstractSql;
-use Laminas\Db\Sql\Ddl\Column\Column;
-use Laminas\Db\Sql\Ddl\CreateTable;
-use Laminas\Db\Sql\Delete;
 use Laminas\Db\Sql\Expression;
-use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\Platform\PlatformDecoratorInterface;
 use Laminas\Db\Sql\Select;
-use Laminas\Db\Sql\Update;
 use LaminasTest\Db\TestAsset;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function array_merge;
 use function is_array;
 use function is_string;
 
-/**
- * @method Select select(null|string $table)
- * @method Update update(null|string $table)
- * @method Delete delete(null|string $table)
- * @method Insert insert(null|string $table)
- * @method CreateTable createTable(null|string $table)
- * @method Column createColumn(null|string $name)
- */
 class SqlFunctionalTest extends TestCase
 {
     /**
@@ -58,12 +46,12 @@ class SqlFunctionalTest extends TestCase
      *     }
      * }>
      */
-    protected function dataProviderCommonProcessMethods(): array
+    protected static function dataProviderCommonProcessMethods(): array
     {
         // phpcs:disable Generic.Files.LineLength.TooLong
         return [
             'Select::processOffset()'      => [
-                'sqlObject' => $this->select('foo')->offset(10),
+                'sqlObject' => (new Sql\Select('foo'))->offset(10),
                 'expected'  => [
                     'sql92'     => [
                         'string'     => 'SELECT "foo".* FROM "foo" OFFSET \'10\'',
@@ -88,7 +76,7 @@ class SqlFunctionalTest extends TestCase
                 ],
             ],
             'Select::processLimit()'       => [
-                'sqlObject' => $this->select('foo')->limit(10),
+                'sqlObject' => (new Sql\Select('foo'))->limit(10),
                 'expected'  => [
                     'sql92'     => [
                         'string'     => 'SELECT "foo".* FROM "foo" LIMIT \'10\'',
@@ -113,7 +101,7 @@ class SqlFunctionalTest extends TestCase
                 ],
             ],
             'Select::processLimitOffset()' => [
-                'sqlObject' => $this->select('foo')->limit(10)->offset(5),
+                'sqlObject' => (new Sql\Select('foo'))->limit(10)->offset(5),
                 'expected'  => [
                     'sql92'     => [
                         'string'     => 'SELECT "foo".* FROM "foo" LIMIT \'10\' OFFSET \'5\'',
@@ -139,7 +127,7 @@ class SqlFunctionalTest extends TestCase
             ],
             // Github issue https://github.com/zendframework/zend-db/issues/98
             'Select::processJoinNoJoinedColumns()' => [
-                'sqlObject' => $this->select('my_table')
+                'sqlObject' => (new Sql\Select('my_table'))
                                     ->join(
                                         'joined_table2',
                                         'my_table.id = joined_table2.id',
@@ -170,8 +158,8 @@ class SqlFunctionalTest extends TestCase
                 ],
             ],
             'Select::processJoin()'                => [
-                'sqlObject' => $this->select('a')
-                                    ->join(['b' => $this->select('c')->where(['cc' => 10])], 'd=e')->where(['x' => 20]),
+                'sqlObject' => (new Sql\Select('a'))
+                                    ->join(['b' => (new Sql\Select('c'))->where(['cc' => 10])], 'd=e')->where(['x' => 20]),
                 'expected'  => [
                     'sql92'     => [
                         'string'     => 'SELECT "a".*, "b".* FROM "a" INNER JOIN (SELECT "c".* FROM "c" WHERE "cc" = \'10\') AS "b" ON "d"="e" WHERE "x" = \'20\'',
@@ -196,11 +184,11 @@ class SqlFunctionalTest extends TestCase
                 ],
             ],
             'Ddl::CreateTable::processColumns()'   => [
-                'sqlObject' => $this->createTable('foo')
-                                    ->addColumn($this->createColumn('col1')
+                'sqlObject' => (new Sql\Ddl\CreateTable('foo'))
+                                    ->addColumn((new Sql\Ddl\Column\Column('col1'))
                                         ->setOption('identity', true)
                                         ->setOption('comment', 'Comment1'))
-                                    ->addColumn($this->createColumn('col2')
+                                    ->addColumn((new Sql\Ddl\Column\Column('col2'))
                                         ->setOption('identity', true)
                                         ->setOption('comment', 'Comment2')),
                 'expected'  => [
@@ -211,7 +199,7 @@ class SqlFunctionalTest extends TestCase
                 ],
             ],
             'Ddl::CreateTable::processTable()'     => [
-                'sqlObject' => $this->createTable('foo')->setTemporary(true),
+                'sqlObject' => (new Sql\Ddl\CreateTable('foo'))->setTemporary(true),
                 'expected'  => [
                     'sql92'     => "CREATE TEMPORARY TABLE \"foo\" ( \n)",
                     'MySql'     => "CREATE TEMPORARY TABLE `foo` ( \n)",
@@ -220,14 +208,12 @@ class SqlFunctionalTest extends TestCase
                 ],
             ],
             'Select::processSubSelect()'           => [
-                'sqlObject' => $this
-                    ->select([
-                        'a' => $this
-                            ->select([
-                                'b' => $this->select('c')->where(['cc' => 'CC']),
-                            ])
+                'sqlObject' => (new Sql\Select([
+                    'a' => (new Sql\Select([
+                        'b' => (new Sql\Select('c'))->where(['cc' => 'CC']),
+                    ]))
                             ->where(['bb' => 'BB']),
-                    ])
+                ]))
                     ->where(['aa' => 'AA']),
                 'expected'  => [
                     'sql92'     => [
@@ -253,7 +239,7 @@ class SqlFunctionalTest extends TestCase
                 ],
             ],
             'Delete::processSubSelect()'           => [
-                'sqlObject' => $this->delete('foo')->where(['x' => $this->select('foo')->where(['x' => 'y'])]),
+                'sqlObject' => (new Sql\Delete('foo'))->where(['x' => (new Sql\Select('foo'))->where(['x' => 'y'])]),
                 'expected'  => [
                     'sql92'     => [
                         'string'     => 'DELETE FROM "foo" WHERE "x" = (SELECT "foo".* FROM "foo" WHERE "x" = \'y\')',
@@ -278,7 +264,7 @@ class SqlFunctionalTest extends TestCase
                 ],
             ],
             'Update::processSubSelect()'           => [
-                'sqlObject' => $this->update('foo')->set(['x' => $this->select('foo')]),
+                'sqlObject' => (new Sql\Update('foo'))->set(['x' => new Sql\Select('foo')]),
                 'expected'  => [
                     'sql92'     => 'UPDATE "foo" SET "x" = (SELECT "foo".* FROM "foo")',
                     'MySql'     => 'UPDATE `foo` SET `x` = (SELECT `foo`.* FROM `foo`)',
@@ -287,7 +273,7 @@ class SqlFunctionalTest extends TestCase
                 ],
             ],
             'Insert::processSubSelect()'           => [
-                'sqlObject' => $this->insert('foo')->select($this->select('foo')->where(['x' => 'y'])),
+                'sqlObject' => (new Sql\Insert('foo'))->select((new Sql\Select('foo'))->where(['x' => 'y'])),
                 'expected'  => [
                     'sql92'     => [
                         'string'     => 'INSERT INTO "foo"  SELECT "foo".* FROM "foo" WHERE "x" = \'y\'',
@@ -312,8 +298,8 @@ class SqlFunctionalTest extends TestCase
                 ],
             ],
             'Update::processExpression()'          => [
-                'sqlObject' => $this->update('foo')->set(
-                    ['x' => new Sql\Expression('?', [$this->select('foo')->where(['x' => 'y'])])]
+                'sqlObject' => (new Sql\Update('foo'))->set(
+                    ['x' => new Sql\Expression('?', [(new Sql\Select('foo'))->where(['x' => 'y'])])]
                 ),
                 'expected'  => [
                     'sql92'     => [
@@ -339,7 +325,7 @@ class SqlFunctionalTest extends TestCase
                 ],
             ],
             'Update::processJoins()'               => [
-                'sqlObject' => $this->update('foo')->set(['x' => 'y'])->where(['xx' => 'yy'])->join(
+                'sqlObject' => (new Sql\Update('foo'))->set(['x' => 'y'])->where(['xx' => 'yy'])->join(
                     'bar',
                     'bar.barId = foo.barId'
                 ),
@@ -385,11 +371,11 @@ class SqlFunctionalTest extends TestCase
      *     }
      * }>
      */
-    protected function dataProviderDecorators(): array
+    protected static function dataProviderDecorators(): array
     {
         return [
             'RootDecorators::Select' => [
-                'sqlObject' => $this->select('foo')->where(['x' => $this->select('bar')]),
+                'sqlObject' => (new Sql\Select('foo'))->where(['x' => new Sql\Select('bar')]),
                 'expected'  => [
                     'sql92'     => [
                         'decorators' => [
@@ -586,8 +572,8 @@ class SqlFunctionalTest extends TestCase
     public static function dataProvider(): array
     {
         $data = array_merge(
-            $this->dataProviderCommonProcessMethods(),
-            $this->dataProviderDecorators()
+            self::dataProviderCommonProcessMethods(),
+            self::dataProviderDecorators()
         );
 
         $res = [];
@@ -608,7 +594,7 @@ class SqlFunctionalTest extends TestCase
      * @param type $platform
      * @param type $expected
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
+    #[DataProvider('dataProvider')]
     public function test($sqlObject, $platform, $expected)
     {
         $sql = new Sql\Sql($this->resolveAdapter($platform));

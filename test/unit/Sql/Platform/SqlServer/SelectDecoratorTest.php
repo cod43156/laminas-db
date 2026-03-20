@@ -10,20 +10,23 @@ use Laminas\Db\Adapter\Platform\SqlServer as SqlServerPlatform;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Platform\SqlServer\SelectDecorator;
 use Laminas\Db\Sql\Select;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::class, 'prepareStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::class, 'processLimitOffset')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::class, 'getSqlString')]
+#[CoversMethod(SelectDecorator::class, 'prepareStatement')]
+#[CoversMethod(SelectDecorator::class, 'processLimitOffset')]
+#[CoversMethod(SelectDecorator::class, 'getSqlString')]
 class SelectDecoratorTest extends TestCase
 {
     /**
      * @param array<string, mixed> $expectedParams
      * @param mixed $notUsed
      */
-    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
+    #[TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
                            a proper limit/offset sql statement')]
-    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
+    #[DataProvider('dataProvider')]
     public function testPrepareStatement(
         Select $select,
         string $expectedSql,
@@ -61,9 +64,9 @@ class SelectDecoratorTest extends TestCase
      * @param mixed $ignored
      * @param mixed $alsoIgnored
      */
-    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
+    #[TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
                            a proper limit/offset sql statement')]
-    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
+    #[DataProvider('dataProvider')]
     public function testGetSqlString(Select $select, $ignored, $alsoIgnored, string $expectedSql)
     {
         $parameterContainer = new ParameterContainer();

@@ -20,18 +20,22 @@ use Laminas\Db\Sql\Where;
 use LaminasTest\Db\DeprecatedAssertionsTrait;
 use LaminasTest\Db\TestAsset\TrustingSql92Platform;
 use LaminasTest\Db\TestAsset\UpdateIgnore;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'table')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, '__construct')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'set')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'where')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'getRawState')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'prepareStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'getSqlString')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, '__get')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, '__clone')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'join')]
+#[CoversMethod(Update::class, 'table')]
+#[CoversMethod(Update::class, '__construct')]
+#[CoversMethod(Update::class, 'set')]
+#[CoversMethod(Update::class, 'where')]
+#[CoversMethod(Update::class, 'getRawState')]
+#[CoversMethod(Update::class, 'prepareStatement')]
+#[CoversMethod(Update::class, 'getSqlString')]
+#[CoversMethod(Update::class, '__get')]
+#[CoversMethod(Update::class, '__clone')]
+#[CoversMethod(Update::class, 'join')]
 class UpdateTest extends TestCase
 {
     use DeprecatedAssertionsTrait;
@@ -142,7 +146,7 @@ class UpdateTest extends TestCase
         $this->update->where(null);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('Laminas-240')]
+    #[Group('Laminas-240')]
     public function testPassingMultipleKeyValueInWhereClause()
     {
         $update = clone $this->update;
@@ -237,8 +241,8 @@ class UpdateTest extends TestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('6768')]
-    #[\PHPUnit\Framework\Attributes\Group('6773')]
+    #[Group('6768')]
+    #[Group('6773')]
     public function testGetSqlStringForFalseUpdateValueParameter()
     {
         $this->update = new Update();
@@ -282,7 +286,7 @@ class UpdateTest extends TestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\CoversNothing]
+    #[CoversNothing]
     public function testSpecificationconstantsCouldBeOverridedByExtensionInPrepareStatement()
     {
         $updateIgnore = new UpdateIgnore();
@@ -309,7 +313,7 @@ class UpdateTest extends TestCase
         $updateIgnore->prepareStatement($mockAdapter, $mockStatement);
     }
 
-    #[\PHPUnit\Framework\Attributes\CoversNothing]
+    #[CoversNothing]
     public function testSpecificationconstantsCouldBeOverridedByExtensionInGetSqlString()
     {
         $this->update = new UpdateIgnore();
@@ -383,7 +387,7 @@ class UpdateTest extends TestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test join() returns Update object (is chainable)')]
+    #[TestDox('unit test: Test join() returns Update object (is chainable)')]
     public function testJoinChainable()
     {
         $return = $this->update->join('baz', 'foo.fooId = baz.fooId', Join::JOIN_LEFT);

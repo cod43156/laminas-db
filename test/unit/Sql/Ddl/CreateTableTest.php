@@ -8,18 +8,19 @@ use Laminas\Db\Sql\Ddl\Constraint;
 use Laminas\Db\Sql\Ddl\Constraint\ConstraintInterface;
 use Laminas\Db\Sql\Ddl\CreateTable;
 use Laminas\Db\Sql\TableIdentifier;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 
 use function array_pop;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\CreateTable::class, '__construct')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\CreateTable::class, 'setTemporary')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\CreateTable::class, 'isTemporary')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\CreateTable::class, 'setTable')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\CreateTable::class, 'getRawState')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\CreateTable::class, 'addColumn')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\CreateTable::class, 'addConstraint')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\CreateTable::class, 'getSqlString')]
+#[CoversMethod(CreateTable::class, '__construct')]
+#[CoversMethod(CreateTable::class, 'setTemporary')]
+#[CoversMethod(CreateTable::class, 'isTemporary')]
+#[CoversMethod(CreateTable::class, 'setTable')]
+#[CoversMethod(CreateTable::class, 'getRawState')]
+#[CoversMethod(CreateTable::class, 'addColumn')]
+#[CoversMethod(CreateTable::class, 'addConstraint')]
+#[CoversMethod(CreateTable::class, 'getSqlString')]
 class CreateTableTest extends TestCase
 {
     /**
@@ -61,7 +62,7 @@ class CreateTableTest extends TestCase
         return $ct;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testSetTable')]
+    #[Depends('testSetTable')]
     public function testRawStateViaTable(CreateTable $ct)
     {
         self::assertEquals('test', $ct->getRawState('table'));
@@ -75,7 +76,7 @@ class CreateTableTest extends TestCase
         return $ct;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testAddColumn')]
+    #[Depends('testAddColumn')]
     public function testRawStateViaColumn(CreateTable $ct)
     {
         $state = $ct->getRawState('columns');
@@ -92,7 +93,7 @@ class CreateTableTest extends TestCase
         return $ct;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testAddConstraint')]
+    #[Depends('testAddConstraint')]
     public function testRawStateViaConstraint(CreateTable $ct)
     {
         $state = $ct->getRawState('constraints');

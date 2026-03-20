@@ -15,13 +15,16 @@ use Laminas\Db\Sql\Platform\Mysql\SelectDecorator;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Sql;
 use LaminasTest\Db\TestAsset\TrustingMysqlPlatform;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\SelectDecorator::class, 'prepareStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\SelectDecorator::class, 'processLimit')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\SelectDecorator::class, 'processOffset')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\SelectDecorator::class, 'getSqlString')]
+#[CoversMethod(SelectDecorator::class, 'prepareStatement')]
+#[CoversMethod(SelectDecorator::class, 'processLimit')]
+#[CoversMethod(SelectDecorator::class, 'processOffset')]
+#[CoversMethod(SelectDecorator::class, 'getSqlString')]
 class SelectDecoratorTest extends TestCase
 {
     /** @var Adapter&MockObject */
@@ -29,9 +32,9 @@ class SelectDecoratorTest extends TestCase
 
     /** @var Sql */
     protected $sql;
-    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
+    #[TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
                            a proper limit/offset sql statement')]
-    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
+    #[DataProvider('dataProvider')]
     public function testPrepareStatement(Select $select, string $expectedSql, array $expectedParams)
     {
         $driver = $this->getMockBuilder(DriverInterface::class)->getMock();
@@ -64,9 +67,9 @@ class SelectDecoratorTest extends TestCase
      * @param array<string, mixed> $params
      * @param mixed $alsoIgnore
      */
-    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
+    #[TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
                            a proper limit/offset sql statement')]
-    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
+    #[DataProvider('dataProvider')]
     public function testPrepareStatementForSqlObject(
         Select $select,
         $ignore,
@@ -97,9 +100,9 @@ class SelectDecoratorTest extends TestCase
      * @param mixed $ignore
      * @param mixed $alsoIgnore
      */
-    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
+    #[TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
                            a proper limit/offset sql statement')]
-    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
+    #[DataProvider('dataProvider')]
     public function testGetSqlString(Select $select, $ignore, $alsoIgnore, string $expectedSql)
     {
         $parameterContainer = new ParameterContainer();

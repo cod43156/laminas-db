@@ -3,18 +3,19 @@
 namespace LaminasTest\Db\Adapter\Platform;
 
 use Laminas\Db\Adapter\Platform\Postgresql;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'getName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'getQuoteIdentifierSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'quoteIdentifier')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'quoteIdentifierChain')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'getQuoteValueSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'quoteValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'quoteTrustedValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'quoteValueList')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'getIdentifierSeparator')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'quoteIdentifierInFragment')]
+#[CoversMethod(Postgresql::class, 'getName')]
+#[CoversMethod(Postgresql::class, 'getQuoteIdentifierSymbol')]
+#[CoversMethod(Postgresql::class, 'quoteIdentifier')]
+#[CoversMethod(Postgresql::class, 'quoteIdentifierChain')]
+#[CoversMethod(Postgresql::class, 'getQuoteValueSymbol')]
+#[CoversMethod(Postgresql::class, 'quoteValue')]
+#[CoversMethod(Postgresql::class, 'quoteTrustedValue')]
+#[CoversMethod(Postgresql::class, 'quoteValueList')]
+#[CoversMethod(Postgresql::class, 'getIdentifierSeparator')]
+#[CoversMethod(Postgresql::class, 'quoteIdentifierInFragment')]
 class PostgresqlTest extends TestCase
 {
     /** @var Postgresql */

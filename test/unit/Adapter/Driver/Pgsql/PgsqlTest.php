@@ -7,22 +7,23 @@ use Laminas\Db\Adapter\Driver\Pgsql\Pgsql;
 use Laminas\Db\Adapter\Driver\Pgsql\Result;
 use Laminas\Db\Adapter\Driver\Pgsql\Statement;
 use Laminas\Db\Adapter\Exception\RuntimeException;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 
 use function extension_loaded;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Pgsql::class, 'checkEnvironment')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Pgsql::class, 'registerConnection')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Pgsql::class, 'registerStatementPrototype')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Pgsql::class, 'registerResultPrototype')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Pgsql::class, 'getDatabasePlatformName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Pgsql::class, 'getConnection')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Pgsql::class, 'createStatement')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Pgsql::class, 'createResult')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Pgsql::class, 'getPrepareType')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Pgsql::class, 'formatParameterName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Pgsql::class, 'getLastGeneratedValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Pgsql::class, 'getResultPrototype')]
+#[CoversMethod(Pgsql::class, 'checkEnvironment')]
+#[CoversMethod(Pgsql::class, 'registerConnection')]
+#[CoversMethod(Pgsql::class, 'registerStatementPrototype')]
+#[CoversMethod(Pgsql::class, 'registerResultPrototype')]
+#[CoversMethod(Pgsql::class, 'getDatabasePlatformName')]
+#[CoversMethod(Pgsql::class, 'getConnection')]
+#[CoversMethod(Pgsql::class, 'createStatement')]
+#[CoversMethod(Pgsql::class, 'createResult')]
+#[CoversMethod(Pgsql::class, 'getPrepareType')]
+#[CoversMethod(Pgsql::class, 'formatParameterName')]
+#[CoversMethod(Pgsql::class, 'getLastGeneratedValue')]
+#[CoversMethod(Pgsql::class, 'getResultPrototype')]
 class PgsqlTest extends TestCase
 {
     /** @var Pgsql */
@@ -99,7 +100,7 @@ class PgsqlTest extends TestCase
         self::assertEquals('PostgreSQL', $this->pgsql->getDatabasePlatformName(Pgsql::NAME_FORMAT_NATURAL));
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testRegisterConnection')]
+    #[Depends('testRegisterConnection')]
     public function testGetConnection()
     {
         $conn = new Connection([]);

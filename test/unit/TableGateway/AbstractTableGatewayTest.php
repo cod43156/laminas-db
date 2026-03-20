@@ -15,19 +15,20 @@ use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Update;
 use Laminas\Db\TableGateway\AbstractTableGateway;
 use Laminas\Db\TableGateway\Feature\FeatureSet;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\MockObject\Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'getTable')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'getAdapter')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'getSql')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'getResultSetPrototype')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'select')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'selectWith')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'executeSelect')]
-#[\PHPUnit\Framework\Attributes\CoversMethod('\Laminas\Db\TableGateway\AbstractTableGateway::executeSelect
+#[CoversMethod(AbstractTableGateway::class, 'getTable')]
+#[CoversMethod(AbstractTableGateway::class, 'getAdapter')]
+#[CoversMethod(AbstractTableGateway::class, 'getSql')]
+#[CoversMethod(AbstractTableGateway::class, 'getResultSetPrototype')]
+#[CoversMethod(AbstractTableGateway::class, 'select')]
+#[CoversMethod(AbstractTableGateway::class, 'selectWith')]
+#[CoversMethod(AbstractTableGateway::class, 'executeSelect')]
+#[CoversMethod('\Laminas\Db\TableGateway\AbstractTableGateway::executeSelect
 This is a test for the case when a valid $select is built using an aliased table name, then used
 with AbstractTableGateway::selectWith (or AbstractTableGateway::select).
 $myTable = new MyTable(...);
@@ -44,18 +45,18 @@ $select = $sql->select()->from(array(\'t\' => \'mytable\'));
 // Following fails, with Fatal error: Uncaught exception \'RuntimeException\' with message
 \'The table name of the provided select object must match that of the table\' unless fix is provided.
 $myTable->selectWith($select);')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'insert')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'insertWith')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'executeInsert')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'update')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'updateWith')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'executeUpdate')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'delete')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'deleteWith')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'executeDelete')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, 'getLastInsertValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, '__get')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\AbstractTableGateway::class, '__clone')]
+#[CoversMethod(AbstractTableGateway::class, 'insert')]
+#[CoversMethod(AbstractTableGateway::class, 'insertWith')]
+#[CoversMethod(AbstractTableGateway::class, 'executeInsert')]
+#[CoversMethod(AbstractTableGateway::class, 'update')]
+#[CoversMethod(AbstractTableGateway::class, 'updateWith')]
+#[CoversMethod(AbstractTableGateway::class, 'executeUpdate')]
+#[CoversMethod(AbstractTableGateway::class, 'delete')]
+#[CoversMethod(AbstractTableGateway::class, 'deleteWith')]
+#[CoversMethod(AbstractTableGateway::class, 'executeDelete')]
+#[CoversMethod(AbstractTableGateway::class, 'getLastInsertValue')]
+#[CoversMethod(AbstractTableGateway::class, '__get')]
+#[CoversMethod(AbstractTableGateway::class, '__clone')]
 class AbstractTableGatewayTest extends TestCase
 {
     /** @var Generator */

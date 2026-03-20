@@ -3,9 +3,10 @@
 namespace LaminasTest\Db\Sql\Ddl\Index;
 
 use Laminas\Db\Sql\Ddl\Index\Index;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Index\Index::class, 'getExpressionData')]
+#[CoversMethod(Index::class, 'getExpressionData')]
 class IndexTest extends TestCase
 {
     public function testGetExpressionData()

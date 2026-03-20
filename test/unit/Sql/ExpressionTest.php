@@ -4,6 +4,10 @@ namespace LaminasTest\Db\Sql;
 
 use Laminas\Db\Sql\Exception\InvalidArgumentException;
 use Laminas\Db\Sql\Expression;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -12,13 +16,13 @@ use PHPUnit\Framework\TestCase;
  *
  * Expression is a value object with no dependencies/collaborators, therefore, no fixure needed
  */
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'setExpression')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'getExpression')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'setParameters')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'getParameters')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'setTypes')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'getTypes')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'getExpressionData')]
+#[CoversMethod(Expression::class, 'setExpression')]
+#[CoversMethod(Expression::class, 'getExpression')]
+#[CoversMethod(Expression::class, 'setParameters')]
+#[CoversMethod(Expression::class, 'getParameters')]
+#[CoversMethod(Expression::class, 'setTypes')]
+#[CoversMethod(Expression::class, 'getTypes')]
+#[CoversMethod(Expression::class, 'getExpressionData')]
 class ExpressionTest extends TestCase
 {
     /**
@@ -40,7 +44,7 @@ class ExpressionTest extends TestCase
         $expression->setExpression(null);
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testSetExpression')]
+    #[Depends('testSetExpression')]
     public function testGetExpression(Expression $expression)
     {
         self::assertEquals('Foo Bar', $expression->getExpression());
@@ -63,7 +67,7 @@ class ExpressionTest extends TestCase
         $expression->setParameters(null);
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testSetParameters')]
+    #[Depends('testSetParameters')]
     public function testGetParameters(Expression $expression)
     {
         self::assertEquals('foo', $expression->getParameters());
@@ -81,7 +85,7 @@ class ExpressionTest extends TestCase
         return $expression;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testSetTypes')]
+    #[Depends('testSetTypes')]
     public function testGetTypes(Expression $expression)
     {
         self::assertEquals(
@@ -143,7 +147,7 @@ class ExpressionTest extends TestCase
         self::assertSame('0', $expression->getExpression());
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('7407')]
+    #[Group('7407')]
     public function testGetExpressionPreservesPercentageSignInFromUnixtime()
     {
         $expressionString = 'FROM_UNIXTIME(date, "%Y-%m")';
@@ -171,7 +175,7 @@ class ExpressionTest extends TestCase
     /**
      * @param mixed $falsyParameter
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('falsyExpressionParametersProvider')]
+    #[DataProvider('falsyExpressionParametersProvider')]
     public function testConstructorWithFalsyValidParameters($falsyParameter)
     {
         $expression = new Expression('?', $falsyParameter);

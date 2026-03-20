@@ -11,16 +11,16 @@ use function realpath;
 use function touch;
 use function unlink;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'getName')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'getQuoteIdentifierSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'quoteIdentifier')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'quoteIdentifierChain')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'getQuoteValueSymbol')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'quoteValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'quoteTrustedValue')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'quoteValueList')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'getIdentifierSeparator')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'quoteIdentifierInFragment')]
+#[CoversMethod(Sqlite::class, 'getName')]
+#[CoversMethod(Sqlite::class, 'getQuoteIdentifierSymbol')]
+#[CoversMethod(Sqlite::class, 'quoteIdentifier')]
+#[CoversMethod(Sqlite::class, 'quoteIdentifierChain')]
+#[CoversMethod(Sqlite::class, 'getQuoteValueSymbol')]
+#[CoversMethod(Sqlite::class, 'quoteValue')]
+#[CoversMethod(Sqlite::class, 'quoteTrustedValue')]
+#[CoversMethod(Sqlite::class, 'quoteValueList')]
+#[CoversMethod(Sqlite::class, 'getIdentifierSeparator')]
+#[CoversMethod(Sqlite::class, 'quoteIdentifierInFragment')]
 class SqliteTest extends TestCase
 {
     /** @var Sqlite */

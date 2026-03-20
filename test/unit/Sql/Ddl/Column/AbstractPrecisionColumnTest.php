@@ -3,13 +3,14 @@
 namespace LaminasTest\Db\Sql\Ddl\Column;
 
 use Laminas\Db\Sql\Ddl\Column\AbstractPrecisionColumn;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\AbstractPrecisionColumn::class, 'setDigits')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\AbstractPrecisionColumn::class, 'getDigits')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\AbstractPrecisionColumn::class, 'setDecimal')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\AbstractPrecisionColumn::class, 'getDecimal')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\AbstractPrecisionColumn::class, 'getExpressionData')]
+#[CoversMethod(AbstractPrecisionColumn::class, 'setDigits')]
+#[CoversMethod(AbstractPrecisionColumn::class, 'getDigits')]
+#[CoversMethod(AbstractPrecisionColumn::class, 'setDecimal')]
+#[CoversMethod(AbstractPrecisionColumn::class, 'getDecimal')]
+#[CoversMethod(AbstractPrecisionColumn::class, 'getExpressionData')]
 class AbstractPrecisionColumnTest extends TestCase
 {
     public function testSetDigits()

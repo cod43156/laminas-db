@@ -6,11 +6,13 @@ use InvalidArgumentException;
 use Laminas\Db\Sql\Join;
 use Laminas\Db\Sql\Select;
 use LaminasTest\Db\DeprecatedAssertionsTrait;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Join::class, 'join')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Join::class, 'count')]
-#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Join::class, 'reset')]
+#[CoversMethod(Join::class, 'join')]
+#[CoversMethod(Join::class, 'count')]
+#[CoversMethod(Join::class, 'reset')]
 class JoinTest extends TestCase
 {
     use DeprecatedAssertionsTrait;
@@ -84,7 +86,7 @@ class JoinTest extends TestCase
         self::assertFalse($join->valid());
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test join() returns Join object (is chainable)')]
+    #[TestDox('unit test: Test join() returns Join object (is chainable)')]
     public function testJoin()
     {
         $join   = new Join();
@@ -108,7 +110,7 @@ class JoinTest extends TestCase
         $join->join([], false);
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test count() returns correct count')]
+    #[TestDox('unit test: Test count() returns correct count')]
     public function testCount()
     {
         $join = new Join();
@@ -119,7 +121,7 @@ class JoinTest extends TestCase
         self::assertCount($join->count(), $join->getJoins());
     }
 
-    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test reset() resets the joins')]
+    #[TestDox('unit test: Test reset() resets the joins')]
     public function testReset()
     {
         $join = new Join();

@@ -8,6 +8,8 @@ use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Laminas\ServiceManager\ServiceManager;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\TestCase;
 
 class AdapterAbstractServiceFactoryTest extends TestCase
@@ -62,8 +64,8 @@ class AdapterAbstractServiceFactoryTest extends TestCase
     /**
      * @param string $service
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('providerValidService')]
-    #[\PHPUnit\Framework\Attributes\RequiresPhpExtension('mysqli')]
+    #[DataProvider('providerValidService')]
+    #[RequiresPhpExtension('mysqli')]
     public function testValidService($service)
     {
         $actual = $this->serviceManager->get($service);
@@ -73,7 +75,7 @@ class AdapterAbstractServiceFactoryTest extends TestCase
     /**
      * @param string $service
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('providerInvalidService')]
+    #[DataProvider('providerInvalidService')]
     public function testInvalidService($service)
     {
         $this->expectException(ServiceNotFoundException::class);

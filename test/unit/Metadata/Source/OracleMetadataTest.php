@@ -7,12 +7,14 @@ use Laminas\Db\Adapter\Driver\Oci8\Statement;
 use Laminas\Db\Metadata\Object\ConstraintObject;
 use Laminas\Db\Metadata\Source\OracleMetadata;
 use LaminasTest\Db\Adapter\Driver\Oci8\AbstractIntegrationTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\MockObject\MockObject;
 
 use function count;
 use function extension_loaded;
 
-#[\PHPUnit\Framework\Attributes\RequiresPhpExtension('oci8')]
+#[RequiresPhpExtension('oci8')]
 class OracleMetadataTest extends AbstractIntegrationTest
 {
     /** @var OracleMetadata */
@@ -39,7 +41,7 @@ class OracleMetadataTest extends AbstractIntegrationTest
     /**
      * @param array $constraintData
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('constraintDataProvider')]
+    #[DataProvider('constraintDataProvider')]
     public function testGetConstraints(array $constraintData)
     {
         $statement = $this->getMockBuilder(Statement::class)

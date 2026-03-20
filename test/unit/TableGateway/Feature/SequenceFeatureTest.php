@@ -8,6 +8,7 @@ use Laminas\Db\Adapter\Driver\StatementInterface;
 use Laminas\Db\Adapter\Platform\PlatformInterface;
 use Laminas\Db\TableGateway\Feature\SequenceFeature;
 use Laminas\Db\TableGateway\TableGateway;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class SequenceFeatureTest extends TestCase
@@ -29,7 +30,7 @@ class SequenceFeatureTest extends TestCase
         $this->feature = new SequenceFeature($this->primaryKeyField, self::$sequenceName);
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('nextSequenceIdProvider')]
+    #[DataProvider('nextSequenceIdProvider')]
     public function testNextSequenceId(string $platformName, string $statementSql)
     {
         $platform = $this->createMock(PlatformInterface::class);
