@@ -17,6 +17,12 @@ use LaminasTest\Db\TestAsset;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Sql::class, '__construct')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Sql::class, 'select')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Sql::class, 'insert')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Sql::class, 'update')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Sql::class, 'delete')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Sql::class, 'prepareStatementForSqlObject')]
 class SqlTest extends TestCase
 {
     /** @var Adapter&MockObject */
@@ -43,16 +49,12 @@ class SqlTest extends TestCase
 
         // setup mock adapter
         $this->mockAdapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver, new TestAsset\TrustingSql92Platform()])
             ->getMock();
 
         $this->sql = new Sql($this->mockAdapter, 'foo');
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Sql::__construct
-     */
     // @codingStandardsIgnoreStart
     public function test__construct()
     {
@@ -69,9 +71,6 @@ class SqlTest extends TestCase
         $sql->setTable(null);
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Sql::select
-     */
     public function testSelect()
     {
         $select = $this->sql->select();
@@ -85,9 +84,6 @@ class SqlTest extends TestCase
         $this->sql->select('bar');
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Sql::insert
-     */
     public function testInsert()
     {
         $insert = $this->sql->insert();
@@ -101,9 +97,6 @@ class SqlTest extends TestCase
         $this->sql->insert('bar');
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Sql::update
-     */
     public function testUpdate()
     {
         $update = $this->sql->update();
@@ -117,9 +110,6 @@ class SqlTest extends TestCase
         $this->sql->update('bar');
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Sql::delete
-     */
     public function testDelete()
     {
         $delete = $this->sql->delete();
@@ -134,9 +124,6 @@ class SqlTest extends TestCase
         $this->sql->delete('bar');
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Sql::prepareStatementForSqlObject
-     */
     public function testPrepareStatementForSqlObject()
     {
         $insert = $this->sql->insert()->columns(['foo'])->values(['foo' => 'bar']);
@@ -144,9 +131,7 @@ class SqlTest extends TestCase
         self::assertInstanceOf(StatementInterface::class, $stmt);
     }
 
-    /**
-     * @group 6890
-     */
+    #[\PHPUnit\Framework\Attributes\Group('6890')]
     public function testForDifferentAdapters()
     {
         $adapterSql92     = $this->getAdapterForPlatform('sql92');

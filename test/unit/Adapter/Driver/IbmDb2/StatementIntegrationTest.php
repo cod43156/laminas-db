@@ -12,10 +12,13 @@ use function extension_loaded;
 use function get_resource_type;
 use function getenv;
 
-/**
- * @group integration
- * @group integration-ibm_db2
- */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'initialize')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'getResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'prepare')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'isPrepared')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'execute')]
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-ibm_db2')]
 class StatementIntegrationTest extends TestCase
 {
     /** @var array<string, string> */
@@ -45,9 +48,6 @@ class StatementIntegrationTest extends TestCase
         }
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::initialize
-     */
     public function testInitialize()
     {
         $db2Resource = db2_connect(
@@ -61,9 +61,6 @@ class StatementIntegrationTest extends TestCase
         unset($stmtResource, $db2Resource);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::getResource
-     */
     public function testGetResource()
     {
         $db2Resource = db2_connect(
@@ -80,10 +77,6 @@ class StatementIntegrationTest extends TestCase
         unset($resource, $db2Resource);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::prepare
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::isPrepared
-     */
     public function testPrepare()
     {
         $db2Resource = db2_connect(
@@ -100,9 +93,6 @@ class StatementIntegrationTest extends TestCase
         unset($resource, $db2Resource);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::prepare
-     */
     public function testPrepareThrowsAnExceptionOnFailure()
     {
         $db2Resource = db2_connect(
@@ -116,9 +106,6 @@ class StatementIntegrationTest extends TestCase
         $statement->prepare("SELECT");
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::execute
-     */
     public function testExecute()
     {
         $ibmdb2    = new IbmDb2($this->variables);

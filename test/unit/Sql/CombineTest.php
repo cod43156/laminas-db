@@ -201,7 +201,6 @@ class CombineTest extends TestCase
         $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
 
         return $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver])
             ->getMock();
     }

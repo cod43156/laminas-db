@@ -6,11 +6,9 @@ use ArrayIterator;
 use Laminas\Db\ResultSet\HydratingResultSet;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\HydratingResultSet::class, 'current')]
 class HydratingResultSetIntegrationTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\ResultSet\HydratingResultSet::current
-     */
     public function testCurrentWillReturnBufferedRow()
     {
         $hydratingRs = new HydratingResultSet();

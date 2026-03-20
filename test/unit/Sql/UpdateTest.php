@@ -22,6 +22,16 @@ use LaminasTest\Db\TestAsset\TrustingSql92Platform;
 use LaminasTest\Db\TestAsset\UpdateIgnore;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'table')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, '__construct')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'set')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'where')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'getRawState')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'prepareStatement')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'getSqlString')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, '__get')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, '__clone')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Update::class, 'join')]
 class UpdateTest extends TestCase
 {
     use DeprecatedAssertionsTrait;
@@ -46,9 +56,6 @@ class UpdateTest extends TestCase
     {
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Update::table
-     */
     public function testTable()
     {
         $this->update->table('foo', 'bar');
@@ -59,27 +66,18 @@ class UpdateTest extends TestCase
         self::assertEquals($tableIdentifier, $this->readAttribute($this->update, 'table'));
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Update::__construct
-     */
     public function testConstruct()
     {
         $update = new Update('foo');
         self::assertEquals('foo', $this->readAttribute($update, 'table'));
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Update::set
-     */
     public function testSet()
     {
         $this->update->set(['foo' => 'bar']);
         self::assertEquals(['foo' => 'bar'], $this->update->getRawState('set'));
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Update::set
-     */
     public function testSortableSet()
     {
         $this->update->set([
@@ -98,9 +96,6 @@ class UpdateTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Update::where
-     */
     public function testWhere()
     {
         $this->update->where('x = y');
@@ -147,10 +142,7 @@ class UpdateTest extends TestCase
         $this->update->where(null);
     }
 
-    /**
-     * @group Laminas-240
-     * @covers \Laminas\Db\Sql\Update::where
-     */
+    #[\PHPUnit\Framework\Attributes\Group('Laminas-240')]
     public function testPassingMultipleKeyValueInWhereClause()
     {
         $update = clone $this->update;
@@ -163,9 +155,6 @@ class UpdateTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Update::getRawState
-     */
     public function testGetRawState()
     {
         $this->update->table('foo')
@@ -178,16 +167,12 @@ class UpdateTest extends TestCase
         self::assertInstanceOf(Where::class, $this->update->getRawState('where'));
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Update::prepareStatement
-     */
     public function testPrepareStatement()
     {
         $mockDriver = $this->getMockBuilder(DriverInterface::class)->getMock();
         $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         $mockAdapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 
@@ -211,7 +196,6 @@ class UpdateTest extends TestCase
         $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         $mockAdapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 
@@ -230,9 +214,6 @@ class UpdateTest extends TestCase
         $this->update->prepareStatement($mockAdapter, $mockStatement);
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Update::getSqlString
-     */
     public function testGetSqlString()
     {
         $this->update->table('foo')
@@ -256,10 +237,8 @@ class UpdateTest extends TestCase
         );
     }
 
-    /**
-     * @group 6768
-     * @group 6773
-     */
+    #[\PHPUnit\Framework\Attributes\Group('6768')]
+    #[\PHPUnit\Framework\Attributes\Group('6773')]
     public function testGetSqlStringForFalseUpdateValueParameter()
     {
         $this->update = new Update();
@@ -272,27 +251,18 @@ class UpdateTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Update::__get
-     */
     public function testGetUpdate()
     {
         $getWhere = $this->update->__get('where');
         self::assertInstanceOf(Where::class, $getWhere);
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Update::__get
-     */
     public function testGetUpdateFails()
     {
         $getWhat = $this->update->__get('what');
         self::assertNull($getWhat);
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Update::__clone
-     */
     public function testCloneUpdate()
     {
         $update1 = clone $this->update;
@@ -312,9 +282,7 @@ class UpdateTest extends TestCase
         );
     }
 
-    /**
-     * @coversNothing
-     */
+    #[\PHPUnit\Framework\Attributes\CoversNothing]
     public function testSpecificationconstantsCouldBeOverridedByExtensionInPrepareStatement()
     {
         $updateIgnore = new UpdateIgnore();
@@ -323,7 +291,6 @@ class UpdateTest extends TestCase
         $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         $mockAdapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 
@@ -342,9 +309,7 @@ class UpdateTest extends TestCase
         $updateIgnore->prepareStatement($mockAdapter, $mockStatement);
     }
 
-    /**
-     * @coversNothing
-     */
+    #[\PHPUnit\Framework\Attributes\CoversNothing]
     public function testSpecificationconstantsCouldBeOverridedByExtensionInGetSqlString()
     {
         $this->update = new UpdateIgnore();
@@ -370,9 +335,6 @@ class UpdateTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Update::where
-     */
     public function testJoin()
     {
         $this->update->table('Document');
@@ -421,10 +383,7 @@ class UpdateTest extends TestCase
         );
     }
 
-    /**
-     * @testdox unit test: Test join() returns Update object (is chainable)
-     * @covers \Laminas\Db\Sql\Update::join
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test join() returns Update object (is chainable)')]
     public function testJoinChainable()
     {
         $return = $this->update->join('baz', 'foo.fooId = baz.fooId', Join::JOIN_LEFT);

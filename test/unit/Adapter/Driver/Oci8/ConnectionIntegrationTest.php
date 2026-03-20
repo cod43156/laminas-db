@@ -6,24 +6,27 @@ use Laminas\Db\Adapter\Driver\Oci8\Connection;
 use Laminas\Db\Adapter\Driver\Oci8\Oci8;
 use Laminas\Db\Adapter\Driver\Oci8\Result;
 
-/**
- * @group integration
- * @group integration-oracle
- */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'getCurrentSchema')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'setResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'getResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'connect')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'isConnected')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'disconnect')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'beginTransaction')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'commit')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'rollback')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'execute')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Connection::class, 'getLastGeneratedValue')]
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-oracle')]
 class ConnectionIntegrationTest extends AbstractIntegrationTest
 {
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Connection::getCurrentSchema
-     */
     public function testGetCurrentSchema()
     {
         $connection = new Connection($this->variables);
         self::assertInternalType('string', $connection->getCurrentSchema());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Connection::setResource
-     */
     public function testSetResource()
     {
         $this->markTestIncomplete('edit this');
@@ -41,9 +44,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         unset($resource);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Connection::getResource
-     */
     public function testGetResource()
     {
         $connection = new Connection($this->variables);
@@ -54,9 +54,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         unset($connection);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Connection::connect
-     */
     public function testConnect()
     {
         $connection = new Connection($this->variables);
@@ -67,9 +64,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         unset($connection);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Connection::isConnected
-     */
     public function testIsConnected()
     {
         $connection = new Connection($this->variables);
@@ -81,9 +75,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         unset($connection);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Connection::disconnect
-     */
     public function testDisconnect()
     {
         $connection = new Connection($this->variables);
@@ -94,7 +85,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Connection::beginTransaction
      * @todo   Implement testBeginTransaction().
      */
     public function testBeginTransaction()
@@ -106,7 +96,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Connection::commit
      * @todo   Implement testCommit().
      */
     public function testCommit()
@@ -118,7 +107,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Connection::rollback
      * @todo   Implement testRollback().
      */
     public function testRollback()
@@ -129,9 +117,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Connection::execute
-     */
     public function testExecute()
     {
         $oci8       = new Oci8($this->variables);
@@ -141,9 +126,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         self::assertInstanceOf(Result::class, $result);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Connection::getLastGeneratedValue
-     */
     public function testGetLastGeneratedValue()
     {
         $this->markTestIncomplete('Need to create a temporary sequence.');
@@ -151,9 +133,7 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         $connection->getLastGeneratedValue();
     }
 
-    /**
-     * @group laminas3469
-     */
+    #[\PHPUnit\Framework\Attributes\Group('laminas3469')]
     public function testConnectReturnsConnectionWhenResourceSet()
     {
         $this->markTestIncomplete('edit this');

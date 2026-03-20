@@ -40,7 +40,6 @@ class RowGatewayTest extends TestCase
 
         // setup mock adapter
         $this->mockAdapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver])
             ->getMock();
     }

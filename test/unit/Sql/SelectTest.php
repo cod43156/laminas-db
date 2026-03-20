@@ -23,21 +23,43 @@ use LaminasTest\Db\TestAsset\TrustingSql92Platform;
 use PHPUnit\Framework\TestCase;
 use ReflectionObject;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, '__construct')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'from')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'getRawState')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'quantifier')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'columns')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'isTableReadOnly')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'join')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'processJoins')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'where')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'order')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'limit')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'offset')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'group')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'having')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'combine')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'reset')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'prepareStatement')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'getSqlString')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, '__get')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, '__clone')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'processSelect')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'processWhere')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'processGroup')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'processHaving')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'processOrder')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'processLimit')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'processOffset')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Select::class, 'processCombine')]
 class SelectTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\Sql\Select::__construct
-     */
     public function testConstruct()
     {
         $select = new Select('foo');
         self::assertEquals('foo', $select->getRawState('table'));
     }
 
-    /**
-     * @testdox unit test: Test from() returns Select object (is chainable)
-     * @covers \Laminas\Db\Sql\Select::from
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test from() returns Select object (is chainable)')]
     public function testFrom(): Select
     {
         $select = new Select();
@@ -47,20 +69,14 @@ class SelectTest extends TestCase
         return $return;
     }
 
-    /**
-     * @testdox unit test: Test getRawState() returns information populated via from()
-     * @covers \Laminas\Db\Sql\Select::getRawState
-     * @depends testFrom
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testFrom')]
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getRawState() returns information populated via from()')]
     public function testGetRawStateViaFrom(Select $select)
     {
         self::assertEquals('foo', $select->getRawState('table'));
     }
 
-    /**
-     * @testdox unit test: Test quantifier() returns Select object (is chainable)
-     * @covers \Laminas\Db\Sql\Select::quantifier
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test quantifier() returns Select object (is chainable)')]
     public function testQuantifier(): Select
     {
         $select = new Select();
@@ -69,20 +85,14 @@ class SelectTest extends TestCase
         return $return;
     }
 
-    /**
-     * @testdox unit test: Test getRawState() returns information populated via quantifier()
-     * @covers \Laminas\Db\Sql\Select::getRawState
-     * @depends testQuantifier
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testQuantifier')]
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getRawState() returns information populated via quantifier()')]
     public function testGetRawStateViaQuantifier(Select $select)
     {
         self::assertEquals(Select::QUANTIFIER_DISTINCT, $select->getRawState('quantifier'));
     }
 
-    /**
-     * @testdox unit test: Test quantifier() accepts expression
-     * @covers \Laminas\Db\Sql\Select::quantifier
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test quantifier() accepts expression')]
     public function testQuantifierParameterExpressionInterface()
     {
         $expr   = $this->getMockBuilder(ExpressionInterface::class)->getMock();
@@ -94,10 +104,7 @@ class SelectTest extends TestCase
         );
     }
 
-    /**
-     * @testdox unit test: Test columns() returns Select object (is chainable)
-     * @covers \Laminas\Db\Sql\Select::columns
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test columns() returns Select object (is chainable)')]
     public function testColumns(): Select
     {
         $select = new Select();
@@ -107,10 +114,7 @@ class SelectTest extends TestCase
         return $select;
     }
 
-    /**
-     * @testdox unit test: Test isTableReadOnly() returns correct state for read only
-     * @covers \Laminas\Db\Sql\Select::isTableReadOnly
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test isTableReadOnly() returns correct state for read only')]
     public function testIsTableReadOnly()
     {
         $select = new Select('foo');
@@ -120,20 +124,14 @@ class SelectTest extends TestCase
         self::assertFalse($select->isTableReadOnly());
     }
 
-    /**
-     * @testdox unit test: Test getRawState() returns information populated via columns()
-     * @covers \Laminas\Db\Sql\Select::getRawState
-     * @depends testColumns
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testColumns')]
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getRawState() returns information populated via columns()')]
     public function testGetRawStateViaColumns(Select $select)
     {
         self::assertEquals(['foo', 'bar'], $select->getRawState('columns'));
     }
 
-    /**
-     * @testdox unit test: Test join() returns same Select object (is chainable)
-     * @covers \Laminas\Db\Sql\Select::join
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test join() returns same Select object (is chainable)')]
     public function testJoin(): Select
     {
         $select = new Select();
@@ -143,10 +141,7 @@ class SelectTest extends TestCase
         return $return;
     }
 
-    /**
-     * @testdox unit test: Test join() exception with bad join
-     * @covers \Laminas\Db\Sql\Select::join
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test join() exception with bad join')]
     public function testBadJoin()
     {
         $select = new Select();
@@ -155,10 +150,7 @@ class SelectTest extends TestCase
         $select->join(['foo'], 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
     }
 
-    /**
-     * @testdox unit test: Test processJoins() exception with bad join name
-     * @covers \Laminas\Db\Sql\Select::processJoins
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test processJoins() exception with bad join name')]
     public function testBadJoinName()
     {
         $mockExpression = $this->getMockBuilder(ExpressionInterface::class)
@@ -181,11 +173,8 @@ class SelectTest extends TestCase
         $mr->invokeArgs($select, [new Sql92(), $mockDriver, $parameterContainer]);
     }
 
-    /**
-     * @testdox unit test: Test getRawState() returns information populated via join()
-     * @covers \Laminas\Db\Sql\Select::getRawState
-     * @depends testJoin
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testJoin')]
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getRawState() returns information populated via join()')]
     public function testGetRawStateViaJoin(Select $select)
     {
         self::assertEquals(
@@ -201,20 +190,14 @@ class SelectTest extends TestCase
         );
     }
 
-    /**
-     * @testdox unit test: Test where() returns Select object (is chainable)
-     * @covers \Laminas\Db\Sql\Select::where
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test where() returns Select object (is chainable)')]
     public function testWhereReturnsSameSelectObject()
     {
         $select = new Select();
         self::assertSame($select, $select->where('x = y'));
     }
 
-    /**
-     * @testdox unit test: Test where() will accept a string for the predicate to create an expression predicate
-     * @covers \Laminas\Db\Sql\Select::where
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test where() will accept a string for the predicate to create an expression predicate')]
     public function testWhereArgument1IsString()
     {
         $select = new Select();
@@ -237,11 +220,8 @@ class SelectTest extends TestCase
         self::assertInstanceOf(Literal::class, $predicates[0][1]);
     }
 
-    /**
-     * @testdox unit test: Test where() will accept an array with a string key (containing ?) used as an
-     *                     expression with placeholder
-     * @covers \Laminas\Db\Sql\Select::where
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test where() will accept an array with a string key (containing ?) used as an
+                    expression with placeholder')]
     public function testWhereArgument1IsAssociativeArrayContainingReplacementCharacter()
     {
         $select = new Select();
@@ -257,11 +237,8 @@ class SelectTest extends TestCase
         self::assertEquals([5], $predicates[0][1]->getParameters());
     }
 
-    /**
-     * @testdox unit test: Test where() will accept any array with string key (without ?) to be used
-     *                     as Operator predicate
-     * @covers \Laminas\Db\Sql\Select::where
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test where() will accept any array with string key (without ?) to be used
+                    as Operator predicate')]
     public function testWhereArgument1IsAssociativeArrayNotContainingReplacementCharacter()
     {
         $select = new Select();
@@ -290,10 +267,7 @@ class SelectTest extends TestCase
         self::assertInstanceOf(Literal::class, $predicates[0][1]);
     }
 
-    /**
-     * @testdox unit test: Test where() will accept any array with string key (without ?) with Predicate throw Exception
-     * @covers \Laminas\Db\Sql\Select::where
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test where() will accept any array with string key (without ?) with Predicate throw Exception')]
     public function testWhereArgument1IsAssociativeArrayIsPredicate()
     {
         $select = new Select();
@@ -306,10 +280,7 @@ class SelectTest extends TestCase
         $select->where($where);
     }
 
-    /**
-     * @testdox unit test: Test where() will accept an indexed array to be used by joining string expressions
-     * @covers \Laminas\Db\Sql\Select::where
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test where() will accept an indexed array to be used by joining string expressions')]
     public function testWhereArgument1IsIndexedArray()
     {
         $select = new Select();
@@ -325,11 +296,8 @@ class SelectTest extends TestCase
         self::assertEquals('name = "Ralph"', $predicates[0][1]->getLiteral());
     }
 
-    /**
-     * @testdox unit test: Test where() will accept an indexed array to be used by joining string expressions,
-     *                     combined by OR
-     * @covers \Laminas\Db\Sql\Select::where
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test where() will accept an indexed array to be used by joining string expressions,
+                    combined by OR')]
     public function testWhereArgument1IsIndexedArrayArgument2IsOr()
     {
         $select = new Select();
@@ -345,10 +313,7 @@ class SelectTest extends TestCase
         self::assertEquals('name = "Ralph"', $predicates[0][1]->getLiteral());
     }
 
-    /**
-     * @testdox unit test: Test where() will accept a closure to be executed with Where object as argument
-     * @covers \Laminas\Db\Sql\Select::where
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test where() will accept a closure to be executed with Where object as argument')]
     public function testWhereArgument1IsClosure()
     {
         $select = new Select();
@@ -359,10 +324,7 @@ class SelectTest extends TestCase
         });
     }
 
-    /**
-     * @testdox unit test: Test where() will accept any Predicate object as-is
-     * @covers \Laminas\Db\Sql\Select::where
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test where() will accept any Predicate object as-is')]
     public function testWhereArgument1IsPredicate()
     {
         $select    = new Select();
@@ -378,10 +340,7 @@ class SelectTest extends TestCase
         self::assertSame($predicate, $predicates[0][1]);
     }
 
-    /**
-     * @testdox unit test: Test where() will accept a Where object
-     * @covers \Laminas\Db\Sql\Select::where
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test where() will accept a Where object')]
     public function testWhereArgument1IsWhereObject()
     {
         $select = new Select();
@@ -389,10 +348,7 @@ class SelectTest extends TestCase
         self::assertSame($newWhere, $select->getRawState('where'));
     }
 
-    /**
-     * @testdox unit test: Test order()
-     * @covers \Laminas\Db\Sql\Select::order
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test order()')]
     public function testOrder()
     {
         $select = new Select();
@@ -422,7 +378,6 @@ class SelectTest extends TestCase
         $select = new Select();
         $select->order(
             $this->getMockBuilder(Operator::class)
-                ->setMethods()
                 ->setConstructorArgs(['rating', '<', '10'])
                 ->getMock()
         );
@@ -435,10 +390,7 @@ class SelectTest extends TestCase
         );
     }
 
-    /**
-     * @testdox unit test: Test order() correctly splits parameters.
-     * @covers \Laminas\Db\Sql\Select::order
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test order() correctly splits parameters.')]
     public function testOrderCorrectlySplitsParameter()
     {
         $select = new Select();
@@ -449,10 +401,7 @@ class SelectTest extends TestCase
         );
     }
 
-    /**
-     * @testdox: unit test: test limit()
-     * @covers \Laminas\Db\Sql\Select::limit
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox(': unit test: test limit()')]
     public function testLimit(): Select
     {
         $select = new Select();
@@ -460,20 +409,14 @@ class SelectTest extends TestCase
         return $select;
     }
 
-    /**
-     * @testdox: unit test: Test getRawState() returns information populated via limit()
-     * @covers \Laminas\Db\Sql\Select::getRawState
-     * @depends testLimit
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testLimit')]
+    #[\PHPUnit\Framework\Attributes\TestDox(': unit test: Test getRawState() returns information populated via limit()')]
     public function testGetRawStateViaLimit(Select $select)
     {
         self::assertEquals(5, $select->getRawState($select::LIMIT));
     }
 
-    /**
-     * @testdox: unit test: test limit() throws execption when invalid parameter passed
-     * @covers \Laminas\Db\Sql\Select::limit
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox(': unit test: test limit() throws execption when invalid parameter passed')]
     public function testLimitExceptionOnInvalidParameter()
     {
         $select = new Select();
@@ -482,10 +425,7 @@ class SelectTest extends TestCase
         $select->limit('foobar');
     }
 
-    /**
-     * @testdox: unit test: test offset()
-     * @covers \Laminas\Db\Sql\Select::offset
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox(': unit test: test offset()')]
     public function testOffset(): Select
     {
         $select = new Select();
@@ -493,20 +433,14 @@ class SelectTest extends TestCase
         return $select;
     }
 
-    /**
-     * @testdox: unit test: Test getRawState() returns information populated via offset()
-     * @covers \Laminas\Db\Sql\Select::getRawState
-     * @depends testOffset
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testOffset')]
+    #[\PHPUnit\Framework\Attributes\TestDox(': unit test: Test getRawState() returns information populated via offset()')]
     public function testGetRawStateViaOffset(Select $select)
     {
         self::assertEquals(10, $select->getRawState($select::OFFSET));
     }
 
-    /**
-     * @testdox: unit test: test offset() throws exception when invalid parameter passed
-     * @covers \Laminas\Db\Sql\Select::offset
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox(': unit test: test offset() throws exception when invalid parameter passed')]
     public function testOffsetExceptionOnInvalidParameter()
     {
         $select = new Select();
@@ -515,10 +449,7 @@ class SelectTest extends TestCase
         $select->offset('foobar');
     }
 
-    /**
-     * @testdox unit test: Test group() returns same Select object (is chainable)
-     * @covers \Laminas\Db\Sql\Select::group
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test group() returns same Select object (is chainable)')]
     public function testGroup(): Select
     {
         $select = new Select();
@@ -528,11 +459,8 @@ class SelectTest extends TestCase
         return $return;
     }
 
-    /**
-     * @testdox unit test: Test getRawState() returns information populated via group()
-     * @covers \Laminas\Db\Sql\Select::getRawState
-     * @depends testGroup
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testGroup')]
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getRawState() returns information populated via group()')]
     public function testGetRawStateViaGroup(Select $select)
     {
         self::assertEquals(
@@ -541,10 +469,7 @@ class SelectTest extends TestCase
         );
     }
 
-    /**
-     * @testdox unit test: Test having() returns same Select object (is chainable)
-     * @covers \Laminas\Db\Sql\Select::having
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test having() returns same Select object (is chainable)')]
     public function testHaving(): Select
     {
         $select = new Select();
@@ -554,10 +479,7 @@ class SelectTest extends TestCase
         return $return;
     }
 
-    /**
-     * @testdox unit test: Test having() returns same Select object (is chainable)
-     * @covers \Laminas\Db\Sql\Select::having
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test having() returns same Select object (is chainable)')]
     public function testHavingArgument1IsHavingObject(): Select
     {
         $select = new Select();
@@ -569,20 +491,14 @@ class SelectTest extends TestCase
         return $return;
     }
 
-    /**
-     * @testdox unit test: Test getRawState() returns information populated via having()
-     * @covers \Laminas\Db\Sql\Select::getRawState
-     * @depends testHaving
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testHaving')]
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getRawState() returns information populated via having()')]
     public function testGetRawStateViaHaving(Select $select)
     {
         self::assertInstanceOf(Having::class, $select->getRawState('having'));
     }
 
-    /**
-     * @testdox unit test: Test combine() returns same Select object (is chainable)
-     * @covers \Laminas\Db\Sql\Select::combine
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test combine() returns same Select object (is chainable)')]
     public function testCombine(): Select
     {
         $select  = new Select();
@@ -593,11 +509,8 @@ class SelectTest extends TestCase
         return $return;
     }
 
-    /**
-     * @testdox unit test: Test getRawState() returns information populated via combine()
-     * @covers \Laminas\Db\Sql\Select::getRawState
-     * @depends testCombine
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testCombine')]
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getRawState() returns information populated via combine()')]
     public function testGetRawStateViaCombine(Select $select)
     {
         $state = $select->getRawState('combine');
@@ -607,10 +520,7 @@ class SelectTest extends TestCase
         self::assertEquals('ALL', $state['modifier']);
     }
 
-    /**
-     * @testdox unit test: Test reset() resets internal stat of Select object, based on input
-     * @covers \Laminas\Db\Sql\Select::reset
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test reset() resets internal stat of Select object, based on input')]
     public function testReset()
     {
         $select = new Select();
@@ -680,13 +590,12 @@ class SelectTest extends TestCase
     }
 
     /**
-     * @testdox unit test: Test prepareStatement() will produce expected sql and parameters based on
-     *                     a variety of provided arguments [uses data provider]
-     * @covers \Laminas\Db\Sql\Select::prepareStatement
-     * @dataProvider providerData
      * @param mixed $unused1
      * @param mixed $unused2
      */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test prepareStatement() will produce expected sql and parameters based on
+                    a variety of provided arguments [uses data provider]')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerData')]
     public function testPrepareStatement(
         Select $select,
         string $expectedSqlString,
@@ -702,7 +611,6 @@ class SelectTest extends TestCase
             }
         ));
         $mockAdapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 
@@ -720,9 +628,7 @@ class SelectTest extends TestCase
         }
     }
 
-    /**
-     * @group Laminas-5192
-     */
+    #[\PHPUnit\Framework\Attributes\Group('Laminas-5192')]
     public function testSelectUsingTableIdentifierWithEmptyScheme()
     {
         $select = new Select();
@@ -736,33 +642,26 @@ class SelectTest extends TestCase
     }
 
     /**
-     * @testdox unit test: Test getSqlString() will produce expected sql and parameters based on
-     *                     a variety of provided arguments [uses data provider]
-     * @covers \Laminas\Db\Sql\Select::getSqlString
-     * @dataProvider providerData
      * @param mixed $unused
      * @param mixed $unused2
      */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test getSqlString() will produce expected sql and parameters based on
+                    a variety of provided arguments [uses data provider]')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerData')]
     public function testGetSqlString(Select $select, $unused, $unused2, string $expectedSqlString)
     {
         self::assertEquals($expectedSqlString, $select->getSqlString(new TrustingSql92Platform()));
     }
 
-    /**
-     * @testdox unit test: Test __get() returns expected objects magically
-     * @covers \Laminas\Db\Sql\Select::__get
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test __get() returns expected objects magically')]
     public function testMagicAccessor()
     {
         $select = new Select();
         self::assertInstanceOf(Where::class, $select->where);
     }
 
-    /**
-     * @testdox unit test: Test __clone() will clone the where object so that this select can be used
-     *                     in multiple contexts
-     * @covers \Laminas\Db\Sql\Select::__clone
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Test __clone() will clone the where object so that this select can be used
+                    in multiple contexts')]
     public function testCloning()
     {
         $select  = new Select();
@@ -778,22 +677,13 @@ class SelectTest extends TestCase
     }
 
     /**
-     * @testdox unit test: Text process*() methods will return proper array when internally called,
-     *                     part of extension API
-     * @dataProvider providerData
-     * @covers \Laminas\Db\Sql\Select::processSelect
-     * @covers \Laminas\Db\Sql\Select::processJoins
-     * @covers \Laminas\Db\Sql\Select::processWhere
-     * @covers \Laminas\Db\Sql\Select::processGroup
-     * @covers \Laminas\Db\Sql\Select::processHaving
-     * @covers \Laminas\Db\Sql\Select::processOrder
-     * @covers \Laminas\Db\Sql\Select::processLimit
-     * @covers \Laminas\Db\Sql\Select::processOffset
-     * @covers \Laminas\Db\Sql\Select::processCombine
      * @param mixed $unused
      * @param mixed $unused2
      * @param mixed $unused3
      */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test: Text process*() methods will return proper array when internally called,
+                    part of extension API')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerData')]
     public function testProcessMethods(Select $select, $unused, $unused2, $unused3, array $internalTests)
     {
         if (! $internalTests) {
@@ -824,7 +714,7 @@ class SelectTest extends TestCase
      *     5: bool,
      * }
      */
-    public function providerData(): array
+    public static function providerData(): array
     {
         // phpcs:disable Generic.Files.LineLength.TooLong
         // basic table

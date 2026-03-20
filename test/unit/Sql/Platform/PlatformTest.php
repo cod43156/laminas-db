@@ -44,9 +44,7 @@ class PlatformTest extends TestCase
         self::assertEquals('sql92', $reflectionMethod->invoke($platform, new TestAsset\TrustingSql92Platform()));
     }
 
-    /**
-     * @group 6890
-     */
+    #[\PHPUnit\Framework\Attributes\Group('6890')]
     public function testAbstractPlatformCrashesGracefullyOnMissingDefaultPlatform()
     {
         $adapter            = $this->resolveAdapter('sql92');
@@ -65,9 +63,7 @@ class PlatformTest extends TestCase
         $reflectionMethod->invoke($platform, null);
     }
 
-    /**
-     * @group 6890
-     */
+    #[\PHPUnit\Framework\Attributes\Group('6890')]
     public function testAbstractPlatformCrashesGracefullyOnMissingDefaultPlatformWithGetDecorators()
     {
         $adapter            = $this->resolveAdapter('sql92');

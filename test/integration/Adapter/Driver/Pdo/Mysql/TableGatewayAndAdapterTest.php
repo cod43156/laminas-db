@@ -17,9 +17,7 @@ class TableGatewayAndAdapterTest extends TestCase
 {
     use AdapterTrait;
 
-    /**
-     * @dataProvider connections
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('connections')]
     public function testGetOutOfConnections(): void
     {
         $this->adapter->query('SELECT VERSION();');
@@ -40,7 +38,7 @@ class TableGatewayAndAdapterTest extends TestCase
         $this->adapter = null;
     }
 
-    public function connections(): array
+    public static function connections(): array
     {
         return array_fill(0, 200, []);
     }

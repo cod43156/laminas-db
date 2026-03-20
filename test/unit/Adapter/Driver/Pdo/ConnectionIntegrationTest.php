@@ -8,27 +8,31 @@ use Laminas\Db\Adapter\Driver\Pdo\Result;
 use Laminas\Db\Adapter\Driver\Pdo\Statement;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group integration
- * @group integration-pdo
- */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'getCurrentSchema')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'setResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'getResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'connect')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'isConnected')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'disconnect')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'beginTransaction')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'commit')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'rollback')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'execute')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'prepare')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Connection::class, 'getLastGeneratedValue')]
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-pdo')]
 class ConnectionIntegrationTest extends TestCase
 {
     /** @var array<string, string> */
     protected $variables = ['pdodriver' => 'sqlite', 'database' => ':memory:'];
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Connection::getCurrentSchema
-     */
     public function testGetCurrentSchema()
     {
         $connection = new Connection($this->variables);
         self::assertIsString($connection->getCurrentSchema());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Connection::setResource
-     */
     public function testSetResource()
     {
         $resource   = new TestAsset\SqliteMemoryPdo();
@@ -40,9 +44,6 @@ class ConnectionIntegrationTest extends TestCase
         unset($resource);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Connection::getResource
-     */
     public function testGetResource()
     {
         $connection = new Connection($this->variables);
@@ -53,9 +54,6 @@ class ConnectionIntegrationTest extends TestCase
         unset($connection);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Connection::connect
-     */
     public function testConnect()
     {
         $connection = new Connection($this->variables);
@@ -66,9 +64,6 @@ class ConnectionIntegrationTest extends TestCase
         unset($connection);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Connection::isConnected
-     */
     public function testIsConnected()
     {
         $connection = new Connection($this->variables);
@@ -80,9 +75,6 @@ class ConnectionIntegrationTest extends TestCase
         unset($connection);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Connection::disconnect
-     */
     public function testDisconnect()
     {
         $connection = new Connection($this->variables);
@@ -93,7 +85,6 @@ class ConnectionIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Connection::beginTransaction
      * @todo   Implement testBeginTransaction().
      */
     public function testBeginTransaction()
@@ -105,7 +96,6 @@ class ConnectionIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Connection::commit
      * @todo   Implement testCommit().
      */
     public function testCommit()
@@ -117,7 +107,6 @@ class ConnectionIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Connection::rollback
      * @todo   Implement testRollback().
      */
     public function testRollback()
@@ -128,9 +117,6 @@ class ConnectionIntegrationTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Connection::execute
-     */
     public function testExecute()
     {
         $sqlsrv     = new Pdo($this->variables);
@@ -140,9 +126,6 @@ class ConnectionIntegrationTest extends TestCase
         self::assertInstanceOf(Result::class, $result);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Connection::prepare
-     */
     public function testPrepare()
     {
         $sqlsrv     = new Pdo($this->variables);
@@ -152,9 +135,6 @@ class ConnectionIntegrationTest extends TestCase
         self::assertInstanceOf(Statement::class, $statement);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Connection::getLastGeneratedValue
-     */
     public function testGetLastGeneratedValue()
     {
         $this->markTestIncomplete('Need to create a temporary sequence.');
@@ -162,9 +142,7 @@ class ConnectionIntegrationTest extends TestCase
         $connection->getLastGeneratedValue();
     }
 
-    /**
-     * @group laminas3469
-     */
+    #[\PHPUnit\Framework\Attributes\Group('laminas3469')]
     public function testConnectReturnsConnectionWhenResourceSet()
     {
         $resource   = new TestAsset\SqliteMemoryPdo();

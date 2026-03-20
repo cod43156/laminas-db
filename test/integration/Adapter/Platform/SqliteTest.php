@@ -9,10 +9,8 @@ use PHPUnit\Framework\TestCase;
 use function extension_loaded;
 use function getenv;
 
-/**
- * @group integration
- * @group integration-sqlite
- */
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-sqlite')]
 class SqliteTest extends TestCase
 {
     /** @var array<string, resource|\PDO> */

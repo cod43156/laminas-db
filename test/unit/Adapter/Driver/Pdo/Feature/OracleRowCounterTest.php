@@ -11,6 +11,10 @@ use Laminas\Db\Adapter\Driver\ResultInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter::class, 'getName')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter::class, 'getCountForStatement')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter::class, 'getCountForSql')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter::class, 'getRowCountClosure')]
 class OracleRowCounterTest extends TestCase
 {
     /** @var OracleRowCounter */
@@ -21,17 +25,11 @@ class OracleRowCounterTest extends TestCase
         $this->rowCounter = new OracleRowCounter();
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter::getName
-     */
     public function testGetName()
     {
         self::assertEquals('OracleRowCounter', $this->rowCounter->getName());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter::getCountForStatement
-     */
     public function testGetCountForStatement()
     {
         $statement = $this->getMockStatement('SELECT XXX', 5);
@@ -42,9 +40,6 @@ class OracleRowCounterTest extends TestCase
         self::assertEquals(5, $count);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter::getCountForSql
-     */
     public function testGetCountForSql()
     {
         $this->rowCounter->setDriver($this->getMockDriver(5));
@@ -52,9 +47,6 @@ class OracleRowCounterTest extends TestCase
         self::assertEquals(5, $count);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter::getRowCountClosure
-     */
     public function testGetRowCountClosure()
     {
         $stmt = $this->getMockStatement('SELECT XXX', 5);
@@ -73,13 +65,11 @@ class OracleRowCounterTest extends TestCase
     {
         /** @var Statement|MockObject $statement */
         $statement = $this->getMockBuilder(Statement::class)
-            ->setMethods(['prepare', 'execute'])
             ->disableOriginalConstructor()
             ->getMock();
 
         // mock PDOStatement with stdClass
         $resource = $this->getMockBuilder('stdClass')
-            ->setMethods(['fetch'])
             ->getMock();
         $resource->expects($this->once())
             ->method('fetch')
@@ -106,7 +96,6 @@ class OracleRowCounterTest extends TestCase
     protected function getMockDriver($returnValue)
     {
         $pdoStatement = $this->getMockBuilder('stdClass')
-            ->setMethods(['fetch'])
             ->disableOriginalConstructor()
             ->getMock(); // stdClass can be used here
         $pdoStatement->expects($this->once())
@@ -114,7 +103,6 @@ class OracleRowCounterTest extends TestCase
             ->will($this->returnValue(['count' => $returnValue]));
 
         $pdoConnection = $this->getMockBuilder('stdClass')
-            ->setMethods(['query'])
             ->getMock();
         $pdoConnection->expects($this->once())
             ->method('query')
@@ -126,7 +114,6 @@ class OracleRowCounterTest extends TestCase
             ->will($this->returnValue($pdoConnection));
 
         $driver = $this->getMockBuilder(Pdo::class)
-            ->setMethods(['getConnection'])
             ->disableOriginalConstructor()
             ->getMock();
         $driver->expects($this->once())

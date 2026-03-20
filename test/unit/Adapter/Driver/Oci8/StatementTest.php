@@ -8,9 +8,19 @@ use Laminas\Db\Adapter\ParameterContainer;
 use Laminas\Db\Adapter\Profiler\Profiler;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group integrationOracle
- */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'setDriver')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'setProfiler')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'getProfiler')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'initialize')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'setSql')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'setParameterContainer')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'getParameterContainer')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'getResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'getSql')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'prepare')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'isPrepared')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'execute')]
+#[\PHPUnit\Framework\Attributes\Group('integrationOracle')]
 class StatementTest extends TestCase
 {
     /** @var Statement */
@@ -33,25 +43,16 @@ class StatementTest extends TestCase
     {
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::setDriver
-     */
     public function testSetDriver()
     {
         self::assertEquals($this->statement, $this->statement->setDriver(new Oci8([])));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::setProfiler
-     */
     public function testSetProfiler()
     {
         self::assertEquals($this->statement, $this->statement->setProfiler(new Profiler()));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::getProfiler
-     */
     public function testGetProfiler()
     {
         $profiler = new Profiler();
@@ -59,34 +60,24 @@ class StatementTest extends TestCase
         self::assertEquals($profiler, $this->statement->getProfiler());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::initialize
-     */
     public function testInitialize()
     {
         $oci8 = new Oci8([]);
         self::assertEquals($this->statement, $this->statement->initialize($oci8));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::setSql
-     */
     public function testSetSql()
     {
         self::assertEquals($this->statement, $this->statement->setSql('select * from table'));
         self::assertEquals('select * from table', $this->statement->getSql());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::setParameterContainer
-     */
     public function testSetParameterContainer()
     {
         self::assertSame($this->statement, $this->statement->setParameterContainer(new ParameterContainer()));
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::getParameterContainer
      * @todo   Implement testGetParameterContainer().
      */
     public function testGetParameterContainer()
@@ -97,7 +88,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::getResource
      * @todo   Implement testGetResource().
      */
     public function testGetResource()
@@ -109,7 +99,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::getSql
      * @todo   Implement testGetSql().
      */
     public function testGetSql()
@@ -119,7 +108,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::prepare
      * @todo   Implement testPrepare().
      */
     public function testPrepare()
@@ -130,16 +118,12 @@ class StatementTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::isPrepared
-     */
     public function testIsPrepared()
     {
         self::assertFalse($this->statement->isPrepared());
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::execute
      * @todo   Implement testExecute().
      */
     public function testExecute()

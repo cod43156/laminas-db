@@ -19,12 +19,14 @@ use Laminas\Db\TableGateway\Feature\SequenceFeature;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\Feature\FeatureSet::class, 'canCallMagicCall')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\Feature\FeatureSet::class, 'callMagicCall')]
 class FeatureSetTest extends TestCase
 {
     /**
      * @cover FeatureSet::addFeature
-     * @group Laminas-4993
      */
+    #[\PHPUnit\Framework\Attributes\Group('Laminas-4993')]
     public function testAddFeatureThatFeatureDoesNotHaveTableGatewayButFeatureSetHas()
     {
         $mockMasterAdapter = $this->getMockBuilder(AdapterInterface::class)->getMock();
@@ -64,8 +66,8 @@ class FeatureSetTest extends TestCase
 
     /**
      * @cover FeatureSet::addFeature
-     * @group Laminas-4993
      */
+    #[\PHPUnit\Framework\Attributes\Group('Laminas-4993')]
     public function testAddFeatureThatFeatureHasTableGatewayButFeatureSetDoesNotHave()
     {
         $tableGatewayMock = $this->getMockForAbstractClass(AbstractTableGateway::class);
@@ -87,9 +89,6 @@ class FeatureSetTest extends TestCase
         self::assertInstanceOf(FeatureSet::class, $featureSet->addFeature($feature));
     }
 
-    /**
-     * @covers \Laminas\Db\TableGateway\Feature\FeatureSet::canCallMagicCall
-     */
     public function testCanCallMagicCallReturnsTrueForAddedMethodOfAddedFeature()
     {
         $feature    = new SequenceFeature('id', 'table_sequence');
@@ -102,9 +101,6 @@ class FeatureSetTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\TableGateway\Feature\FeatureSet::canCallMagicCall
-     */
     public function testCanCallMagicCallReturnsFalseForAddedMethodOfAddedFeature()
     {
         $feature    = new SequenceFeature('id', 'table_sequence');
@@ -117,9 +113,6 @@ class FeatureSetTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\TableGateway\Feature\FeatureSet::canCallMagicCall
-     */
     public function testCanCallMagicCallReturnsFalseWhenNoFeaturesHaveBeenAdded()
     {
         $featureSet = new FeatureSet();
@@ -128,9 +121,6 @@ class FeatureSetTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\TableGateway\Feature\FeatureSet::callMagicCall
-     */
     public function testCallMagicCallSucceedsForValidMethodOfAddedFeature()
     {
         $sequenceName = 'table_sequence';

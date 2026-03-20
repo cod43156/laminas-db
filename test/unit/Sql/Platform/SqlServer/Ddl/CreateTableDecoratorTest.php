@@ -7,11 +7,9 @@ use Laminas\Db\Sql\Ddl\CreateTable;
 use Laminas\Db\Sql\Platform\SqlServer\Ddl\CreateTableDecorator;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\SqlServer\Ddl\CreateTableDecorator::class, 'getSqlString')]
 class CreateTableDecoratorTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\Sql\Platform\SqlServer\Ddl\CreateTableDecorator::getSqlString
-     */
     public function testGetSqlString()
     {
         $ctd = new CreateTableDecorator();

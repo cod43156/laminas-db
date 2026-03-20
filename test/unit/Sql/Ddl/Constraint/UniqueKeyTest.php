@@ -5,11 +5,9 @@ namespace LaminasTest\Db\Sql\Ddl\Constraint;
 use Laminas\Db\Sql\Ddl\Constraint\UniqueKey;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\UniqueKey::class, 'getExpressionData')]
 class UniqueKeyTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\Sql\Ddl\Constraint\UniqueKey::getExpressionData
-     */
     public function testGetExpressionData()
     {
         $uk = new UniqueKey('foo', 'my_uk');

@@ -8,6 +8,16 @@ use Laminas\Db\Adapter\Driver\Oci8\Result;
 use Laminas\Db\Adapter\Driver\Oci8\Statement;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'registerConnection')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'registerStatementPrototype')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'registerResultPrototype')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'getDatabasePlatformName')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'getConnection')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'createStatement')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'createResult')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'getPrepareType')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'formatParameterName')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'getLastGeneratedValue')]
 class Oci8Test extends TestCase
 {
     /** @var Oci8 */
@@ -22,9 +32,6 @@ class Oci8Test extends TestCase
         $this->oci8 = new Oci8([]);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Oci8::registerConnection
-     */
     public function testRegisterConnection()
     {
         $mockConnection = $this->getMockForAbstractClass(
@@ -40,9 +47,6 @@ class Oci8Test extends TestCase
         self::assertSame($this->oci8, $this->oci8->registerConnection($mockConnection));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Oci8::registerStatementPrototype
-     */
     public function testRegisterStatementPrototype()
     {
         $this->oci8    = new Oci8([]);
@@ -59,9 +63,6 @@ class Oci8Test extends TestCase
         self::assertSame($this->oci8, $this->oci8->registerStatementPrototype($mockStatement));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Oci8::registerResultPrototype
-     */
     public function testRegisterResultPrototype()
     {
         $this->oci8    = new Oci8([]);
@@ -77,9 +78,6 @@ class Oci8Test extends TestCase
         self::assertSame($this->oci8, $this->oci8->registerResultPrototype($mockStatement));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Oci8::getDatabasePlatformName
-     */
     public function testGetDatabasePlatformName()
     {
         $this->oci8 = new Oci8([]);
@@ -87,10 +85,7 @@ class Oci8Test extends TestCase
         self::assertEquals('Oracle', $this->oci8->getDatabasePlatformName(Oci8::NAME_FORMAT_NATURAL));
     }
 
-    /**
-     * @depends testRegisterConnection
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Oci8::getConnection
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testRegisterConnection')]
     public function testGetConnection()
     {
         $conn = new Connection([]);
@@ -99,7 +94,6 @@ class Oci8Test extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Oci8::createStatement
      * @todo   Implement testGetPrepareType().
      */
     public function testCreateStatement()
@@ -111,7 +105,6 @@ class Oci8Test extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Oci8::createResult
      * @todo   Implement testGetPrepareType().
      */
     public function testCreateResult()
@@ -123,7 +116,6 @@ class Oci8Test extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Oci8::getPrepareType
      * @todo   Implement testGetPrepareType().
      */
     public function testGetPrepareType()
@@ -135,7 +127,6 @@ class Oci8Test extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Oci8::formatParameterName
      * @todo   Implement testFormatParameterName().
      */
     public function testFormatParameterName()
@@ -147,7 +138,6 @@ class Oci8Test extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Oci8::getLastGeneratedValue
      * @todo   Implement testGetLastGeneratedValue().
      */
     public function testGetLastGeneratedValue()

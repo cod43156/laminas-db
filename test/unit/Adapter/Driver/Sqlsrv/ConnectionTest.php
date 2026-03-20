@@ -6,6 +6,9 @@ use Laminas\Db\Adapter\Driver\Sqlsrv\Connection;
 use Laminas\Db\Adapter\Driver\Sqlsrv\Sqlsrv;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'setDriver')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'setConnectionParameters')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'getConnectionParameters')]
 class ConnectionTest extends TestCase
 {
     /** @var Connection */
@@ -28,25 +31,16 @@ class ConnectionTest extends TestCase
     {
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::setDriver
-     */
     public function testSetDriver()
     {
         self::assertEquals($this->connection, $this->connection->setDriver(new Sqlsrv([])));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::setConnectionParameters
-     */
     public function testSetConnectionParameters()
     {
         self::assertEquals($this->connection, $this->connection->setConnectionParameters([]));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::getConnectionParameters
-     */
     public function testGetConnectionParameters()
     {
         $this->connection->setConnectionParameters(['foo' => 'bar']);

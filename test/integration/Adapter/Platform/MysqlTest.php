@@ -10,10 +10,8 @@ use PHPUnit\Framework\TestCase;
 use function extension_loaded;
 use function getenv;
 
-/**
- * @group integration
- * @group integration-mysql
- */
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-mysql')]
 class MysqlTest extends TestCase
 {
     /** @var array<string, resource|\PDO> */

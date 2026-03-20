@@ -5,6 +5,16 @@ namespace LaminasTest\Db\Adapter\Platform;
 use Laminas\Db\Adapter\Platform\Sql92;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'getName')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'getQuoteIdentifierSymbol')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'quoteIdentifier')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'quoteIdentifierChain')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'getQuoteValueSymbol')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'quoteValue')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'quoteTrustedValue')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'quoteValueList')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'getIdentifierSeparator')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sql92::class, 'quoteIdentifierInFragment')]
 class Sql92Test extends TestCase
 {
     /** @var Sql92 */
@@ -19,33 +29,21 @@ class Sql92Test extends TestCase
         $this->platform = new Sql92();
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sql92::getName
-     */
     public function testGetName()
     {
         self::assertEquals('SQL92', $this->platform->getName());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sql92::getQuoteIdentifierSymbol
-     */
     public function testGetQuoteIdentifierSymbol()
     {
         self::assertEquals('"', $this->platform->getQuoteIdentifierSymbol());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sql92::quoteIdentifier
-     */
     public function testQuoteIdentifier()
     {
         self::assertEquals('"identifier"', $this->platform->quoteIdentifier('identifier'));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sql92::quoteIdentifierChain
-     */
     public function testQuoteIdentifierChain()
     {
         self::assertEquals('"identifier"', $this->platform->quoteIdentifierChain('identifier'));
@@ -53,30 +51,21 @@ class Sql92Test extends TestCase
         self::assertEquals('"schema"."identifier"', $this->platform->quoteIdentifierChain(['schema', 'identifier']));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sql92::getQuoteValueSymbol
-     */
     public function testGetQuoteValueSymbol()
     {
         self::assertEquals("'", $this->platform->getQuoteValueSymbol());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sql92::quoteValue
-     */
     public function testQuoteValueRaisesNoticeWithoutPlatformSupport()
     {
         $this->expectNotice();
-        $this->expectNoticeMessage(
+        $this->expectExceptionMessage(
             'Attempting to quote a value without specific driver level support can introduce security vulnerabilities '
             . 'in a production environment.'
         );
         $this->platform->quoteValue('value');
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sql92::quoteValue
-     */
     public function testQuoteValue()
     {
         self::assertEquals("'value'", @$this->platform->quoteValue('value'));
@@ -91,9 +80,6 @@ class Sql92Test extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sql92::quoteTrustedValue
-     */
     public function testQuoteTrustedValue()
     {
         self::assertEquals("'value'", $this->platform->quoteTrustedValue('value'));
@@ -110,30 +96,21 @@ class Sql92Test extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sql92::quoteValueList
-     */
     public function testQuoteValueList()
     {
         $this->expectError();
-        $this->expectErrorMessage(
+        $this->expectExceptionMessage(
             'Attempting to quote a value without specific driver level support can introduce security vulnerabilities '
             . 'in a production environment.'
         );
         self::assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sql92::getIdentifierSeparator
-     */
     public function testGetIdentifierSeparator()
     {
         self::assertEquals('.', $this->platform->getIdentifierSeparator());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sql92::quoteIdentifierInFragment
-     */
     public function testQuoteIdentifierInFragment()
     {
         self::assertEquals('"foo"."bar"', $this->platform->quoteIdentifierInFragment('foo.bar'));

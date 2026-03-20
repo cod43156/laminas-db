@@ -5,11 +5,9 @@ namespace LaminasTest\Db\Sql\Ddl\Constraint;
 use Laminas\Db\Sql\Ddl\Constraint\Check;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Constraint\Check::class, 'getExpressionData')]
 class CheckTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\Sql\Ddl\Constraint\Check::getExpressionData
-     */
     public function testGetExpressionData()
     {
         $check = new Check('id>0', 'foo');

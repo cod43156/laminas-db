@@ -6,20 +6,16 @@ use Laminas\Db\Sql\Ddl\Column\Integer;
 use Laminas\Db\Sql\Ddl\Constraint\PrimaryKey;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\Integer::class, '__construct')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\Column::class, 'getExpressionData')]
 class IntegerTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\Sql\Ddl\Column\Integer::__construct
-     */
     public function testObjectConstruction()
     {
         $integer = new Integer('foo');
         self::assertEquals('foo', $integer->getName());
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Ddl\Column\Column::getExpressionData
-     */
     public function testGetExpressionData()
     {
         $column = new Integer('foo');

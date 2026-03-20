@@ -14,6 +14,18 @@ use PHPUnit\Framework\TestCase;
 
 use function assert;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'initialize')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'buffer')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'isBuffered')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'getDataSource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'getFieldCount')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'next')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'key')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'current')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'valid')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'rewind')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'count')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'toArray')]
 class AbstractResultSetTest extends TestCase
 {
     /** @var MockObject */
@@ -28,9 +40,6 @@ class AbstractResultSetTest extends TestCase
         $this->resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::initialize
-     */
     public function testInitialize()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -48,9 +57,6 @@ class AbstractResultSetTest extends TestCase
         $resultSet->initialize('foo');
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::initialize
-     */
     public function testInitializeDoesNotCallCount()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -59,18 +65,12 @@ class AbstractResultSetTest extends TestCase
         $resultSet->initialize($result);
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::initialize
-     */
     public function testInitializeWithEmptyArray()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
         self::assertSame($resultSet, $resultSet->initialize([]));
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::buffer
-     */
     public function testBuffer()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -88,9 +88,6 @@ class AbstractResultSetTest extends TestCase
         $resultSet->buffer();
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::isBuffered
-     */
     public function testIsBuffered()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -99,9 +96,6 @@ class AbstractResultSetTest extends TestCase
         self::assertTrue($resultSet->isBuffered());
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::getDataSource
-     */
     public function testGetDataSource()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -113,9 +107,6 @@ class AbstractResultSetTest extends TestCase
         self::assertInstanceOf(ArrayIterator::class, $resultSet->getDataSource());
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::getFieldCount
-     */
     public function testGetFieldCount()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -125,9 +116,6 @@ class AbstractResultSetTest extends TestCase
         self::assertEquals(2, $resultSet->getFieldCount());
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::next
-     */
     public function testNext()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -139,9 +127,6 @@ class AbstractResultSetTest extends TestCase
         self::assertNull($resultSet->next());
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::key
-     */
     public function testKey()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -158,9 +143,6 @@ class AbstractResultSetTest extends TestCase
         self::assertEquals(3, $resultSet->key());
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::current
-     */
     public function testCurrent()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -172,9 +154,6 @@ class AbstractResultSetTest extends TestCase
         self::assertEquals(['id' => 1, 'name' => 'one'], $resultSet->current());
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::valid
-     */
     public function testValid()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -190,9 +169,6 @@ class AbstractResultSetTest extends TestCase
         self::assertFalse($resultSet->valid());
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::rewind
-     */
     public function testRewind()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -204,9 +180,6 @@ class AbstractResultSetTest extends TestCase
         self::assertNull($resultSet->rewind());
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::count
-     */
     public function testCount()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -218,9 +191,6 @@ class AbstractResultSetTest extends TestCase
         self::assertEquals(3, $resultSet->count());
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::toArray
-     */
     public function testToArray()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -241,9 +211,8 @@ class AbstractResultSetTest extends TestCase
 
     /**
      * Test multiple iterations with buffer
-     *
-     * @group issue-6845
      */
+    #[\PHPUnit\Framework\Attributes\Group('issue-6845')]
     public function testBufferIterations()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
@@ -273,9 +242,8 @@ class AbstractResultSetTest extends TestCase
 
     /**
      * Test multiple iterations with buffer with multiple rewind() calls
-     *
-     * @group issue-6845
      */
+    #[\PHPUnit\Framework\Attributes\Group('issue-6845')]
     public function testMultipleRewindBufferIterations()
     {
         $resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);

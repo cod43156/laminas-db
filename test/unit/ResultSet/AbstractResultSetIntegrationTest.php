@@ -7,6 +7,7 @@ use Laminas\Db\ResultSet\AbstractResultSet;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\AbstractResultSet::class, 'current')]
 class AbstractResultSetIntegrationTest extends TestCase
 {
     /** @var AbstractResultSet|MockObject */
@@ -21,9 +22,6 @@ class AbstractResultSetIntegrationTest extends TestCase
         $this->resultSet = $this->getMockForAbstractClass(AbstractResultSet::class);
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::current
-     */
     public function testCurrentCallsDataSourceCurrentAsManyTimesWithoutBuffer()
     {
         $result = $this->getMockBuilder(ResultInterface::class)->getMock();
@@ -35,9 +33,6 @@ class AbstractResultSetIntegrationTest extends TestCase
         self::assertEquals($value1, $value2);
     }
 
-    /**
-     * @covers \Laminas\Db\ResultSet\AbstractResultSet::current
-     */
     public function testCurrentCallsDataSourceCurrentOnceWithBuffer()
     {
         $result = $this->getMockBuilder(ResultInterface::class)->getMock();

@@ -12,15 +12,12 @@ use stdClass;
 use function assert;
 use function uniqid;
 
-/**
- * @group result-pdo
- */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Result::class, 'current')]
+#[\PHPUnit\Framework\Attributes\Group('result-pdo')]
 class ResultTest extends TestCase
 {
     /**
      * Tests current method returns same data on consecutive calls.
-     *
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Result::current
      */
     public function testCurrent()
     {

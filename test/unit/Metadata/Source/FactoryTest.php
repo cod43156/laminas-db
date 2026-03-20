@@ -17,9 +17,9 @@ use PHPUnit\Framework\TestCase;
 class FactoryTest extends TestCase
 {
     /**
-     * @dataProvider validAdapterProvider
      * @param string $expectedReturnClass
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('validAdapterProvider')]
     public function testCreateSourceFromAdapter(Adapter $adapter, $expectedReturnClass)
     {
         $source = Factory::createSourceFromAdapter($adapter);

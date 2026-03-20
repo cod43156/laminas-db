@@ -8,6 +8,17 @@ use Laminas\Db\Adapter\Driver\IbmDb2\Result;
 use Laminas\Db\Adapter\Driver\IbmDb2\Statement;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'registerConnection')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'registerStatementPrototype')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'registerResultPrototype')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'getDatabasePlatformName')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'getConnection')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'createStatement')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'createResult')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'getPrepareType')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'formatParameterName')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'getLastGeneratedValue')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'getResultPrototype')]
 class IbmDb2Test extends TestCase
 {
     /** @var IbmDb2 */
@@ -22,9 +33,6 @@ class IbmDb2Test extends TestCase
         $this->ibmdb2 = new IbmDb2([]);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::registerConnection
-     */
     public function testRegisterConnection()
     {
         $mockConnection = $this->getMockForAbstractClass(
@@ -40,9 +48,6 @@ class IbmDb2Test extends TestCase
         self::assertSame($this->ibmdb2, $this->ibmdb2->registerConnection($mockConnection));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::registerStatementPrototype
-     */
     public function testRegisterStatementPrototype()
     {
         $this->ibmdb2  = new IbmDb2([]);
@@ -59,9 +64,6 @@ class IbmDb2Test extends TestCase
         self::assertSame($this->ibmdb2, $this->ibmdb2->registerStatementPrototype($mockStatement));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::registerResultPrototype
-     */
     public function testRegisterResultPrototype()
     {
         $this->ibmdb2  = new IbmDb2([]);
@@ -77,9 +79,6 @@ class IbmDb2Test extends TestCase
         self::assertSame($this->ibmdb2, $this->ibmdb2->registerResultPrototype($mockStatement));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::getDatabasePlatformName
-     */
     public function testGetDatabasePlatformName()
     {
         $this->ibmdb2 = new IbmDb2([]);
@@ -87,10 +86,7 @@ class IbmDb2Test extends TestCase
         self::assertEquals('IBM DB2', $this->ibmdb2->getDatabasePlatformName(IbmDb2::NAME_FORMAT_NATURAL));
     }
 
-    /**
-     * @depends testRegisterConnection
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::getConnection
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testRegisterConnection')]
     public function testGetConnection()
     {
         $conn = new Connection([]);
@@ -99,7 +95,6 @@ class IbmDb2Test extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::createStatement
      * @todo   Implement testGetPrepareType().
      */
     public function testCreateStatement()
@@ -111,7 +106,6 @@ class IbmDb2Test extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::createResult
      * @todo   Implement testGetPrepareType().
      */
     public function testCreateResult()
@@ -123,7 +117,6 @@ class IbmDb2Test extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::getPrepareType
      * @todo   Implement testGetPrepareType().
      */
     public function testGetPrepareType()
@@ -135,7 +128,6 @@ class IbmDb2Test extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::formatParameterName
      * @todo   Implement testFormatParameterName().
      */
     public function testFormatParameterName()
@@ -147,7 +139,6 @@ class IbmDb2Test extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::getLastGeneratedValue
      * @todo   Implement testGetLastGeneratedValue().
      */
     public function testGetLastGeneratedValue()
@@ -158,9 +149,6 @@ class IbmDb2Test extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::getResultPrototype
-     */
     public function testGetResultPrototype()
     {
         $resultPrototype = $this->ibmdb2->getResultPrototype();

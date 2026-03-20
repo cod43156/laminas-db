@@ -18,6 +18,10 @@ use LaminasTest\Db\TestAsset\TrustingMysqlPlatform;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\SelectDecorator::class, 'prepareStatement')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\SelectDecorator::class, 'processLimit')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\SelectDecorator::class, 'processOffset')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\SelectDecorator::class, 'getSqlString')]
 class SelectDecoratorTest extends TestCase
 {
     /** @var Adapter&MockObject */
@@ -25,14 +29,9 @@ class SelectDecoratorTest extends TestCase
 
     /** @var Sql */
     protected $sql;
-    /**
-     * @testdox integration test: Testing SelectDecorator will use Select an internal state to prepare
-     *                            a proper limit/offset sql statement
-     * @covers \Laminas\Db\Sql\Platform\Mysql\SelectDecorator::prepareStatement
-     * @covers \Laminas\Db\Sql\Platform\Mysql\SelectDecorator::processLimit
-     * @covers \Laminas\Db\Sql\Platform\Mysql\SelectDecorator::processOffset
-     * @dataProvider dataProvider
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
+                           a proper limit/offset sql statement')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
     public function testPrepareStatement(Select $select, string $expectedSql, array $expectedParams)
     {
         $driver = $this->getMockBuilder(DriverInterface::class)->getMock();
@@ -40,7 +39,6 @@ class SelectDecoratorTest extends TestCase
 
         // test
         $adapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([
                 $driver,
                 new MysqlPlatform(),
@@ -62,16 +60,13 @@ class SelectDecoratorTest extends TestCase
     }
 
     /**
-     * @testdox integration test: Testing SelectDecorator will use Select an internal state to prepare
-     *                            a proper limit/offset sql statement
-     * @covers \Laminas\Db\Sql\Platform\Mysql\SelectDecorator::prepareStatement
-     * @covers \Laminas\Db\Sql\Platform\Mysql\SelectDecorator::processLimit
-     * @covers \Laminas\Db\Sql\Platform\Mysql\SelectDecorator::processOffset
-     * @dataProvider dataProvider
      * @param mixed $ignore
      * @param array<string, mixed> $params
      * @param mixed $alsoIgnore
      */
+    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
+                           a proper limit/offset sql statement')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
     public function testPrepareStatementForSqlObject(
         Select $select,
         $ignore,
@@ -99,15 +94,12 @@ class SelectDecoratorTest extends TestCase
     }
 
     /**
-     * @testdox integration test: Testing SelectDecorator will use Select an internal state to prepare
-     *                            a proper limit/offset sql statement
-     * @covers \Laminas\Db\Sql\Platform\Mysql\SelectDecorator::getSqlString
-     * @covers \Laminas\Db\Sql\Platform\Mysql\SelectDecorator::processLimit
-     * @covers \Laminas\Db\Sql\Platform\Mysql\SelectDecorator::processOffset
-     * @dataProvider dataProvider
      * @param mixed $ignore
      * @param mixed $alsoIgnore
      */
+    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
+                           a proper limit/offset sql statement')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
     public function testGetSqlString(Select $select, $ignore, $alsoIgnore, string $expectedSql)
     {
         $parameterContainer = new ParameterContainer();
@@ -129,7 +121,7 @@ class SelectDecoratorTest extends TestCase
      *     4: string
      * }>
      */
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         // phpcs:disable Generic.Files.LineLength.TooLong
         $select0 = new Select();

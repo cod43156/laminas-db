@@ -13,16 +13,17 @@ use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::class, 'prepareStatement')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::class, 'processLimitOffset')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\IbmDb2\SelectDecorator::class, 'getSqlString')]
 class SelectDecoratorTest extends TestCase
 {
     /**
-     * @testdox integration test: Testing SelectDecorator will use Select to produce properly IBM Db2
-     *                            dialect prepared sql
-     * @covers \Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::prepareStatement
-     * @covers \Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::processLimitOffset
-     * @dataProvider dataProvider
      * @param mixed $notUsed
      */
+    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select to produce properly IBM Db2
+                           dialect prepared sql')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
     public function testPrepareStatement(
         Select $select,
         string $expectedPrepareSql,
@@ -35,7 +36,6 @@ class SelectDecoratorTest extends TestCase
 
         // test
         $adapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([
                 $driver,
                 new IbmDb2Platform(),
@@ -63,13 +63,12 @@ class SelectDecoratorTest extends TestCase
     }
 
     /**
-     * @testdox integration test: Testing SelectDecorator will use Select to produce properly Ibm DB2
-     *                            dialect sql statements
-     * @covers \Laminas\Db\Sql\Platform\IbmDb2\SelectDecorator::getSqlString
-     * @dataProvider dataProvider
      * @param mixed $ignored0
      * @param mixed $ignored1
      */
+    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select to produce properly Ibm DB2
+                           dialect sql statements')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
     public function testGetSqlString(
         Select $select,
         $ignored0,
@@ -96,7 +95,7 @@ class SelectDecoratorTest extends TestCase
      *
      * @return array
      */
-    public function dataProvider()
+    public static function dataProvider()
     {
         // phpcs:disable Generic.Files.LineLength.TooLong
         $select0 = new Select();

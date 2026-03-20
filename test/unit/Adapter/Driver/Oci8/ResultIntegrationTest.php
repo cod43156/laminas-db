@@ -5,10 +5,21 @@ namespace LaminasTest\Db\Adapter\Driver\Oci8;
 use Laminas\Db\Adapter\Driver\Oci8\Result;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group integration
- * @group integration-oracle
- */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'initialize')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'buffer')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'getResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'current')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'next')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'key')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'rewind')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'valid')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'count')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'getFieldCount')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'isQueryResult')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'getAffectedRows')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Result::class, 'getGeneratedValue')]
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-oracle')]
 class ResultIntegrationTest extends TestCase
 {
     /** @var Result */
@@ -32,7 +43,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::initialize
      * @todo   Implement testInitialize().
      */
     public function testInitialize()
@@ -44,7 +54,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::buffer
      * @todo   Implement testBuffer().
      */
     public function testBuffer()
@@ -56,7 +65,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::getResource
      * @todo   Implement testGetResource().
      */
     public function testGetResource()
@@ -68,7 +76,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::current
      * @todo   Implement testCurrent().
      */
     public function testCurrent()
@@ -80,7 +87,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::next
      * @todo   Implement testNext().
      */
     public function testNext()
@@ -92,7 +98,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::key
      * @todo   Implement testKey().
      */
     public function testKey()
@@ -104,7 +109,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::rewind
      * @todo   Implement testRewind().
      */
     public function testRewind()
@@ -116,7 +120,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::valid
      * @todo   Implement testValid().
      */
     public function testValid()
@@ -128,7 +131,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::count
      * @todo   Implement testCount().
      */
     public function testCount()
@@ -140,7 +142,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::getFieldCount
      * @todo   Implement testGetFieldCount().
      */
     public function testGetFieldCount()
@@ -152,7 +153,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::isQueryResult
      * @todo   Implement testIsQueryResult().
      */
     public function testIsQueryResult()
@@ -164,7 +164,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::getAffectedRows
      * @todo   Implement testGetAffectedRows().
      */
     public function testGetAffectedRows()
@@ -176,7 +175,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Result::getGeneratedValue
      * @todo   Implement testGetGeneratedValue().
      */
     public function testGetGeneratedValue()

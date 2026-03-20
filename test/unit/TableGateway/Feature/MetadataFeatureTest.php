@@ -13,9 +13,7 @@ use ReflectionProperty;
 
 class MetadataFeatureTest extends TestCase
 {
-    /**
-     * @group integration-test
-     */
+    #[\PHPUnit\Framework\Attributes\Group('integration-test')]
     public function testPostInitialize()
     {
         $tableGatewayMock = $this->getMockForAbstractClass(AbstractTableGateway::class);

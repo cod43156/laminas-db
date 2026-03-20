@@ -5,11 +5,11 @@ namespace LaminasTest\Db\Sql\Ddl\Column;
 use Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn::class, 'setLength')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn::class, 'getLength')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn::class, 'getExpressionData')]
 class AbstractLengthColumnTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn::setLength
-     */
     public function testSetLength()
     {
         $column = $this->getMockForAbstractClass(AbstractLengthColumn::class, ['foo', 55]);
@@ -18,18 +18,12 @@ class AbstractLengthColumnTest extends TestCase
         self::assertEquals(20, $column->getLength());
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn::getLength
-     */
     public function testGetLength()
     {
         $column = $this->getMockForAbstractClass(AbstractLengthColumn::class, ['foo', 55]);
         self::assertEquals(55, $column->getLength());
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn::getExpressionData
-     */
     public function testGetExpressionData()
     {
         $column = $this->getMockForAbstractClass(AbstractLengthColumn::class, ['foo', 4]);

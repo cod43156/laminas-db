@@ -5,11 +5,9 @@ namespace LaminasTest\Db\Sql\Ddl\Column;
 use Laminas\Db\Sql\Ddl\Column\Binary;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\Binary::class, 'getExpressionData')]
 class BinaryTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\Sql\Ddl\Column\Binary::getExpressionData
-     */
     public function testGetExpressionData()
     {
         $column = new Binary('foo', 10000000);

@@ -5,11 +5,9 @@ namespace LaminasTest\Db\Sql\Ddl\Column;
 use Laminas\Db\Sql\Ddl\Column\Datetime;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\Datetime::class, 'getExpressionData')]
 class DatetimeTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\Sql\Ddl\Column\Datetime::getExpressionData
-     */
     public function testGetExpressionData()
     {
         $column = new Datetime('foo');

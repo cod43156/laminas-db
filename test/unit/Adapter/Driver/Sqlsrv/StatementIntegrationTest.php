@@ -9,15 +9,15 @@ use Laminas\Db\Adapter\Driver\Sqlsrv\Statement;
 use function get_resource_type;
 use function sqlsrv_connect;
 
-/**
- * @group integration
- * @group integration-sqlserver
- */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'initialize')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'getResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'prepare')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'isPrepared')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'execute')]
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-sqlserver')]
 class StatementIntegrationTest extends AbstractIntegrationTest
 {
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::initialize
-     */
     public function testInitialize()
     {
         $sqlsrvResource = sqlsrv_connect(
@@ -34,9 +34,6 @@ class StatementIntegrationTest extends AbstractIntegrationTest
         unset($stmtResource, $sqlsrvResource);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::getResource
-     */
     public function testGetResource()
     {
         $sqlsrvResource = sqlsrv_connect(
@@ -56,10 +53,6 @@ class StatementIntegrationTest extends AbstractIntegrationTest
         unset($resource, $sqlsrvResource);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::prepare
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::isPrepared
-     */
     public function testPrepare()
     {
         $sqlsrvResource = sqlsrv_connect(
@@ -79,9 +72,6 @@ class StatementIntegrationTest extends AbstractIntegrationTest
         unset($resource, $sqlsrvResource);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::execute
-     */
     public function testExecute()
     {
         $sqlsrv    = new Sqlsrv($this->variables);

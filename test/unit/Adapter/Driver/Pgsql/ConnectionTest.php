@@ -15,6 +15,7 @@ use function pg_client_encoding;
 
 use const PGSQL_CONNECT_FORCE_NEW;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pgsql\Connection::class, 'getResource')]
 class ConnectionTest extends TestCase
 {
     use DeprecatedAssertionsTrait;
@@ -33,8 +34,6 @@ class ConnectionTest extends TestCase
 
     /**
      * Test getResource method if it tries to connect to the database.
-     *
-     * @covers \Laminas\Db\Adapter\Driver\Pgsql\Connection::getResource
      */
     public function testResourceInvalid()
     {
@@ -57,8 +56,6 @@ class ConnectionTest extends TestCase
 
     /**
      * Test getResource method if it tries to connect to the database.
-     *
-     * @covers \Laminas\Db\Adapter\Driver\Pgsql\Connection::getResource
      */
     public function testResource()
     {
@@ -86,10 +83,8 @@ class ConnectionTest extends TestCase
         self::assertSame($this->connection, $this->connection->disconnect());
     }
 
-    /**
-     * @group 6760
-     * @group 6787
-     */
+    #[\PHPUnit\Framework\Attributes\Group('6760')]
+    #[\PHPUnit\Framework\Attributes\Group('6787')]
     public function testGetConnectionStringEncodeSpecialSymbol()
     {
         $connectionParameters = [
@@ -139,9 +134,7 @@ class ConnectionTest extends TestCase
         self::assertEquals($type, self::readAttribute($this->connection, 'type'));
     }
 
-    /**
-     * @runInSeparateProcess
-     */
+    #[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
     public function testSetCharset()
     {
         if (! extension_loaded('pgsql')) {
@@ -167,9 +160,7 @@ class ConnectionTest extends TestCase
         self::assertEquals('SQL_ASCII', pg_client_encoding($this->connection->getResource()));
     }
 
-    /**
-     * @runInSeparateProcess
-     */
+    #[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
     public function testSetInvalidCharset()
     {
         if (! extension_loaded('pgsql')) {

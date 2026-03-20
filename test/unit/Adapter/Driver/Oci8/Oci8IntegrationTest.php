@@ -7,16 +7,12 @@ use Laminas\Db\Adapter\Driver\Oci8\Statement;
 use Laminas\Db\Adapter\Exception\InvalidArgumentException;
 use stdClass;
 
-/**
- * @group integration
- * @group integration-oracle
- */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Oci8::class, 'checkEnvironment')]
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-oracle')]
 class Oci8IntegrationTest extends AbstractIntegrationTest
 {
-    /**
-     * @group integration-oci8
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Oci8::checkEnvironment
-     */
+    #[\PHPUnit\Framework\Attributes\Group('integration-oci8')]
     public function testCheckEnvironment()
     {
         $sqlserver = new Oci8([]);

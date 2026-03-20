@@ -10,24 +10,21 @@ use PHPUnit\Framework\TestCase;
 
 use function count;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\TableGateway::class, '__construct')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\TableGateway::class, 'select')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\TableGateway\TableGateway::class, 'insert')]
 class TableGatewayTest extends TestCase
 {
     use AdapterTrait;
 
     /** @var Adapter */
     protected $adapter;
-    /**
-     * @covers \Laminas\Db\TableGateway\TableGateway::__construct
-     */
     public function testConstructor()
     {
         $tableGateway = new TableGateway('test', $this->adapter);
         $this->assertInstanceOf(TableGateway::class, $tableGateway);
     }
 
-    /**
-     * @covers \Laminas\Db\TableGateway\TableGateway::select
-     */
     public function testSelect()
     {
         $tableGateway = new TableGateway('test', $this->adapter);
@@ -41,10 +38,6 @@ class TableGatewayTest extends TestCase
         }
     }
 
-    /**
-     * @covers \Laminas\Db\TableGateway\TableGateway::insert
-     * @covers \Laminas\Db\TableGateway\TableGateway::select
-     */
     public function testInsert()
     {
         $tableGateway = new TableGateway('test', $this->adapter);
@@ -84,9 +77,9 @@ class TableGatewayTest extends TestCase
     }
 
     /**
-     * @depends testInsertWithExtendedCharsetFieldName
      * @param mixed $id
      */
+    #[\PHPUnit\Framework\Attributes\Depends('testInsertWithExtendedCharsetFieldName')]
     public function testUpdateWithExtendedCharsetFieldName($id)
     {
         $tableGateway = new TableGateway('test_charset', $this->adapter);
@@ -107,9 +100,9 @@ class TableGatewayTest extends TestCase
     }
 
     /**
-     * @dataProvider tableProvider
      * @param string|TableIdentifier|array $table
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('tableProvider')]
     public function testTableGatewayWithMetadataFeature($table)
     {
         $tableGateway = new TableGateway($table, $this->adapter, new MetadataFeature());
@@ -119,7 +112,7 @@ class TableGatewayTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: mixed}> */
-    public function tableProvider(): array
+    public static function tableProvider(): array
     {
         return [
             'string'                  => ['test'],

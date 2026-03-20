@@ -9,24 +9,28 @@ use Laminas\Db\Adapter\Driver\Sqlsrv\Statement;
 
 use function sqlsrv_connect;
 
-/**
- * @group integration
- * @group integration-sqlserver
- */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'getCurrentSchema')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'setResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'getResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'connect')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'isConnected')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'disconnect')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'beginTransaction')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'commit')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'rollback')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'execute')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'prepare')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Connection::class, 'getLastGeneratedValue')]
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-sqlserver')]
 class ConnectionIntegrationTest extends AbstractIntegrationTest
 {
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::getCurrentSchema
-     */
     public function testGetCurrentSchema()
     {
         $connection = new Connection($this->variables);
         self::assertIsString($connection->getCurrentSchema());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::setResource
-     */
     public function testSetResource()
     {
         $resource   = sqlsrv_connect(
@@ -45,9 +49,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         unset($resource);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::getResource
-     */
     public function testGetResource()
     {
         $connection = new Connection($this->variables);
@@ -58,9 +59,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         unset($connection);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::connect
-     */
     public function testConnect()
     {
         $connection = new Connection($this->variables);
@@ -71,9 +69,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         unset($connection);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::isConnected
-     */
     public function testIsConnected()
     {
         $connection = new Connection($this->variables);
@@ -85,9 +80,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         unset($connection);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::disconnect
-     */
     public function testDisconnect()
     {
         $connection = new Connection($this->variables);
@@ -98,7 +90,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::beginTransaction
      * @todo   Implement testBeginTransaction().
      */
     public function testBeginTransaction()
@@ -110,7 +101,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::commit
      * @todo   Implement testCommit().
      */
     public function testCommit()
@@ -122,7 +112,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::rollback
      * @todo   Implement testRollback().
      */
     public function testRollback()
@@ -133,9 +122,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::execute
-     */
     public function testExecute()
     {
         $sqlsrv     = new Sqlsrv($this->variables);
@@ -145,9 +131,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         self::assertInstanceOf(Result::class, $result);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::prepare
-     */
     public function testPrepare()
     {
         $sqlsrv     = new Sqlsrv($this->variables);
@@ -157,9 +140,6 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         self::assertInstanceOf(Statement::class, $statement);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Connection::getLastGeneratedValue
-     */
     public function testGetLastGeneratedValue()
     {
         $this->markTestIncomplete('Need to create a temporary sequence.');
@@ -167,9 +147,7 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         $connection->getLastGeneratedValue();
     }
 
-    /**
-     * @group laminas3469
-     */
+    #[\PHPUnit\Framework\Attributes\Group('laminas3469')]
     public function testConnectReturnsConnectionWhenResourceSet()
     {
         $resource   = sqlsrv_connect(

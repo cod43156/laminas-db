@@ -10,12 +10,10 @@ use PHPUnit\Framework\TestCase;
 use function current;
 use function key;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\SqlServer\SqlServer::class, '__construct')]
 class SqlServerTest extends TestCase
 {
-    /**
-     * @testdox unit test / object test: Test SqlServer object has Select proxy
-     * @covers \Laminas\Db\Sql\Platform\SqlServer\SqlServer::__construct
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test / object test: Test SqlServer object has Select proxy')]
     public function testConstruct()
     {
         $sqlServer  = new SqlServer();

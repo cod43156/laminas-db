@@ -22,7 +22,6 @@ class StatementIntegrationTest extends TestCase
     protected function setUp(): void
     {
         $driver = $this->getMockBuilder(\Laminas\Db\Adapter\Driver\Pdo\Pdo::class)
-            ->setMethods(['createResult'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -30,7 +29,6 @@ class StatementIntegrationTest extends TestCase
         $this->statement->setDriver($driver);
         $this->statement->initialize(new TestAsset\CtorlessPdo(
             $this->pdoStatementMock = $this->getMockBuilder('PDOStatement')
-                ->setMethods(['execute', 'bindParam'])
                 ->getMock()
         ));
     }

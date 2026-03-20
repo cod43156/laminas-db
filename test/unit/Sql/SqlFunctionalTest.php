@@ -607,8 +607,8 @@ class SqlFunctionalTest extends TestCase
      * @param type $sqlObject
      * @param type $platform
      * @param type $expected
-     * @dataProvider dataProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
     public function test($sqlObject, $platform, $expected)
     {
         $sql = new Sql\Sql($this->resolveAdapter($platform));
@@ -644,7 +644,6 @@ class SqlFunctionalTest extends TestCase
     {
         if (is_array($decorator)) {
             $decoratorMock = $this->getMockBuilder($decorator[0])
-                ->setMethods(['buildSqlString'])
                 ->setConstructorArgs([null])
                 ->getMock();
             $decoratorMock->expects($this->any())->method('buildSqlString')->will($this->returnValue($decorator[1]));

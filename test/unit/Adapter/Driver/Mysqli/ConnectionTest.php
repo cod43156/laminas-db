@@ -13,6 +13,9 @@ use function getenv;
 use const MYSQLI_CLIENT_SSL;
 use const MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Mysqli\Connection::class, 'setDriver')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Mysqli\Connection::class, 'setConnectionParameters')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Mysqli\Connection::class, 'getConnectionParameters')]
 class ConnectionTest extends TestCase
 {
     /** @var Connection */
@@ -38,25 +41,16 @@ class ConnectionTest extends TestCase
     {
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Mysqli\Connection::setDriver
-     */
     public function testSetDriver()
     {
         self::assertEquals($this->connection, $this->connection->setDriver(new Mysqli([])));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Mysqli\Connection::setConnectionParameters
-     */
     public function testSetConnectionParameters()
     {
         self::assertEquals($this->connection, $this->connection->setConnectionParameters([]));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Mysqli\Connection::getConnectionParameters
-     */
     public function testGetConnectionParameters()
     {
         $this->connection->setConnectionParameters(['foo' => 'bar']);
@@ -189,7 +183,6 @@ class ConnectionTest extends TestCase
     protected function createMockConnection($mysqli, $params)
     {
         $connection = $this->getMockBuilder(Connection::class)
-            ->setMethods(['createResource'])
             ->setConstructorArgs([$params])
             ->getMock();
         $connection->expects($this->once())

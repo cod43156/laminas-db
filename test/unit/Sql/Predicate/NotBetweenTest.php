@@ -5,6 +5,8 @@ namespace LaminasTest\Db\Sql\Predicate;
 use Laminas\Db\Sql\Predicate\NotBetween;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\NotBetween::class, 'getSpecification')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Predicate\NotBetween::class, 'getExpressionData')]
 class NotBetweenTest extends TestCase
 {
     /** @var NotBetween */
@@ -15,17 +17,11 @@ class NotBetweenTest extends TestCase
         $this->notBetween = new NotBetween();
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Predicate\NotBetween::getSpecification
-     */
     public function testSpecificationHasSameDefaultValue()
     {
         self::assertEquals('%1$s NOT BETWEEN %2$s AND %3$s', $this->notBetween->getSpecification());
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Predicate\NotBetween::getExpressionData
-     */
     public function testRetrievingWherePartsReturnsSpecificationArrayOfIdentifierAndValuesAndArrayOfTypes()
     {
         $this->notBetween->setIdentifier('foo.bar')

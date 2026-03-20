@@ -12,15 +12,14 @@ use Laminas\Db\Sql\Platform\Sqlite\SelectDecorator;
 use Laminas\Db\Sql\Select;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Sqlite\SelectDecorator::class, 'prepareStatement')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Sqlite\SelectDecorator::class, 'processCombine')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Sqlite\SelectDecorator::class, 'getSqlString')]
 class SelectDecoratorTest extends TestCase
 {
-    /**
-     * @testdox integration test: Testing SelectDecorator will use Select an internal state to prepare a proper combine
-     * statement
-     * @covers \Laminas\Db\Sql\Platform\Sqlite\SelectDecorator::prepareStatement
-     * @covers \Laminas\Db\Sql\Platform\Sqlite\SelectDecorator::processCombine
-     * @dataProvider dataProviderUnionSyntaxFromCombine
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare a proper combine
+statement')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProviderUnionSyntaxFromCombine')]
     public function testPrepareStatementPreparesUnionSyntaxFromCombine(
         Select $select,
         string $expectedSql,
@@ -31,7 +30,6 @@ class SelectDecoratorTest extends TestCase
 
         // test
         $adapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([
                 $driver,
                 new SqlitePlatform(),
@@ -53,14 +51,12 @@ class SelectDecoratorTest extends TestCase
     }
 
     /**
-     * @testdox integration test: Testing SelectDecorator will use Select an internal state to prepare a proper combine
-     * statement
-     * @covers \Laminas\Db\Sql\Platform\Sqlite\SelectDecorator::getSqlString
-     * @covers \Laminas\Db\Sql\Platform\Sqlite\SelectDecorator::processCombine
-     * @dataProvider dataProviderUnionSyntaxFromCombine
      * @param mixed $ignore
      * @param mixed $alsoIgnore
      */
+    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare a proper combine
+statement')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProviderUnionSyntaxFromCombine')]
     public function testGetSqlStringPreparesUnionSyntaxFromCombine(
         Select $select,
         $ignore,
@@ -87,7 +83,7 @@ class SelectDecoratorTest extends TestCase
      *     3: string
      * }>
      */
-    public function dataProviderUnionSyntaxFromCombine(): array
+    public static function dataProviderUnionSyntaxFromCombine(): array
     {
         $select0 = new Select();
         $select0->from('foo');

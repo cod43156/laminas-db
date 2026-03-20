@@ -38,7 +38,6 @@ class TableGatewayTest extends TestCase
 
         // setup mock adapter
         $this->mockAdapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver])
             ->getMock();
     }
@@ -84,10 +83,8 @@ class TableGatewayTest extends TestCase
         );
     }
 
-    /**
-     * @group 6726
-     * @group 6740
-     */
+    #[\PHPUnit\Framework\Attributes\Group('6726')]
+    #[\PHPUnit\Framework\Attributes\Group('6740')]
     public function testTableAsString()
     {
         $ti = 'fooTable.barSchema';
@@ -100,10 +97,8 @@ class TableGatewayTest extends TestCase
         self::assertEquals($ti, $table->getTable());
     }
 
-    /**
-     * @group 6726
-     * @group 6740
-     */
+    #[\PHPUnit\Framework\Attributes\Group('6726')]
+    #[\PHPUnit\Framework\Attributes\Group('6740')]
     public function testTableAsTableIdentifierObject()
     {
         $ti = new TableIdentifier('fooTable', 'barSchema');
@@ -116,10 +111,8 @@ class TableGatewayTest extends TestCase
         self::assertEquals($ti, $table->getTable());
     }
 
-    /**
-     * @group 6726
-     * @group 6740
-     */
+    #[\PHPUnit\Framework\Attributes\Group('6726')]
+    #[\PHPUnit\Framework\Attributes\Group('6740')]
     public function testTableAsAliasedTableIdentifierObject()
     {
         // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps
@@ -140,7 +133,7 @@ class TableGatewayTest extends TestCase
      *     1: string|TableIdentifier
      * }>
      */
-    public function aliasedTables(): array
+    public static function aliasedTables(): array
     {
         $identifier = new TableIdentifier('Users');
         return [
@@ -150,11 +143,11 @@ class TableGatewayTest extends TestCase
     }
 
     /**
-     * @group 7311
-     * @dataProvider aliasedTables
      * @param array<string, string|TableIdentifier> $tableValue
      * @param string|TableIdentifier $expected
      */
+    #[\PHPUnit\Framework\Attributes\Group('7311')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('aliasedTables')]
     public function testInsertShouldResetTableToUnaliasedTable(array $tableValue, $expected)
     {
         $insert = new Insert();
@@ -213,10 +206,10 @@ class TableGatewayTest extends TestCase
     }
 
     /**
-     * @dataProvider aliasedTables
      * @param array<string, string|TableIdentifier> $tableValue
      * @param string|TableIdentifier $expected
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('aliasedTables')]
     public function testUpdateShouldResetTableToUnaliasedTable(array $tableValue, $expected)
     {
         $update = new Update();
@@ -277,10 +270,10 @@ class TableGatewayTest extends TestCase
     }
 
     /**
-     * @dataProvider aliasedTables
      * @param array<string, string|TableIdentifier> $tableValue
      * @param string|TableIdentifier $expected
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('aliasedTables')]
     public function testDeleteShouldResetTableToUnaliasedTable(array $tableValue, $expected)
     {
         $delete = new Delete();

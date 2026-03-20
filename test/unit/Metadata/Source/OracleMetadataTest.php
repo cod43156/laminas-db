@@ -12,9 +12,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use function count;
 use function extension_loaded;
 
-/**
- * @requires extension oci8
- */
+#[\PHPUnit\Framework\Attributes\RequiresPhpExtension('oci8')]
 class OracleMetadataTest extends AbstractIntegrationTest
 {
     /** @var OracleMetadata */
@@ -39,9 +37,9 @@ class OracleMetadataTest extends AbstractIntegrationTest
     }
 
     /**
-     * @dataProvider constraintDataProvider
      * @param array $constraintData
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('constraintDataProvider')]
     public function testGetConstraints(array $constraintData)
     {
         $statement = $this->getMockBuilder(Statement::class)
@@ -73,7 +71,7 @@ class OracleMetadataTest extends AbstractIntegrationTest
     /**
      * @return array
      */
-    public function constraintDataProvider()
+    public static function constraintDataProvider()
     {
         return [
             [

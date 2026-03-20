@@ -9,6 +9,15 @@ use Laminas\Db\Adapter\Driver\Pdo\Statement;
 use Laminas\Db\Adapter\ParameterContainer;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Statement::class, 'setDriver')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Statement::class, 'setParameterContainer')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Statement::class, 'getParameterContainer')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Statement::class, 'getResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Statement::class, 'setSql')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Statement::class, 'getSql')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Statement::class, 'prepare')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Statement::class, 'isPrepared')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Pdo\Statement::class, 'execute')]
 class StatementTest extends TestCase
 {
     /** @var Statement */
@@ -31,24 +40,17 @@ class StatementTest extends TestCase
     {
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Statement::setDriver
-     */
     public function testSetDriver()
     {
         self::assertEquals($this->statement, $this->statement->setDriver(new Pdo([])));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Statement::setParameterContainer
-     */
     public function testSetParameterContainer()
     {
         self::assertSame($this->statement, $this->statement->setParameterContainer(new ParameterContainer()));
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Statement::getParameterContainer
      * @todo   Implement testGetParameterContainer().
      */
     public function testGetParameterContainer()
@@ -58,9 +60,6 @@ class StatementTest extends TestCase
         self::assertSame($container, $this->statement->getParameterContainer());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Statement::getResource
-     */
     public function testGetResource()
     {
         $pdo  = new TestAsset\SqliteMemoryPdo();
@@ -70,18 +69,12 @@ class StatementTest extends TestCase
         self::assertSame($stmt, $this->statement->getResource());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Statement::setSql
-     */
     public function testSetSql()
     {
         $this->statement->setSql('SELECT 1');
         self::assertEquals('SELECT 1', $this->statement->getSql());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Statement::getSql
-     */
     public function testGetSql()
     {
         $this->statement->setSql('SELECT 1');
@@ -89,7 +82,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Statement::prepare
      * @todo   Implement testPrepare().
      */
     public function testPrepare()
@@ -98,9 +90,6 @@ class StatementTest extends TestCase
         self::assertNull($this->statement->prepare('SELECT 1'));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Statement::isPrepared
-     */
     public function testIsPrepared()
     {
         self::assertFalse($this->statement->isPrepared());
@@ -109,9 +98,6 @@ class StatementTest extends TestCase
         self::assertTrue($this->statement->isPrepared());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Pdo\Statement::execute
-     */
     public function testExecute()
     {
         $this->statement->setDriver(new Pdo(new Connection($pdo = new TestAsset\SqliteMemoryPdo())));

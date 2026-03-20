@@ -13,10 +13,8 @@ use function getenv;
 use function is_resource;
 use function pg_connect;
 
-/**
- * @group integration
- * @group integration-postgres
- */
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-postgres')]
 class PostgresqlTest extends TestCase
 {
     /** @var array<string, resource> */

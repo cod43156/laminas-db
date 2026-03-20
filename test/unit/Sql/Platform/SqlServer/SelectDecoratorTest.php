@@ -12,17 +12,18 @@ use Laminas\Db\Sql\Platform\SqlServer\SelectDecorator;
 use Laminas\Db\Sql\Select;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::class, 'prepareStatement')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::class, 'processLimitOffset')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::class, 'getSqlString')]
 class SelectDecoratorTest extends TestCase
 {
     /**
-     * @testdox integration test: Testing SelectDecorator will use Select an internal state to prepare
-     *                            a proper limit/offset sql statement
-     * @covers \Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::prepareStatement
-     * @covers \Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::processLimitOffset
-     * @dataProvider dataProvider
      * @param array<string, mixed> $expectedParams
      * @param mixed $notUsed
      */
+    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
+                           a proper limit/offset sql statement')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
     public function testPrepareStatement(
         Select $select,
         string $expectedSql,
@@ -36,7 +37,6 @@ class SelectDecoratorTest extends TestCase
 
         // test
         $adapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([
                 $driver,
                 new SqlServerPlatform(),
@@ -58,14 +58,12 @@ class SelectDecoratorTest extends TestCase
     }
 
     /**
-     * @testdox integration test: Testing SelectDecorator will use Select an internal state to prepare
-     *                            a proper limit/offset sql statement
-     * @covers \Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::getSqlString
-     * @covers \Laminas\Db\Sql\Platform\SqlServer\SelectDecorator::processLimitOffset
-     * @dataProvider dataProvider
      * @param mixed $ignored
      * @param mixed $alsoIgnored
      */
+    #[\PHPUnit\Framework\Attributes\TestDox('integration test: Testing SelectDecorator will use Select an internal state to prepare
+                           a proper limit/offset sql statement')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
     public function testGetSqlString(Select $select, $ignored, $alsoIgnored, string $expectedSql)
     {
         $parameterContainer = new ParameterContainer();
@@ -79,7 +77,7 @@ class SelectDecoratorTest extends TestCase
     }
 
     /** @psalm-return array<array-key, array{0: Select, 1: string, 2: array<string, mixed>, 3: string, 4: int}> */
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         // phpcs:disable Generic.Files.LineLength.TooLong
         $select0 = new Select();

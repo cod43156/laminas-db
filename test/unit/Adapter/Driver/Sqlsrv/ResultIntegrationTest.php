@@ -5,10 +5,21 @@ namespace LaminasTest\Db\Adapter\Driver\Sqlsrv;
 use Laminas\Db\Adapter\Driver\Sqlsrv\Result;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group integration
- * @group integration-sqlsrv
- */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'initialize')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'buffer')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'getResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'current')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'next')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'key')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'rewind')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'valid')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'count')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'getFieldCount')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'isQueryResult')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'getAffectedRows')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Result::class, 'getGeneratedValue')]
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-sqlsrv')]
 class ResultIntegrationTest extends TestCase
 {
     /** @var Result */
@@ -32,7 +43,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::initialize
      * @todo   Implement testInitialize().
      */
     public function testInitialize()
@@ -44,7 +54,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::buffer
      * @todo   Implement testBuffer().
      */
     public function testBuffer()
@@ -56,7 +65,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::getResource
      * @todo   Implement testGetResource().
      */
     public function testGetResource()
@@ -68,7 +76,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::current
      * @todo   Implement testCurrent().
      */
     public function testCurrent()
@@ -80,7 +87,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::next
      * @todo   Implement testNext().
      */
     public function testNext()
@@ -92,7 +98,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::key
      * @todo   Implement testKey().
      */
     public function testKey()
@@ -104,7 +109,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::rewind
      * @todo   Implement testRewind().
      */
     public function testRewind()
@@ -116,7 +120,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::valid
      * @todo   Implement testValid().
      */
     public function testValid()
@@ -128,7 +131,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::count
      * @todo   Implement testCount().
      */
     public function testCount()
@@ -140,7 +142,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::getFieldCount
      * @todo   Implement testGetFieldCount().
      */
     public function testGetFieldCount()
@@ -152,7 +153,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::isQueryResult
      * @todo   Implement testIsQueryResult().
      */
     public function testIsQueryResult()
@@ -164,7 +164,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::getAffectedRows
      * @todo   Implement testGetAffectedRows().
      */
     public function testGetAffectedRows()
@@ -176,7 +175,6 @@ class ResultIntegrationTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Result::getGeneratedValue
      * @todo   Implement testGetGeneratedValue().
      */
     public function testGetGeneratedValue()

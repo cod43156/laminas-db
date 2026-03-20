@@ -7,6 +7,15 @@ use Laminas\Db\Adapter\Driver\Sqlsrv\Statement;
 use Laminas\Db\Adapter\ParameterContainer;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'setDriver')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'setParameterContainer')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'getParameterContainer')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'getResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'setSql')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'getSql')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'prepare')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'isPrepared')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Sqlsrv\Statement::class, 'execute')]
 class StatementTest extends TestCase
 {
     /** @var Statement */
@@ -29,25 +38,16 @@ class StatementTest extends TestCase
     {
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::setDriver
-     */
     public function testSetDriver()
     {
         self::assertEquals($this->statement, $this->statement->setDriver(new Sqlsrv([])));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::setParameterContainer
-     */
     public function testSetParameterContainer()
     {
         self::assertSame($this->statement, $this->statement->setParameterContainer(new ParameterContainer()));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::getParameterContainer
-     */
     public function testGetParameterContainer()
     {
         $container = new ParameterContainer();
@@ -56,7 +56,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::getResource
      * @todo   Implement testGetResource().
      */
     public function testGetResource()
@@ -68,7 +67,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::setSql
      * @todo   Implement testSetSql().
      */
     public function testSetSql()
@@ -80,7 +78,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::getSql
      * @todo   Implement testGetSql().
      */
     public function testGetSql()
@@ -92,7 +89,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::prepare
      * @todo   Implement testPrepare().
      */
     public function testPrepare()
@@ -104,7 +100,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::isPrepared
      * @todo   Implement testIsPrepared().
      */
     public function testIsPrepared()
@@ -116,7 +111,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\Sqlsrv\Statement::execute
      * @todo   Implement testExecute().
      */
     public function testExecute()

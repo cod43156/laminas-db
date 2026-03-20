@@ -11,6 +11,16 @@ use function realpath;
 use function touch;
 use function unlink;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'getName')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'getQuoteIdentifierSymbol')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'quoteIdentifier')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'quoteIdentifierChain')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'getQuoteValueSymbol')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'quoteValue')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'quoteTrustedValue')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'quoteValueList')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'getIdentifierSeparator')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Sqlite::class, 'quoteIdentifierInFragment')]
 class SqliteTest extends TestCase
 {
     /** @var Sqlite */
@@ -25,33 +35,21 @@ class SqliteTest extends TestCase
         $this->platform = new Sqlite();
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::getName
-     */
     public function testGetName()
     {
         self::assertEquals('SQLite', $this->platform->getName());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::getQuoteIdentifierSymbol
-     */
     public function testGetQuoteIdentifierSymbol()
     {
         self::assertEquals('"', $this->platform->getQuoteIdentifierSymbol());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::quoteIdentifier
-     */
     public function testQuoteIdentifier()
     {
         self::assertEquals('"identifier"', $this->platform->quoteIdentifier('identifier'));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::quoteIdentifierChain
-     */
     public function testQuoteIdentifierChain()
     {
         self::assertEquals('"identifier"', $this->platform->quoteIdentifierChain('identifier'));
@@ -59,30 +57,21 @@ class SqliteTest extends TestCase
         self::assertEquals('"schema"."identifier"', $this->platform->quoteIdentifierChain(['schema', 'identifier']));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::getQuoteValueSymbol
-     */
     public function testGetQuoteValueSymbol()
     {
         self::assertEquals("'", $this->platform->getQuoteValueSymbol());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::quoteValue
-     */
     public function testQuoteValueRaisesNoticeWithoutPlatformSupport()
     {
         $this->expectNotice();
-        $this->expectNoticeMessage(
+        $this->expectExceptionMessage(
             'Attempting to quote a value in Laminas\Db\Adapter\Platform\Sqlite without extension/driver support can '
             . 'introduce security vulnerabilities in a production environment'
         );
         $this->platform->quoteValue('value');
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::quoteValue
-     */
     public function testQuoteValue()
     {
         self::assertEquals("'value'", @$this->platform->quoteValue('value'));
@@ -97,9 +86,6 @@ class SqliteTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::quoteTrustedValue
-     */
     public function testQuoteTrustedValue()
     {
         self::assertEquals("'value'", $this->platform->quoteTrustedValue('value'));
@@ -116,30 +102,21 @@ class SqliteTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::quoteValueList
-     */
     public function testQuoteValueList()
     {
         $this->expectError();
-        $this->expectErrorMessage(
+        $this->expectExceptionMessage(
             'Attempting to quote a value in Laminas\Db\Adapter\Platform\Sqlite without extension/driver support can '
             . 'introduce security vulnerabilities in a production environment'
         );
         self::assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::getIdentifierSeparator
-     */
     public function testGetIdentifierSeparator()
     {
         self::assertEquals('.', $this->platform->getIdentifierSeparator());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::quoteIdentifierInFragment
-     */
     public function testQuoteIdentifierInFragment()
     {
         self::assertEquals('"foo"."bar"', $this->platform->quoteIdentifierInFragment('foo.bar'));
@@ -170,10 +147,6 @@ class SqliteTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::quoteValue
-     * @covers \Laminas\Db\Adapter\Platform\Sqlite::quoteTrustedValue
-     */
     public function testCanCloseConnectionAfterQuoteValue()
     {
         // Creating the SQLite database file

@@ -10,12 +10,10 @@ use PHPUnit\Framework\TestCase;
 use function current;
 use function key;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Sqlite\Sqlite::class, '__construct')]
 class SqliteTest extends TestCase
 {
-    /**
-     * @testdox unit test / object test: Test Sqlite constructor will register the decorator
-     * @covers \Laminas\Db\Sql\Platform\Sqlite\Sqlite::__construct
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test / object test: Test Sqlite constructor will register the decorator')]
     public function testConstructorRegistersSqliteDecorator()
     {
         $mysql      = new Sqlite();

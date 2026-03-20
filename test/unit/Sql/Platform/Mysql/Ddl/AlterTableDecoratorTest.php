@@ -9,11 +9,10 @@ use Laminas\Db\Sql\Ddl\Constraint\PrimaryKey;
 use Laminas\Db\Sql\Platform\Mysql\Ddl\AlterTableDecorator;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\Ddl\AlterTableDecorator::class, 'setSubject')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\Ddl\AlterTableDecorator::class, 'getSqlString')]
 class AlterTableDecoratorTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\Sql\Platform\Mysql\Ddl\AlterTableDecorator::setSubject
-     */
     public function testSetSubject()
     {
         $ctd = new AlterTableDecorator();
@@ -21,9 +20,6 @@ class AlterTableDecoratorTest extends TestCase
         self::assertSame($ctd, $ctd->setSubject($ct));
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Platform\Mysql\Ddl\AlterTableDecorator::getSqlString
-     */
     public function testGetSqlString()
     {
         $ctd = new AlterTableDecorator();

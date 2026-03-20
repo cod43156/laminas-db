@@ -7,16 +7,12 @@ use Laminas\Db\Adapter\Driver\IbmDb2\Statement;
 use Laminas\Db\Adapter\Exception\InvalidArgumentException;
 use stdClass;
 
-/**
- * @group integration
- * @group integration-ibm_db2
- */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::class, 'checkEnvironment')]
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-ibm_db2')]
 class IbmDb2IntegrationTest extends AbstractIntegrationTest
 {
-    /**
-     * @group integration-ibm_db2
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\IbmDb2::checkEnvironment
-     */
+    #[\PHPUnit\Framework\Attributes\Group('integration-ibm_db2')]
     public function testCheckEnvironment()
     {
         $ibmdb2 = new IbmDb2([]);

@@ -5,11 +5,9 @@ namespace LaminasTest\Db\Sql\Ddl\Column;
 use Laminas\Db\Sql\Ddl\Column\Blob;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\Column\Blob::class, 'getExpressionData')]
 class BlobTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\Sql\Ddl\Column\Blob::getExpressionData
-     */
     public function testGetExpressionData()
     {
         $column = new Blob('foo');

@@ -11,13 +11,11 @@ use function shell_exec;
 /**
  * @property Adapter $adapter
  */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, '__construct()')]
 abstract class AbstractAdapterTest extends TestCase
 {
     public const DB_SERVER_PORT = null;
 
-    /**
-     * @covers \Laminas\Db\Adapter\Adapter::__construct()
-     */
     public function testConnection()
     {
         $this->assertInstanceOf(Adapter::class, $this->adapter);

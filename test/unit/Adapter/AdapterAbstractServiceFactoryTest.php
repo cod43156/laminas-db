@@ -41,7 +41,7 @@ class AdapterAbstractServiceFactoryTest extends TestCase
     /**
      * @return array
      */
-    public function providerValidService()
+    public static function providerValidService()
     {
         return [
             ['Laminas\Db\Adapter\Writer'],
@@ -52,7 +52,7 @@ class AdapterAbstractServiceFactoryTest extends TestCase
     /**
      * @return array
      */
-    public function providerInvalidService()
+    public static function providerInvalidService()
     {
         return [
             ['Laminas\Db\Adapter\Unknown'],
@@ -61,9 +61,9 @@ class AdapterAbstractServiceFactoryTest extends TestCase
 
     /**
      * @param string $service
-     * @dataProvider providerValidService
-     * @requires extension mysqli
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerValidService')]
+    #[\PHPUnit\Framework\Attributes\RequiresPhpExtension('mysqli')]
     public function testValidService($service)
     {
         $actual = $this->serviceManager->get($service);
@@ -71,9 +71,9 @@ class AdapterAbstractServiceFactoryTest extends TestCase
     }
 
     /**
-     * @dataProvider providerInvalidService
      * @param string $service
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providerInvalidService')]
     public function testInvalidService($service)
     {
         $this->expectException(ServiceNotFoundException::class);

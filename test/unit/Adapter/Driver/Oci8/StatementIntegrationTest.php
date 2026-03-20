@@ -11,10 +11,13 @@ use function extension_loaded;
 use function get_resource_type;
 use function getenv;
 
-/**
- * @group integration
- * @group integration-oracle
- */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'initialize')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'getResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'prepare')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'isPrepared')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Statement::class, 'execute')]
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-oracle')]
 class StatementIntegrationTest extends TestCase
 {
     /** @var array<string, string> */
@@ -44,9 +47,6 @@ class StatementIntegrationTest extends TestCase
         }
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::initialize
-     */
     public function testInitialize()
     {
         $ociResource = oci_connect(
@@ -60,9 +60,6 @@ class StatementIntegrationTest extends TestCase
         unset($stmtResource, $ociResource);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::getResource
-     */
     public function testGetResource()
     {
         $ociResource = oci_connect(
@@ -79,10 +76,6 @@ class StatementIntegrationTest extends TestCase
         unset($resource, $ociResource);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::prepare
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::isPrepared
-     */
     public function testPrepare()
     {
         $ociResource = oci_connect(
@@ -99,9 +92,6 @@ class StatementIntegrationTest extends TestCase
         unset($resource, $ociResource);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Statement::execute
-     */
     public function testExecute()
     {
         $oci8      = new Oci8($this->variables);

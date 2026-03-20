@@ -9,11 +9,10 @@ use Laminas\Db\Sql\Ddl\CreateTable;
 use Laminas\Db\Sql\Platform\Mysql\Ddl\CreateTableDecorator;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\Ddl\CreateTableDecorator::class, 'setSubject')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\Ddl\CreateTableDecorator::class, 'getSqlString')]
 class CreateTableDecoratorTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\Sql\Platform\Mysql\Ddl\CreateTableDecorator::setSubject
-     */
     public function testSetSubject()
     {
         $ctd = new CreateTableDecorator();
@@ -21,9 +20,6 @@ class CreateTableDecoratorTest extends TestCase
         self::assertSame($ctd, $ctd->setSubject($ct));
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Platform\Mysql\Ddl\CreateTableDecorator::getSqlString
-     */
     public function testGetSqlString()
     {
         $ctd = new CreateTableDecorator();

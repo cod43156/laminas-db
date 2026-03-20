@@ -9,6 +9,8 @@ use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Sql;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Adapter::class, 'query')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\ResultSet\ResultSet::class, 'current')]
 class QueryTest extends TestCase
 {
     use AdapterTrait;
@@ -22,7 +24,7 @@ class QueryTest extends TestCase
      *     2: array<string, mixed>
      * }>
      */
-    public function getQueriesWithRowResult(): array
+    public static function getQueriesWithRowResult(): array
     {
         return [
             ['SELECT * FROM test WHERE id = ?', [1], ['id' => 1, 'name' => 'foo', 'value' => 'bar']],
@@ -38,11 +40,7 @@ class QueryTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getQueriesWithRowResult
-     * @covers \Laminas\Db\Adapter\Adapter::query
-     * @covers \Laminas\Db\ResultSet\ResultSet::current
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getQueriesWithRowResult')]
     public function testQuery(string $query, array $params, array $expected)
     {
         $result = $this->adapter->query($query, $params);

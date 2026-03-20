@@ -12,10 +12,8 @@ use function sqlsrv_connect;
 use function sqlsrv_errors;
 use function var_dump;
 
-/**
- * @group integration
- * @group integration-sqlserver
- */
+#[\PHPUnit\Framework\Attributes\Group('integration')]
+#[\PHPUnit\Framework\Attributes\Group('integration-sqlserver')]
 class SqlServerTest extends TestCase
 {
     /** @var array<string, resource> */

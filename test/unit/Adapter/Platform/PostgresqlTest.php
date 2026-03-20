@@ -5,6 +5,16 @@ namespace LaminasTest\Db\Adapter\Platform;
 use Laminas\Db\Adapter\Platform\Postgresql;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'getName')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'getQuoteIdentifierSymbol')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'quoteIdentifier')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'quoteIdentifierChain')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'getQuoteValueSymbol')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'quoteValue')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'quoteTrustedValue')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'quoteValueList')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'getIdentifierSeparator')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Platform\Postgresql::class, 'quoteIdentifierInFragment')]
 class PostgresqlTest extends TestCase
 {
     /** @var Postgresql */
@@ -19,25 +29,16 @@ class PostgresqlTest extends TestCase
         $this->platform = new Postgresql();
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Postgresql::getName
-     */
     public function testGetName()
     {
         self::assertEquals('PostgreSQL', $this->platform->getName());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Postgresql::getQuoteIdentifierSymbol
-     */
     public function testGetQuoteIdentifierSymbol()
     {
         self::assertEquals('"', $this->platform->getQuoteIdentifierSymbol());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Postgresql::quoteIdentifier
-     */
     public function testQuoteIdentifier()
     {
         self::assertEquals('"identifier"', $this->platform->quoteIdentifier('identifier'));
@@ -47,9 +48,6 @@ class PostgresqlTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Postgresql::quoteIdentifierChain
-     */
     public function testQuoteIdentifierChain()
     {
         self::assertEquals('"identifier"', $this->platform->quoteIdentifierChain('identifier'));
@@ -61,30 +59,21 @@ class PostgresqlTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Postgresql::getQuoteValueSymbol
-     */
     public function testGetQuoteValueSymbol()
     {
         self::assertEquals("'", $this->platform->getQuoteValueSymbol());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Postgresql::quoteValue
-     */
     public function testQuoteValueRaisesNoticeWithoutPlatformSupport()
     {
         $this->expectNotice();
-        $this->expectNoticeMessage(
+        $this->expectExceptionMessage(
             'Attempting to quote a value in Laminas\Db\Adapter\Platform\Postgresql without extension/driver'
             . ' support can introduce security vulnerabilities in a production environment'
         );
         $this->platform->quoteValue('value');
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Postgresql::quoteValue
-     */
     public function testQuoteValue()
     {
         self::assertEquals("E'value'", @$this->platform->quoteValue('value'));
@@ -99,9 +88,6 @@ class PostgresqlTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Postgresql::quoteTrustedValue
-     */
     public function testQuoteTrustedValue()
     {
         self::assertEquals("E'value'", $this->platform->quoteTrustedValue('value'));
@@ -118,30 +104,21 @@ class PostgresqlTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Postgresql::quoteValueList
-     */
     public function testQuoteValueList()
     {
         $this->expectError();
-        $this->expectErrorMessage(
+        $this->expectExceptionMessage(
             'Attempting to quote a value in Laminas\Db\Adapter\Platform\Postgresql without extension/driver'
             . ' support can introduce security vulnerabilities in a production environment'
         );
         self::assertEquals("'Foo O\'\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Postgresql::getIdentifierSeparator
-     */
     public function testGetIdentifierSeparator()
     {
         self::assertEquals('.', $this->platform->getIdentifierSeparator());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Platform\Postgresql::quoteIdentifierInFragment
-     */
     public function testQuoteIdentifierInFragment()
     {
         self::assertEquals('"foo"."bar"', $this->platform->quoteIdentifierInFragment('foo.bar'));

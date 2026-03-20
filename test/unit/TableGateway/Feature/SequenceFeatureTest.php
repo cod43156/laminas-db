@@ -29,9 +29,7 @@ class SequenceFeatureTest extends TestCase
         $this->feature = new SequenceFeature($this->primaryKeyField, $this->sequenceName);
     }
 
-    /**
-     * @dataProvider nextSequenceIdProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('nextSequenceIdProvider')]
     public function testNextSequenceId(string $platformName, string $statementSql)
     {
         $platform = $this->createMock(PlatformInterface::class);
@@ -42,7 +40,6 @@ class SequenceFeatureTest extends TestCase
             ->method('quoteIdentifier')
             ->will($this->returnValue($this->sequenceName));
         $adapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods(['getPlatform', 'createStatement'])
             ->disableOriginalConstructor()
             ->getMock();
         $adapter->expects($this->any())

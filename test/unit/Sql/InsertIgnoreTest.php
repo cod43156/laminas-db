@@ -95,9 +95,7 @@ class InsertIgnoreTest extends TestCase
         $this->insert->values(['foo' => 'bar'], InsertIgnore::VALUES_MERGE);
     }
 
-    /**
-     * @group Laminas-4926
-     */
+    #[\PHPUnit\Framework\Attributes\Group('Laminas-4926')]
     public function testEmptyArrayValues()
     {
         $this->insert->values([]);
@@ -110,7 +108,6 @@ class InsertIgnoreTest extends TestCase
         $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         $mockAdapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 
@@ -132,7 +129,6 @@ class InsertIgnoreTest extends TestCase
         $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         $mockAdapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 
@@ -155,7 +151,6 @@ class InsertIgnoreTest extends TestCase
         $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         $mockAdapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 
@@ -278,9 +273,7 @@ class InsertIgnoreTest extends TestCase
         self::assertNull($this->insert->foo);
     }
 
-    /**
-     * @group Laminas-536
-     */
+    #[\PHPUnit\Framework\Attributes\Group('Laminas-536')]
     public function testValuesMerge()
     {
         $this->insert->into('foo')
@@ -302,7 +295,6 @@ class InsertIgnoreTest extends TestCase
         $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         $mockAdapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 
@@ -325,7 +317,6 @@ class InsertIgnoreTest extends TestCase
         $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         $mockAdapter = $this->getMockBuilder(Adapter::class)
-            ->setMethods()
             ->setConstructorArgs([$mockDriver])
             ->getMock();
 

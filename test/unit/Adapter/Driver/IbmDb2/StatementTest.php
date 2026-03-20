@@ -12,6 +12,15 @@ use function error_reporting;
 
 include __DIR__ . '/TestAsset/Db2Functions.php';
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'setDriver')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'setParameterContainer')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'getParameterContainer')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'getResource')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'setSql')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'getSql')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'prepare')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'isPrepared')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\IbmDb2\Statement::class, 'execute')]
 class StatementTest extends TestCase
 {
     /** @var Statement */
@@ -41,24 +50,17 @@ class StatementTest extends TestCase
         error_reporting($this->currentErrorReporting);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::setDriver
-     */
     public function testSetDriver()
     {
         self::assertEquals($this->statement, $this->statement->setDriver(new IbmDb2([])));
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::setParameterContainer
-     */
     public function testSetParameterContainer()
     {
         self::assertSame($this->statement, $this->statement->setParameterContainer(new ParameterContainer()));
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::getParameterContainer
      * @todo   Implement testGetParameterContainer().
      */
     public function testGetParameterContainer()
@@ -69,7 +71,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::getResource
      * @todo   Implement testGetResource().
      */
     public function testGetResource()
@@ -81,7 +82,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::setSql
      * @todo   Implement testSetSql().
      */
     public function testSetSql()
@@ -93,7 +93,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::getSql
      * @todo   Implement testGetSql().
      */
     public function testGetSql()
@@ -104,10 +103,6 @@ class StatementTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::prepare
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::isPrepared
-     */
     public function testPrepare()
     {
         $sql = "SELECT 'foo' FROM SYSIBM.SYSDUMMY1";
@@ -115,10 +110,6 @@ class StatementTest extends TestCase
         $this->assertTrue($this->statement->isPrepared());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::prepare
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::isPrepared
-     */
     public function testPreparingTwiceErrors()
     {
         $sql = "SELECT 'foo' FROM SYSIBM.SYSDUMMY1";
@@ -132,10 +123,6 @@ class StatementTest extends TestCase
         $this->statement->prepare($sql);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::prepare
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::setSql
-     */
     public function testPrepareThrowsRuntimeExceptionOnInvalidSql()
     {
         $sql = "INVALID SQL";
@@ -152,9 +139,6 @@ class StatementTest extends TestCase
      * If error_reporting() is turned off, then the error handler will not
      * be called, but a RuntimeException will still be generated as the
      * resource is false
-     *
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::prepare
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::setSql
      */
     public function testPrepareThrowsRuntimeExceptionOnInvalidSqlWithErrorReportingDisabled()
     {
@@ -170,7 +154,6 @@ class StatementTest extends TestCase
     }
 
     /**
-     * @covers \Laminas\Db\Adapter\Driver\IbmDb2\Statement::execute
      * @todo   Implement testExecute().
      */
     public function testExecute()

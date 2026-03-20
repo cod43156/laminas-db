@@ -11,9 +11,8 @@ use function array_merge;
 
 /**
  * Tests for {@see \Laminas\Db\Sql\TableIdentifier}
- *
- * @covers \Laminas\Db\Sql\TableIdentifier
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Laminas\Db\Sql\TableIdentifier::class)]
 class TableIdentifierTest extends TestCase
 {
     public function testGetTable()
@@ -39,7 +38,7 @@ class TableIdentifierTest extends TestCase
 
     public function testGetTableFromObjectStringCast()
     {
-        $table = $this->getMockBuilder('stdClass')->setMethods(['__toString'])->getMock();
+        $table = $this->getMockBuilder('stdClass')->getMock();
 
         $table->expects($this->once())->method('__toString')->will($this->returnValue('castResult'));
 
@@ -51,7 +50,7 @@ class TableIdentifierTest extends TestCase
 
     public function testGetSchemaFromObjectStringCast()
     {
-        $schema = $this->getMockBuilder('stdClass')->setMethods(['__toString'])->getMock();
+        $schema = $this->getMockBuilder('stdClass')->getMock();
 
         $schema->expects($this->once())->method('__toString')->will($this->returnValue('castResult'));
 
@@ -62,9 +61,9 @@ class TableIdentifierTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidTableProvider
      * @param mixed $invalidTable
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('invalidTableProvider')]
     public function testRejectsInvalidTable($invalidTable)
     {
         $this->expectException(InvalidArgumentException::class);
@@ -73,9 +72,9 @@ class TableIdentifierTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidSchemaProvider
      * @param mixed $invalidSchema
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('invalidSchemaProvider')]
     public function testRejectsInvalidSchema($invalidSchema)
     {
         $this->expectException(InvalidArgumentException::class);
@@ -101,7 +100,7 @@ class TableIdentifierTest extends TestCase
      *
      * @return mixed[][]
      */
-    public function invalidSchemaProvider()
+    public static function invalidSchemaProvider()
     {
         return [
             [''],

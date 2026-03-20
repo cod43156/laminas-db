@@ -6,11 +6,9 @@ use Laminas\Db\Sql\Ddl\DropTable;
 use Laminas\Db\Sql\TableIdentifier;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Ddl\DropTable::class, 'getSqlString')]
 class DropTableTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Db\Sql\Ddl\DropTable::getSqlString
-     */
     public function testGetSqlString()
     {
         $dt = new DropTable('foo');

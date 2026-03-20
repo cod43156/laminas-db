@@ -10,6 +10,10 @@ use Laminas\Db\Adapter\Driver\Oci8\Statement;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter::class, 'getName')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter::class, 'getCountForStatement')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter::class, 'getCountForSql')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter::class, 'getRowCountClosure')]
 class RowCounterTest extends TestCase
 {
     /** @var RowCounter */
@@ -20,17 +24,11 @@ class RowCounterTest extends TestCase
         $this->rowCounter = new RowCounter();
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter::getName
-     */
     public function testGetName()
     {
         self::assertEquals('RowCounter', $this->rowCounter->getName());
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter::getCountForStatement
-     */
     public function testGetCountForStatement()
     {
         $statement = $this->getMockStatement('SELECT XXX', 5);
@@ -41,9 +39,6 @@ class RowCounterTest extends TestCase
         self::assertEquals(5, $count);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter::getCountForSql
-     */
     public function testGetCountForSql()
     {
         $this->rowCounter->setDriver($this->getMockDriver(5));
@@ -51,9 +46,6 @@ class RowCounterTest extends TestCase
         self::assertEquals(5, $count);
     }
 
-    /**
-     * @covers \Laminas\Db\Adapter\Driver\Oci8\Feature\RowCounter::getRowCountClosure
-     */
     public function testGetRowCountClosure()
     {
         $stmt = $this->getMockStatement('SELECT XXX', 5);
@@ -71,13 +63,11 @@ class RowCounterTest extends TestCase
     protected function getMockStatement($sql, $returnValue)
     {
         $statement = $this->getMockBuilder(Statement::class)
-            ->setMethods(['prepare', 'execute'])
             ->disableOriginalConstructor()
             ->getMock();
 
         // mock the result
         $result = $this->getMockBuilder('stdClass')
-            ->setMethods(['current'])
             ->getMock();
         $result->expects($this->once())
             ->method('current')
@@ -96,7 +86,6 @@ class RowCounterTest extends TestCase
     protected function getMockDriver($returnValue)
     {
         $oci8Statement = $this->getMockBuilder('stdClass')
-            ->setMethods(['current'])
             ->disableOriginalConstructor()
             ->getMock(); // stdClass can be used here
         $oci8Statement->expects($this->once())
@@ -107,7 +96,6 @@ class RowCounterTest extends TestCase
             ->method('execute')
             ->will($this->returnValue($oci8Statement));
         $driver = $this->getMockBuilder(Oci8::class)
-            ->setMethods(['getConnection'])
             ->disableOriginalConstructor()
             ->getMock();
         $driver->expects($this->once())

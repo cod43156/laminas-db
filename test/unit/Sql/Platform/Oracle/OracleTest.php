@@ -10,12 +10,10 @@ use PHPUnit\Framework\TestCase;
 use function current;
 use function key;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Oracle\Oracle::class, '__construct')]
 class OracleTest extends TestCase
 {
-    /**
-     * @testdox unit test / object test: Test Mysql object has Select proxy
-     * @covers \Laminas\Db\Sql\Platform\Oracle\Oracle::__construct
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test / object test: Test Mysql object has Select proxy')]
     public function testConstruct()
     {
         $oracle     = new Oracle();

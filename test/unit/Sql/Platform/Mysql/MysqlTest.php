@@ -10,12 +10,10 @@ use PHPUnit\Framework\TestCase;
 use function current;
 use function key;
 
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Platform\Mysql\Mysql::class, '__construct')]
 class MysqlTest extends TestCase
 {
-    /**
-     * @testdox unit test / object test: Test Mysql object has Select proxy
-     * @covers \Laminas\Db\Sql\Platform\Mysql\Mysql::__construct
-     */
+    #[\PHPUnit\Framework\Attributes\TestDox('unit test / object test: Test Mysql object has Select proxy')]
     public function testConstruct()
     {
         $mysql      = new Mysql();

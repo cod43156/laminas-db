@@ -11,9 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 use function extension_loaded;
 
-/**
- * @requires extension pdo_sqlite
- */
+#[\PHPUnit\Framework\Attributes\RequiresPhpExtension('pdo_sqlite')]
 class SqliteMetadataTest extends TestCase
 {
     /** @var SqliteMetadata */
@@ -67,9 +65,7 @@ class SqliteMetadataTest extends TestCase
         );
     }
 
-    /**
-     * @group Laminas-3719
-     */
+    #[\PHPUnit\Framework\Attributes\Group('Laminas-3719')]
     public function testGetConstraintKeys()
     {
         $keys = $this->metadata->getConstraintKeys(

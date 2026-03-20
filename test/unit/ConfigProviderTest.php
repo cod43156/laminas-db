@@ -31,9 +31,7 @@ class ConfigProviderTest extends TestCase
         return $provider;
     }
 
-    /**
-     * @depends testProvidesExpectedConfiguration
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testProvidesExpectedConfiguration')]
     public function testInvocationProvidesDependencyConfiguration(ConfigProvider $provider)
     {
         self::assertEquals(['dependencies' => $provider->getDependencyConfig()], $provider());

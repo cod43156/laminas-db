@@ -12,10 +12,16 @@ use PHPUnit\Framework\TestCase;
  *
  * Expression is a value object with no dependencies/collaborators, therefore, no fixure needed
  */
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'setExpression')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'getExpression')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'setParameters')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'getParameters')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'setTypes')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'getTypes')]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\Laminas\Db\Sql\Expression::class, 'getExpressionData')]
 class ExpressionTest extends TestCase
 {
     /**
-     * @covers \Laminas\Db\Sql\Expression::setExpression
      * @return Expression
      */
     public function testSetExpression()
@@ -26,9 +32,6 @@ class ExpressionTest extends TestCase
         return $return;
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Expression::setExpression
-     */
     public function testSetExpressionException()
     {
         $expression = new Expression();
@@ -37,18 +40,12 @@ class ExpressionTest extends TestCase
         $expression->setExpression(null);
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Expression::getExpression
-     * @depends testSetExpression
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testSetExpression')]
     public function testGetExpression(Expression $expression)
     {
         self::assertEquals('Foo Bar', $expression->getExpression());
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Expression::setParameters
-     */
     public function testSetParameters(): Expression
     {
         $expression = new Expression();
@@ -57,9 +54,6 @@ class ExpressionTest extends TestCase
         return $return;
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Expression::setParameters
-     */
     public function testSetParametersException()
     {
         $expression = new Expression('', 'foo');
@@ -69,18 +63,12 @@ class ExpressionTest extends TestCase
         $expression->setParameters(null);
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Expression::getParameters
-     * @depends testSetParameters
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testSetParameters')]
     public function testGetParameters(Expression $expression)
     {
         self::assertEquals('foo', $expression->getParameters());
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Expression::setTypes
-     */
     public function testSetTypes(): Expression
     {
         $expression = new Expression();
@@ -93,10 +81,7 @@ class ExpressionTest extends TestCase
         return $expression;
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Expression::getTypes
-     * @depends testSetTypes
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testSetTypes')]
     public function testGetTypes(Expression $expression)
     {
         self::assertEquals(
@@ -105,9 +90,6 @@ class ExpressionTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Laminas\Db\Sql\Expression::getExpressionData
-     */
     public function testGetExpressionData()
     {
         $expression = new Expression(
@@ -161,9 +143,7 @@ class ExpressionTest extends TestCase
         self::assertSame('0', $expression->getExpression());
     }
 
-    /**
-     * @group 7407
-     */
+    #[\PHPUnit\Framework\Attributes\Group('7407')]
     public function testGetExpressionPreservesPercentageSignInFromUnixtime()
     {
         $expressionString = 'FROM_UNIXTIME(date, "%Y-%m")';
@@ -189,9 +169,9 @@ class ExpressionTest extends TestCase
     }
 
     /**
-     * @dataProvider falsyExpressionParametersProvider
      * @param mixed $falsyParameter
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('falsyExpressionParametersProvider')]
     public function testConstructorWithFalsyValidParameters($falsyParameter)
     {
         $expression = new Expression('?', $falsyParameter);
@@ -206,7 +186,7 @@ class ExpressionTest extends TestCase
     }
 
     /** @psalm-return array<array-key, array{0: mixed}> */
-    public function falsyExpressionParametersProvider(): array
+    public static function falsyExpressionParametersProvider(): array
     {
         return [
             [''],
