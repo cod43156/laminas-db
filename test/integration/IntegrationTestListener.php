@@ -6,63 +6,80 @@ use LaminasIntegrationTest\Db\Platform\FixtureLoader;
 use LaminasIntegrationTest\Db\Platform\MysqlFixtureLoader;
 use LaminasIntegrationTest\Db\Platform\PgsqlFixtureLoader;
 use LaminasIntegrationTest\Db\Platform\SqlServerFixtureLoader;
-use PHPUnit\Framework\TestListener;
-use PHPUnit\Framework\TestListenerDefaultImplementation;
-use PHPUnit\Framework\TestSuite;
-use PHPUnit\Runner\TestHook;
+use PHPUnit\Event\TestSuite\Finished;
+use PHPUnit\Event\TestSuite\FinishedSubscriber;
+use PHPUnit\Event\TestSuite\Started;
+use PHPUnit\Event\TestSuite\StartedSubscriber;
+use PHPUnit\Runner\Extension\Extension;
+use PHPUnit\Runner\Extension\Facade;
+use PHPUnit\Runner\Extension\ParameterCollection;
+use PHPUnit\TextUI\Configuration\Configuration;
 
 use function getenv;
 use function printf;
 
-class IntegrationTestListener implements TestHook, TestListener
+class IntegrationTestListener implements Extension
 {
-    use TestListenerDefaultImplementation;
-
-    /** @var FixtureLoader[] */
-    private $fixtureLoaders = [];
-
-    public function startTestSuite(TestSuite $suite): void
+    public function bootstrap(Configuration $configuration, Facade $facade, ParameterCollection $parameters): void
     {
-        if ($suite->getName() !== 'integration test') {
-            return;
-        }
+        /** @var FixtureLoader[] $fixtureLoaders */
+        $fixtureLoaders = [];
 
         if (getenv('TESTS_LAMINAS_DB_ADAPTER_DRIVER_MYSQL')) {
-            $this->fixtureLoaders[] = new MysqlFixtureLoader();
+            $fixtureLoaders[] = new MysqlFixtureLoader();
         }
 
         if (getenv('TESTS_LAMINAS_DB_ADAPTER_DRIVER_PGSQL')) {
-            $this->fixtureLoaders[] = new PgsqlFixtureLoader();
+            $fixtureLoaders[] = new PgsqlFixtureLoader();
         }
 
         if (getenv('TESTS_LAMINAS_DB_ADAPTER_DRIVER_SQLSRV')) {
-            $this->fixtureLoaders[] = new SqlServerFixtureLoader();
+            $fixtureLoaders[] = new SqlServerFixtureLoader();
         }
 
-        if (empty($this->fixtureLoaders)) {
+        if (empty($fixtureLoaders)) {
             return;
         }
 
-        printf("\nIntegration test started.\n");
+        $facade->registerSubscribers(
+            new readonly class ($fixtureLoaders) implements StartedSubscriber {
+                /** @param FixtureLoader[] $fixtureLoaders */
+                public function __construct(private array $fixtureLoaders)
+                {
+                }
 
-        foreach ($this->fixtureLoaders as $fixtureLoader) {
-            $fixtureLoader->createDatabase();
-        }
-    }
+                public function notify(Started $event): void
+                {
+                    if ($event->testSuite()->name() !== 'integration test') {
+                        return;
+                    }
 
-    public function endTestSuite(TestSuite $suite): void
-    {
-        if (
-            $suite->getName() !== 'integration test'
-            || empty($this->fixtureLoaders)
-        ) {
-            return;
-        }
+                    printf("\nIntegration test started.\n");
 
-        printf("\nIntegration test ended.\n");
+                    foreach ($this->fixtureLoaders as $fixtureLoader) {
+                        $fixtureLoader->createDatabase();
+                    }
+                }
+            },
+            new readonly class ($fixtureLoaders) implements FinishedSubscriber {
+                /** @param FixtureLoader[] $fixtureLoaders */
+                public function __construct(private array $fixtureLoaders)
+                {
+                }
 
-        foreach ($this->fixtureLoaders as $fixtureLoader) {
-            $fixtureLoader->dropDatabase();
-        }
+                public function notify(Finished $event): void
+                {
+                    if ($event->testSuite()->name() !== 'integration test') {
+                        return;
+                    }
+
+                    printf("\nIntegration test ended.\n");
+
+                    foreach ($this->fixtureLoaders as $fixtureLoader) {
+                        $fixtureLoader->dropDatabase();
+                    }
+                }
+            },
+        );
     }
 }
