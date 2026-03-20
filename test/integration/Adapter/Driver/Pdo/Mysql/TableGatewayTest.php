@@ -17,8 +17,6 @@ class TableGatewayTest extends TestCase
 {
     use AdapterTrait;
 
-    /** @var Adapter */
-    protected $adapter;
     public function testConstructor()
     {
         $tableGateway = new TableGateway('test', $this->adapter);

@@ -15,8 +15,6 @@ class QueryTest extends TestCase
 {
     use AdapterTrait;
 
-    /** @var Adapter */
-    protected $adapter;
     /**
      * @psalm-return array<array-key, array{
      *     0: string,
